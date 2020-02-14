@@ -7,11 +7,24 @@
              x:Class="MobileDevApp.Profile"
              Title="Profile"
              Icon="profile.png">
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="Styles\ProfileStyles.css" />
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout StyleId="stackLayoutMain">
+            <Grid VerticalOptions="Start">
+                <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center" />
+                <ImageButton x:Name="btnRedactProfile" IsVisible="True" StyleId="btnRedactProfile" VerticalOptions="Start" 
+                             HorizontalOptions="End" BackgroundColor="Transparent" Clicked="btnRedactProfile_Clicked" />
+                <ImageButton x:Name="btnSaveProfile" IsVisible="False" StyleId="btnSaveProfile" VerticalOptions="Start" 
+                             HorizontalOptions="End" BackgroundColor="Transparent" Clicked="btnSaveProfile_Clicked" />
+            </Grid>
+            <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                   VerticalOptions="Start" HorizontalOptions="CenterAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
+                   HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+            <Editor x:Name="editorUserDescription" StyleId="editorUserDescription" AutoSize="TextChanges"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
