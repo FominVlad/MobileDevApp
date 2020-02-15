@@ -34,12 +34,15 @@
                 <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="CenterAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                <Label x:Name="lblID" StyleClass="userInfoLabel" Text="User ID:"/>
                 <Entry x:Name="entryUserId" StyleClass="userInfo" StyleId="entryUserId" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                <Label x:Name="lblPhoneNum" StyleClass="userInfoLabel" Text="User phone number:"/>
                 <Entry x:Name="entryUserPhoneNumber" StyleClass="userInfo" StyleId="entryUserPhoneNumber" IsSpellCheckEnabled="False"
                    IsTextPredictionEnabled="False" VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" 
                    ClearButtonVisibility="WhileEditing" HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                <Label x:Name="lblDescription" StyleClass="userInfoLabel" Text="User description:" />
                 <Editor x:Name="editorUserDescription" StyleClass="userInfo" StyleId="editorUserDescription" IsEnabled="False" 
                     AutoSize="TextChanges" MaxLength="500" Placeholder="Description..." HeightRequest="150" />
             </StackLayout>
