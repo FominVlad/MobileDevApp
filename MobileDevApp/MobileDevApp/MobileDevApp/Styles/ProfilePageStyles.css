@@ -1,0 +1,25 @@
+﻿#btnRedactProfile {
+    margin-right: 10;
+    margin-top: 10;
+}
+
+#btnSaveProfile {
+    margin-right: 10;
+    margin-top: 10;
+}
+
+#stackLayoutMain {
+    margin-top: 10;
+}
+
+.userInfo {
+    margin-left: 30;
+    margin-right: 30;
+    margin-bottom:10;
+}
+
+.userInfoLabel {
+    margin-left: 35;
+    margin-right: 35;
+    margin-bottom:-15;
+}

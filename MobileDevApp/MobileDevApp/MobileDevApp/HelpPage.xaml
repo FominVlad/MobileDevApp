@@ -6,11 +6,20 @@
              mc:Ignorable="d"
              x:Class="MobileDevApp.HelpPage"
              Title="Help">
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="Styles\HelpPageStyles.css" />
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="HELP"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="lblInfo" StyleId="lblInfo" VerticalOptions="Start"
+                HorizontalOptions="FillAndExpand" FontSize="Medium" />
+            <Editor x:Name="editorMessageText" StyleId="editorMessageText" VerticalOptions="Start" 
+                    HorizontalOptions="FillAndExpand" AutoSize="TextChanges" MaxLength="500" 
+                    Placeholder="Message text..." HeightRequest="150"/>
+            <Button Text="Send" x:Name="btnSendMessage" StyleId="btnSendMessage" Clicked="btnSendMessage_Clicked"
+                    HorizontalOptions="Center" VerticalOptions="Start" BorderRadius="15"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
