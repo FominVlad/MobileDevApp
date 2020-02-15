@@ -11,12 +11,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\help.png" />
     <None Remove="Resources\pencil.png" />
     <None Remove="Resources\personIcon.png" />
     <None Remove="Resources\ready.png" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Resources\help.png" />
     <EmbeddedResource Include="Resources\pencil.png" />
     <EmbeddedResource Include="Resources\personIcon.png" />
     <EmbeddedResource Include="Resources\ready.png" />

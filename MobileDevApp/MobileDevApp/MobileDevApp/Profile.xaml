@@ -13,18 +13,32 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <StackLayout StyleId="stackLayoutMain">
-            <Grid VerticalOptions="Start">
-                <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center" />
-                <ImageButton x:Name="btnRedactProfile" IsVisible="True" StyleId="btnRedactProfile" VerticalOptions="Start" 
+        <Grid>
+            <StackLayout StyleId="stackLayoutMain" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid VerticalOptions="Start">
+                    <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center" />
+                    <ImageButton x:Name="btnRedactProfile" IsVisible="True" StyleId="btnRedactProfile" VerticalOptions="Start" 
                              HorizontalOptions="End" BackgroundColor="Transparent" Clicked="btnRedactProfile_Clicked" />
-                <ImageButton x:Name="btnSaveProfile" IsVisible="False" StyleId="btnSaveProfile" VerticalOptions="Start" 
+                    <ImageButton x:Name="btnSaveProfile" IsVisible="False" StyleId="btnSaveProfile" VerticalOptions="Start" 
                              HorizontalOptions="End" BackgroundColor="Transparent" Clicked="btnSaveProfile_Clicked" />
-            </Grid>
-            <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                </Grid>
+                <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="CenterAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
-            <Editor x:Name="editorUserDescription" StyleId="editorUserDescription" AutoSize="TextChanges"/>
-        </StackLayout>
+                <Entry x:Name="entryUserId" StyleClass="userInfo" StyleId="entryUserId" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                   VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
+                   HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                <Entry x:Name="entryUserPhoneNumber" StyleClass="userInfo" StyleId="entryUserPhoneNumber" IsSpellCheckEnabled="False"
+                   IsTextPredictionEnabled="False" VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" 
+                   ClearButtonVisibility="WhileEditing" HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                <Editor x:Name="editorUserDescription" StyleClass="userInfo" StyleId="editorUserDescription" IsEnabled="False" 
+                    AutoSize="TextChanges" MaxLength="500" Placeholder="Description..." HeightRequest="150" />
+
+            </StackLayout>
+
+            <Button x:Name="btnHelp" FontFamily="Times New Roman" Text="Help" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
+                    BackgroundColor="Transparent" />
+        </Grid>
+        
     </ContentPage.Content>
 </ContentPage>
