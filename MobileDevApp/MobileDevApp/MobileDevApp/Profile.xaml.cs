@@ -1,6 +1,7 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
+using System;
 
 namespace MobileDevApp
 {
@@ -39,6 +40,8 @@ namespace MobileDevApp
             entryUserName.Text = "Test User";
             entryUserId.Text = "@TestUserId";
             entryUserPhoneNumber.Text = "+380123456789";
+            editorUserDescription.Text = "Its test text about me. Its test text about me. " +
+                "Its test text about me.";
         }
 
         private void btnRedactProfile_Clicked(object sender, System.EventArgs e)
@@ -65,7 +68,13 @@ namespace MobileDevApp
 
         private void btnHelp_Clicked(object sender, System.EventArgs e)
         {
+            OpenHelpPage();
+        }
 
+        private async void OpenHelpPage()
+        {
+            HelpPage helpPage = new HelpPage();
+            await Navigation.PushAsync(helpPage);
         }
     }
 }

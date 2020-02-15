@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:button="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
              mc:Ignorable="d"
              x:Class="MobileDevApp.Profile"
              Title="Profile"
@@ -17,10 +18,18 @@
             <StackLayout StyleId="stackLayoutMain" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Grid VerticalOptions="Start">
                     <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center" />
-                    <ImageButton x:Name="btnRedactProfile" IsVisible="True" StyleId="btnRedactProfile" VerticalOptions="Start" 
-                             HorizontalOptions="End" BackgroundColor="Transparent" Clicked="btnRedactProfile_Clicked" />
-                    <ImageButton x:Name="btnSaveProfile" IsVisible="False" StyleId="btnSaveProfile" VerticalOptions="Start" 
-                             HorizontalOptions="End" BackgroundColor="Transparent" Clicked="btnSaveProfile_Clicked" />
+                    <Image x:Name="btnRedactProfile" IsVisible="True" StyleId="btnRedactProfile" VerticalOptions="Start" 
+                             HorizontalOptions="End" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="btnRedactProfile_Clicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Image x:Name="btnSaveProfile" IsVisible="False" StyleId="btnSaveProfile" VerticalOptions="Start" 
+                             HorizontalOptions="End" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="btnSaveProfile_Clicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
                 </Grid>
                 <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="CenterAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
@@ -33,12 +42,9 @@
                    ClearButtonVisibility="WhileEditing" HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
                 <Editor x:Name="editorUserDescription" StyleClass="userInfo" StyleId="editorUserDescription" IsEnabled="False" 
                     AutoSize="TextChanges" MaxLength="500" Placeholder="Description..." HeightRequest="150" />
-
             </StackLayout>
-
             <Button x:Name="btnHelp" FontFamily="Times New Roman" Text="Help" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
-                    BackgroundColor="Transparent" />
+                    BackgroundColor="Transparent" Clicked="btnHelp_Clicked" />
         </Grid>
-        
     </ContentPage.Content>
 </ContentPage>
