@@ -32,7 +32,7 @@
                 </Grid>
                 <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="CenterAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
-                   HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                   HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black" />
                 <Label x:Name="lblID" StyleClass="userInfoLabel" Text="User ID:"/>
                 <Entry x:Name="entryUserId" StyleClass="userInfo" StyleId="entryUserId" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"

@@ -57,6 +57,7 @@ namespace MobileDevApp
             entryUserPhoneNumber.TextColor = Color.FromHex(App.ColourScheme.TextColour);
             lblDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
             editorUserDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            btnHelp.TextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
 
         private void btnRedactProfile_Clicked(object sender, System.EventArgs e)
@@ -88,10 +89,7 @@ namespace MobileDevApp
 
         private async void OpenHelpPage()
         {
-            await Navigation.PushAsync(new NavigationPage(new HelpPage()) {
-                BarBackgroundColor = Color.FromHex(App.ColourScheme.HeaderColour),
-                BarTextColor = Color.FromHex(App.ColourScheme.TextColour)
-            });
+            await Navigation.PushAsync(new HelpPage());
         }
     }
 }

@@ -6,9 +6,6 @@
              mc:Ignorable="d"
              x:Class="MobileDevApp.HelpPage"
              Title="Help">
-
-    <Shell.TitleView>
-    </Shell.TitleView>
     
     <ContentPage.Resources>
         <StyleSheetExtension Source="Styles\HelpPageStyles.css" />

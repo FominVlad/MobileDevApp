@@ -15,8 +15,6 @@ namespace MobileDevApp
 
             SetColourScheme();
 
-            NavigationPage.SetHasNavigationBar(this, false);
-
             lblInfo.Text = "Here you can ask any question, comment or suggestion to " +
                     "improve the quality of our application and get a response from technical support.";
         }
@@ -27,6 +25,8 @@ namespace MobileDevApp
             lblInfo.TextColor = Color.FromHex(App.ColourScheme.TextColour);
             editorMessageText.TextColor = Color.FromHex(App.ColourScheme.TextColour);
             btnSendMessage.BackgroundColor = Color.FromHex(App.ColourScheme.ButtonColour);
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.FromHex(App.ColourScheme.HeaderColour);
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
 
         private void btnSendMessage_Clicked(object sender, EventArgs e)
