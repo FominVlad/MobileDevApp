@@ -9,6 +9,13 @@ namespace MobileDevApp
         public Settings()
         {
             InitializeComponent();
+            SetColourScheme();
+        }
+
+        private void SetColourScheme()
+        {
+            BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
+            lblText.TextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
     }
 }

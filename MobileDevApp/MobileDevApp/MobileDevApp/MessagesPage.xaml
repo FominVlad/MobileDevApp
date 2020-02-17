@@ -8,8 +8,8 @@
              Title="Messages"
              IconImageSource="message.png">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="MESSAGE LIST"
+        <StackLayout x:Name="mainLayout">
+            <Label x:Name="lblMessageList" Text="MESSAGE LIST"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

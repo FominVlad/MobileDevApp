@@ -2,6 +2,7 @@
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using System;
+using System.Linq;
 
 namespace MobileDevApp
 {
@@ -14,6 +15,8 @@ namespace MobileDevApp
         public Profile()
         {
             InitializeComponent();
+
+            SetColourScheme();
 
             SetComponentsProp();
         }
@@ -42,6 +45,18 @@ namespace MobileDevApp
             entryUserPhoneNumber.Text = "+380123456789";
             editorUserDescription.Text = "Its test text about me. Its test text about me. " +
                 "Its test text about me.";
+        }
+
+        private void SetColourScheme()
+        {
+            BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
+            lblID.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            entryUserName.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            entryUserId.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            lblPhoneNum.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            entryUserPhoneNumber.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            lblDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            editorUserDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
 
         private void btnRedactProfile_Clicked(object sender, System.EventArgs e)
@@ -73,8 +88,10 @@ namespace MobileDevApp
 
         private async void OpenHelpPage()
         {
-            HelpPage helpPage = new HelpPage();
-            await Navigation.PushAsync(helpPage);
+            await Navigation.PushAsync(new NavigationPage(new HelpPage()) {
+                BarBackgroundColor = Color.FromHex(App.ColourScheme.HeaderColour),
+                BarTextColor = Color.FromHex(App.ColourScheme.TextColour)
+            });
         }
     }
 }

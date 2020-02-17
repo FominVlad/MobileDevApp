@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MobileDevApp.Models;
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,8 +13,20 @@ namespace MobileDevApp
         {
             InitializeComponent();
 
+            SetColourScheme();
+
+            NavigationPage.SetHasNavigationBar(this, false);
+
             lblInfo.Text = "Here you can ask any question, comment or suggestion to " +
-                "improve the quality of our application and get a response from technical support.";
+                    "improve the quality of our application and get a response from technical support.";
+        }
+
+        private void SetColourScheme()
+        {
+            BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
+            lblInfo.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            editorMessageText.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+            btnSendMessage.BackgroundColor = Color.FromHex(App.ColourScheme.ButtonColour);
         }
 
         private void btnSendMessage_Clicked(object sender, EventArgs e)

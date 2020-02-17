@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System.Linq;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace MobileDevApp
@@ -9,6 +10,13 @@ namespace MobileDevApp
         public Messages()
         {
             InitializeComponent();
+            SetColourScheme();
+        }
+
+        private void SetColourScheme()
+        {
+            BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
+            lblMessageList.TextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
     }
 }
