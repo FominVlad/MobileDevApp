@@ -9,6 +9,7 @@
              IconImageSource="settings.png">
     <ContentPage.Content>
         <StackLayout>
+            <Button x:Name="btnUpdate" Text="UPD" Clicked="btnUpdate_Clicked"/>
             <Label x:Name="lblText" Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />

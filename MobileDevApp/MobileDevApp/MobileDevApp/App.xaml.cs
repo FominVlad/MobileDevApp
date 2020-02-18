@@ -28,9 +28,7 @@ namespace MobileDevApp
         {
             get
             {
-                if(colourScheme == null)
-                {
-                    colourScheme = Database.Settings.Join(Database.ColourSchemes,
+                return Database.Settings.Join(Database.ColourSchemes,
                     s => s.ColourSchemeId,
                     c => c.Id,
                     (s, c) => new ColourSchemeDTO
@@ -40,8 +38,6 @@ namespace MobileDevApp
                         TextColour = c.TextColour,
                         ButtonColour = c.ButtonColour
                     }).FirstOrDefault();
-                }
-                return colourScheme;
             }
         }
 
