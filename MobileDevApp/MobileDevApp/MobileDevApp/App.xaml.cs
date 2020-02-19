@@ -22,8 +22,6 @@ namespace MobileDevApp
             }
         }
 
-        private static ColourSchemeDTO colourScheme;
-
         public static ColourSchemeDTO ColourScheme
         {
             get
@@ -33,6 +31,7 @@ namespace MobileDevApp
                     c => c.Id,
                     (s, c) => new ColourSchemeDTO
                     {
+                        SchemeType = c.SchemeType,
                         HeaderColour = c.HeaderColour,
                         PageColour = c.PageColour,
                         TextColour = c.TextColour,

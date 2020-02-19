@@ -7,12 +7,21 @@
              x:Class="MobileDevApp.Settings"
              Title="Settings"
              IconImageSource="settings.png">
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="Styles\SettingsPageStyles.css" />
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
-            <Button x:Name="btnUpdate" Text="UPD" Clicked="btnUpdate_Clicked"/>
-            <Label x:Name="lblText" Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Label x:Name="lblTitle" StyleId="lblTitle" Text="Application settings" FontSize="Title" 
+                   VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+            <Grid x:Name="gridSettings" StyleId="gridSettings" ColumnSpacing="10" RowSpacing="15">
+                <Label x:Name="lblSetColoutScheme" Text="Set colour scheme" Grid.Column="0" FontSize="Subtitle"
+                       Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start"/>
+                <Switch x:Name="switchColourScheme" VerticalOptions="Start" HorizontalOptions="Center" OnColor="DarkBlue" 
+                        Grid.Row="0" Grid.Column="2" />
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using MobileDevApp.Models;
+using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,19 +13,44 @@ namespace MobileDevApp
         {
             InitializeComponent();
             SetColourScheme();
+            SetSwitches();
         }
 
         private void SetColourScheme()
         {
             BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
-            lblText.TextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
 
-        private void btnUpdate_Clicked(object sender, System.EventArgs e)
+        private void SetSwitches()
         {
-            var a = App.Database.Settings.FirstOrDefault();
-            a.ColourScheme = App.Database.ColourSchemes.Where(obj => obj.SchemeType == "Dark").FirstOrDefault();
-            App.Database.Settings.Update(a);
+            if (App.ColourScheme.SchemeType == "Light")
+            {
+                switchColourScheme.IsToggled = false;
+            }
+            else
+            {
+                switchColourScheme.IsToggled = true;
+            }
+
+            switchColourScheme.Toggled += switchColourScheme_Toggled;
+        }
+
+        private void switchColourScheme_Toggled(object sender, ToggledEventArgs e)
+        {
+            Models.Settings settings = App.Database.Settings.FirstOrDefault();
+
+            if (switchColourScheme.IsToggled)
+            {
+                settings.ColourScheme = App.Database.ColourSchemes
+                    .Where(obj => obj.SchemeType == "Dark").FirstOrDefault();
+            }
+            else
+            {
+                settings.ColourScheme = App.Database.ColourSchemes
+                    .Where(obj => obj.SchemeType == "Light").FirstOrDefault();
+            }
+
+            App.Database.Settings.Update(settings);
             App.Database.SaveChanges();
             (Application.Current).MainPage = new NavigationPage(new MainPage());
         }
