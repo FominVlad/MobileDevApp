@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileDevApp.Profile"
+             x:Class="MobileDevApp.ProfilePage"
              Title="Profile"
              Icon="profile.png">
 
@@ -47,6 +47,10 @@
             </StackLayout>
             <Button x:Name="btnHelp" FontFamily="Times New Roman" Text="Help" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
                     BackgroundColor="Transparent" Clicked="btnHelp_Clicked" />
+            <Button x:Name="btnMyQr" FontFamily="Times New Roman" Text="My QrCode" VerticalOptions="End" HorizontalOptions="Start" ContentLayout="Left, 10" 
+                    BackgroundColor="Transparent" Clicked="btnMyQr_Clicked" />
+            <Button x:Name="btnWriteMessage" Text="Write a message" VerticalOptions="End" HorizontalOptions="Center" 
+                    Clicked="btnWriteMessage_Clicked" IsVisible="False"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -19,6 +19,8 @@ namespace MobileDevApp.Droid
 
             base.OnCreate(savedInstanceState);
 
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+
             this.RequestedOrientation = ScreenOrientation.Portrait;
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);

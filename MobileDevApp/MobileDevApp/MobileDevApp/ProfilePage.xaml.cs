@@ -7,13 +7,30 @@ using System.Linq;
 namespace MobileDevApp
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Profile : ContentPage
+    public partial class ProfilePage : ContentPage
     {
         public int ScreenHeight { get; private set; }
         public int ScreenWidth { get; private set; }
 
-        public Profile()
+        private bool IsOwner { get; set; } = true;
+
+        public string Id { get; set; }
+
+        public ProfilePage()
         {
+            InitializeComponent();
+
+            SetColourScheme();
+
+            SetComponentsProp();
+        }
+
+        public ProfilePage(bool IsOwner, string id = "@TestUserId")
+        {
+            this.IsOwner = IsOwner;
+
+            this.Id = id;
+
             InitializeComponent();
 
             SetColourScheme();
@@ -27,6 +44,7 @@ namespace MobileDevApp
             btnRedactProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.pencil.png");
             btnSaveProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.ready.png");
             btnHelp.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.help.png");
+            btnMyQr.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.scanQR.png");
 
             ScreenHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
             ScreenWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
@@ -41,10 +59,19 @@ namespace MobileDevApp
             btnSaveProfile.HeightRequest = ScreenWidth / 25;
 
             entryUserName.Text = "Test User";
-            entryUserId.Text = "@TestUserId";
+            entryUserId.Text = this.Id;
             entryUserPhoneNumber.Text = "+380123456789";
             editorUserDescription.Text = "Its test text about me. Its test text about me. " +
                 "Its test text about me.";
+
+            if(!IsOwner)
+            {
+                btnRedactProfile.IsVisible = false;
+                btnSaveProfile.IsVisible = false;
+                btnHelp.IsVisible = false;
+                btnMyQr.IsVisible = false;
+                btnWriteMessage.IsVisible = true;
+            }
         }
 
         private void SetColourScheme()
@@ -90,6 +117,16 @@ namespace MobileDevApp
         private async void OpenHelpPage()
         {
             await Navigation.PushAsync(new HelpPage());
+        }
+
+        private void btnWriteMessage_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private async void btnMyQr_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new QrCodePage("Test QR Code User ID"));
         }
     }
 }

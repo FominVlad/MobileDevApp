@@ -9,7 +9,7 @@
 
     <TabbedPage.Children>
         <local:Messages />
-        <local:Profile />
+        <local:ProfilePage />
         <local:Settings />
     </TabbedPage.Children>
 </TabbedPage>
