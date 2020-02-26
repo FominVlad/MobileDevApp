@@ -4,8 +4,8 @@
 Идея проекта подразумевает в себе создание онлайн-чата, в котором можно будет вести личные переписки с человеком тет-а-тет. В приложении будет возможность редактирования личного профиля пользователя, настройка пролижения (к примеру, цветовая схема: светлая, тёмная), поиск пользователя по идентификатору, номеру телефона и персональному Qr-коду, который будет генерироваться для каждого юзера персонально на страничке профиля.
 
 ## Технические требования: ##
-* ![Xamarin](https://chocolatey.org/content/packageimages/microsoft-build-tools-2013.2013.1.png "Xamarin")
-* ![ASP.NET Core](https://blog.tedd.no/wp-content/uploads/2019/06/128-Bitmap-BIG_ASP.NET-Core-MVC-Logo_2colors_Square_RGB.png "ASP.NET Core")
+* ![Xamarin](https://i.imgur.com/EWHavjP.png "Xamarin")
+* ![ASP.NET Core](https://i.imgur.com/NLS3u6e.png "ASP.NET Core")
 * ![SignalR](https://i.imgur.com/6S9rruv.png "SignalR")
 * ![MS SQL](https://i.imgur.com/R51VwRt.png "MS SQL")
 * ![SQLite](https://i.imgur.com/9pQ4ee7.png "SQLite")
