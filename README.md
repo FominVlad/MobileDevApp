@@ -6,9 +6,9 @@
 ## Технические требования: ##
 * ![Xamarin](https://chocolatey.org/content/packageimages/microsoft-build-tools-2013.2013.1.png "Xamarin")
 * ![ASP.NET Core](https://blog.tedd.no/wp-content/uploads/2019/06/128-Bitmap-BIG_ASP.NET-Core-MVC-Logo_2colors_Square_RGB.png "ASP.NET Core")
-* ![SignalR](https://imgur.com/6S9rruv "SignalR")
-* ![MS SQL](https://cdn.iconscout.com/icon/free/png-256/sql-4-190807.png "MS SQL")
-* ![SQLite](https://s3.us-east-2.amazonaws.com/upload-icon/uploads/icons/png/946338781551952108-256.png "SQLite")
+* ![SignalR](https://i.imgur.com/6S9rruv.png "SignalR")
+* ![MS SQL](https://i.imgur.com/R51VwRt.png "MS SQL")
+* ![SQLite](https://i.imgur.com/9pQ4ee7.png "SQLite")
   
 ## Разделение рабочей силы: ##
 * Мобильная разработка - [Фомин Владислав](https://github.com/FominVlad "Фомин Владислав").
