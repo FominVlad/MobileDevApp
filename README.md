@@ -6,7 +6,7 @@
 ## Технические требования: ##
 * ![Xamarin](https://i.imgur.com/EWHavjP.png "Xamarin")
 * ![ASP.NET Core](https://i.imgur.com/NLS3u6e.png "ASP.NET Core")
-* ![SignalR](https://i.imgur.com/6S9rruv.png "SignalR")
+* ![SignalR](https://i.imgur.com/x6dRvsh.png "SignalR")
 * ![MS SQL](https://i.imgur.com/R51VwRt.png "MS SQL")
 * ![SQLite](https://i.imgur.com/9pQ4ee7.png "SQLite")
   
