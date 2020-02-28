@@ -9,9 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MobileDevApp.iOS", "MobileD
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MobileDevApp", "MobileDevApp\MobileDevApp\MobileDevApp.csproj", "{AD658A53-C6F9-420D-9C4F-C980C2F51433}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.DAL", "Chat.DAL\Chat.DAL.csproj", "{9919643B-EC30-4F63-9FDC-8A38001CE54E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.DAL", "Chat.DAL\Chat.DAL.csproj", "{9919643B-EC30-4F63-9FDC-8A38001CE54E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chat.API", "Chat.API\Chat.API.csproj", "{0E49C470-A5C5-4723-8C57-21C08F88FE51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chat.API", "Chat.API\Chat.API.csproj", "{0E49C470-A5C5-4723-8C57-21C08F88FE51}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patterns", "Patterns\Patterns.csproj", "{25C7F743-3C75-47D0-AD53-36C460A8F750}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -101,6 +103,18 @@ Global
 		{0E49C470-A5C5-4723-8C57-21C08F88FE51}.Release|iPhone.Build.0 = Release|Any CPU
 		{0E49C470-A5C5-4723-8C57-21C08F88FE51}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{0E49C470-A5C5-4723-8C57-21C08F88FE51}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Release|iPhone.Build.0 = Release|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{25C7F743-3C75-47D0-AD53-36C460A8F750}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
