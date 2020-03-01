@@ -96,6 +96,24 @@ namespace Chat.DAL.Implementations
             return _chatDbContext.SaveChangesAsync();
         }
 
+        public List<T> TakeOrdered<TSelector>(
+            ISpecification<T> specification,
+            Func<IQueryable<T>, IQueryable<T>> includer,
+            Func<T, TSelector> orderKeySelector,
+            int? numbToTake = null,
+            bool isDescending = false)
+        {
+            IQueryable<T> allEntities = GetQueryToFind(specification, includer);
+
+            IOrderedEnumerable<T> orderedFoundEntitites = isDescending ? 
+                allEntities.OrderByDescending(orderKeySelector) : 
+                allEntities.OrderBy(orderKeySelector);
+
+            return numbToTake.HasValue ? 
+                orderedFoundEntitites.Take(numbToTake.Value).ToList() : 
+                orderedFoundEntitites.ToList();
+        }
+
         #region Private
 
         private IQueryable<T> GetQueryToFind(ISpecification<T> specification,

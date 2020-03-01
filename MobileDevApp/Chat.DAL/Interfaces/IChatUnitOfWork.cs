@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Chat.DAL.Models;
+using System;
 
 namespace Chat.DAL.Interfaces
 {
-    public interface IChatUnitOfWork
+    public interface IChatUnitOfWork : IDisposable
     {
+        IChatRepository<Message> MessagesRepository { get; }
+        IChatRepository<User> UsersRepository { get; }
+        IChatRepository<ChatEntity> ChatsRepository { get; }
     }
 }

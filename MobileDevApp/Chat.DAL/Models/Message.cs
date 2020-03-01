@@ -7,22 +7,19 @@ namespace Chat.DAL.Models
     {
         public int MessageID { get; set; }
 
-        [Required]
-        public int ChatID { get; set; }
-
-        public ChatEntity Chat { get; set; }
+        [Required, MaxLength(7000)]
+        public string Text { get; set; }
 
         [Required]
+        public DateTime ReceivedDate { get; set; }
+
         public int SenderID { get; set; }
 
         public User Sender { get; set; }
 
         [Required]
-        public int ReceiverID { get; set; }
+        public int ChatID { get; set; }
 
-        public User Receier { get; set; }
-
-        [Required]
-        public DateTime ReceivedDate { get; set; }
+        public ChatEntity Chat { get; set; }
     }
 }

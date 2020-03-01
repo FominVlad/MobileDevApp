@@ -31,5 +31,12 @@ namespace Chat.DAL.Interfaces
         int Update(T entity);
 
         Task<int> UpdateAsync(T entity);
+
+        List<T> TakeOrdered<TSelector>(
+            ISpecification<T> specification,
+            Func<IQueryable<T>, IQueryable<T>> includer,
+            Func<T, TSelector> orderKeySelector,
+            int? numbToTake = null,
+            bool isDescending = false);
     }
 }

@@ -1,39 +1,96 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Chat.API.Auth;
+using Chat.API.Filters;
+using Chat.API.Hubs;
+using Chat.DAL.Implementations;
+using Chat.DAL.Interfaces;
+using Chat.DAL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace Chat.API
 {
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration)
         {
+            Configuration = configuration;
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ChatDbContext>(options =>
+                options.UseSqlServer(Configuration["Data:ChatDB:ConnectionString"],
+                    op => op.EnableRetryOnFailure()));
+            services.AddScoped<IChatDbContext, ChatDbContext>();
+
+            services.AddScoped<IChatRepository<ChatEntity>>(sp =>
+                new ChatBaseRepository<ChatEntity>(sp.GetRequiredService<IChatDbContext>(), db => db.Chats));
+            services.AddScoped<IChatRepository<User>>(sp =>
+                new ChatBaseRepository<User>(sp.GetRequiredService<IChatDbContext>(), db => db.Users));
+            services.AddScoped<IChatRepository<Message>>(sp =>
+                new ChatBaseRepository<Message>(sp.GetRequiredService<IChatDbContext>(), db => db.Messages));
+            services.AddScoped<IChatUnitOfWork, ChatUnitOfWork>();
+
+            services.AddAuthentication(ChatAuthenticationScheme.SchemeName)
+               .AddScheme<ChatAuthenticationScheme, ChatAuthenticationHandler>(ChatAuthenticationScheme.SchemeName, null);
+
+            services.AddControllers(options => 
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                   .AddAuthenticationSchemes(new[] { ChatAuthenticationScheme.SchemeName })
+                   .RequireAuthenticatedUser()
+                   .Build();
+
+                options.Filters.Add(new ChatAuthorizeFilter(policy));
+            });
+            services.AddSignalR();
+
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo
+                {
+                    Title = "Chat.API",
+                    Version = "v1",
+                    Description = "A software product that is designed to food delivery.",
+                });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                options.IncludeXmlComments(xmlPath);
+
+                options.OperationFilter<SwaggerAuthHeaderFilter>();
+            });
+        }
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            app.UseDeveloperExceptionPage();
 
             app.UseRouting();
 
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
+            });
+
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/chat-api/v1/swagger.json", "Chat.API");
+                c.RoutePrefix = string.Empty;
             });
         }
     }

@@ -1,12 +1,13 @@
 ﻿using Chat.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Chat.DAL.Interfaces
 {
-    public interface IChatDbContext
+    public interface IChatDbContext : IDisposable
     {
         DbSet<User> Users { get; }
         DbSet<ChatEntity> Chats { get; }
