@@ -1,12 +1,15 @@
 using Chat.API.Auth;
 using Chat.API.Filters;
 using Chat.API.Hubs;
+using Chat.Business.Implementations;
+using Chat.Business.Interfaces;
 using Chat.DAL.Implementations;
 using Chat.DAL.Interfaces;
 using Chat.DAL.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -41,6 +44,10 @@ namespace Chat.API
                 new ChatBaseRepository<Message>(sp.GetRequiredService<IChatDbContext>(), db => db.Messages));
             services.AddScoped<IChatUnitOfWork, ChatUnitOfWork>();
 
+            services.AddScoped<IUserManager>(sp => 
+                new UserManager(sp.GetRequiredService<IChatUnitOfWork>(), Configuration["Auth:Secret"]));
+            services.AddScoped<IChatsManager, ChatsManager>();
+
             services.AddAuthentication(ChatAuthenticationScheme.SchemeName)
                .AddScheme<ChatAuthenticationScheme, ChatAuthenticationHandler>(ChatAuthenticationScheme.SchemeName, null);
 
@@ -53,6 +60,8 @@ namespace Chat.API
 
                 options.Filters.Add(new ChatAuthorizeFilter(policy));
             });
+
+            services.AddSingleton<IUserIdProvider, UserIdProvider>();
             services.AddSignalR();
 
             services.AddSwaggerGen(options =>
