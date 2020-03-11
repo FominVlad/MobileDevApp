@@ -41,7 +41,13 @@ namespace Chat.Business.Implementations
                     {
                         PartnerID = partner.UserID,
                         PartnerImage = partner.Image.Image,
-                        LastMessage = lastMessage.Text,
+                        LastMessage = new MessageShortInfo 
+                        { 
+                            Text = lastMessage.Text,
+                            ReceivedDate = lastMessage.ReceivedDate,
+                            SenderID = lastMessage.SenderID,
+                            IsRead = lastMessage.IsRead
+                        },
                         LastMessageDate = lastMessage.ReceivedDate
                     });
             }
@@ -64,7 +70,8 @@ namespace Chat.Business.Implementations
                     {
                         SenderID = m.SenderID,
                         Text = m.Text,
-                        ReceivedDate = m.ReceivedDate
+                        ReceivedDate = m.ReceivedDate,
+                        IsRead = m.IsRead
                     })
                 .ToList();
         }
@@ -76,7 +83,8 @@ namespace Chat.Business.Implementations
                 Text = newMessage.Text,
                 SenderID = newMessage.SenderID,
                 ChatID = newMessage.ChatID,
-                ReceivedDate = newMessage.ReceivedDate
+                ReceivedDate = newMessage.ReceivedDate,
+                IsRead = newMessage.IsRead
             };
 
             return _chatUnitOfWork.MessagesRepository.Create(dbMessage) > 0;

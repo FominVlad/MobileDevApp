@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Chat.Business.Models
+namespace MobileDevApp.RemoteProviders.Models
 {
     public class ChatShortInfo
     {

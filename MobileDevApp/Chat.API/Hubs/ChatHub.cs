@@ -32,7 +32,8 @@ namespace Chat.API.Hubs
                 ChatID = message.ChatID,
                 SenderID = senderID,
                 ReceiverID = message.ReceiverID,
-                ReceivedDate = DateTime.Now
+                ReceivedDate = DateTime.Now,
+                IsRead = Clients.User(message.ReceiverID.ToString()) != null ? true : false
             };
             if (!_chatsManager.StoreMessage(messageInfo))
                 await this.Clients.Users(new List<string> { this.Context.UserIdentifier }).SendAsync("Receive", null, error);
