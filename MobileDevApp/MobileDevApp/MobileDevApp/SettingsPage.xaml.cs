@@ -1,6 +1,9 @@
-﻿using MobileDevApp.Models;
+﻿
+using MobileDevApp.Models;
 using System;
+using System.Json;
 using System.Linq;
+using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -54,5 +57,16 @@ namespace MobileDevApp
             App.Database.SaveChanges();
             (Application.Current).MainPage = new NavigationPage(new MainPage());
         }
+
+        private void Test_Clicked(object sender, EventArgs e)
+        {
+            IGoogleAuth tst = DependencyService.Get<IGoogleAuth>();
+            tst.GetGoogle();
+        }
+
+
+
+
+
     }
 }
