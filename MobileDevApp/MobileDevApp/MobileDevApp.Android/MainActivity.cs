@@ -12,6 +12,7 @@ using Firebase;
 using Android.Gms.Tasks;
 using Android.Content.PM;
 using Android.Views;
+using Xamarin.Forms;
 
 namespace MobileDevApp.Droid
 {
@@ -95,6 +96,7 @@ namespace MobileDevApp.Droid
 
         public void OnSuccess(Java.Lang.Object result)
         {
+            LoadApplication(new App());
             //displayNameText.Text = "Display Name: " + firebaseAuth.CurrentUser.DisplayName;
             //emailText.Text = "Email: " + firebaseAuth.CurrentUser.Email;
             //photourlText.Text = "Photo URL: " + firebaseAuth.CurrentUser.PhotoUrl.Path;
@@ -131,12 +133,8 @@ namespace MobileDevApp.Droid
 
         public void SigninButton_Click()
         {
-            
-
             if (firebaseAuth.CurrentUser == null)
             {
-                
-
                 var intent = Auth.GoogleSignInApi.GetSignInIntent(googleApiClient);
                 StartActivityForResult(intent, 1);
             }
@@ -144,7 +142,6 @@ namespace MobileDevApp.Droid
             {
                 firebaseAuth.SignOut();
             }
-
         }
     }
 }

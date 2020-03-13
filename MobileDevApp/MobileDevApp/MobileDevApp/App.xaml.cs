@@ -43,6 +43,13 @@ namespace MobileDevApp
         public App()
         {
             InitializeComponent();
+            //MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new SignInPage());
+        }
+
+        public void CreateNewPage()
+        {
+            InitializeComponent();
             MainPage = new NavigationPage(new MainPage());
         }
 

@@ -57,16 +57,5 @@ namespace MobileDevApp
             App.Database.SaveChanges();
             (Application.Current).MainPage = new NavigationPage(new MainPage());
         }
-
-        private void Test_Clicked(object sender, EventArgs e)
-        {
-            IGoogleAuth tst = DependencyService.Get<IGoogleAuth>();
-            tst.GetGoogle();
-        }
-
-
-
-
-
     }
 }

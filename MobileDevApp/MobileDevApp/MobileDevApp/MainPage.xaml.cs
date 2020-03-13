@@ -10,6 +10,7 @@ namespace MobileDevApp
     {
         public MainPage()
         {
+
             InitializeComponent();
             SetColourScheme();
             NavigationPage.SetHasNavigationBar(this, false);

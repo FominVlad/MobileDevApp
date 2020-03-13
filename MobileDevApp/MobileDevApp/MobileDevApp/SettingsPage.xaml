@@ -22,7 +22,6 @@
                 <Switch x:Name="switchColourScheme" VerticalOptions="Start" HorizontalOptions="Center" OnColor="DarkBlue" 
                         Grid.Row="0" Grid.Column="2" />
             </Grid>
-            <Button x:Name="Test" Text="FACEBOOK LOGIN" Clicked="Test_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

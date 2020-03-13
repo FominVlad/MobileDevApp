@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Sign In"
+             x:Class="MobileDevApp.SignInPage">
+    
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Grid x:Name="grdInternetConn" IsVisible="False">
+                <Label Text="No internet connection" FontSize="Body"/>
+                <Image x:Name="imgNoInternetConnection" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+            </Grid>
+            <Grid x:Name="grdContent" IsVisible="False">
+                <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <ActivityIndicator x:Name="loaderIndicator" Color="Blue" IsRunning="False" IsVisible="False" IsEnabled="False" BackgroundColor="Transparent"/>
+                </AbsoluteLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lblLogin"  Text="Login:"/>
+                    <Entry x:Name="entryLogin" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                   VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
+                   HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                    <Label x:Name="lblPassword" Text="Password:"/>
+                    <Entry x:Name="entryPassword" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                   VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
+                   HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
+                    <Button Text="Sign in" x:Name="btnSignIn" Clicked="btnSignIn_Clicked" VerticalOptions="End" HorizontalOptions="CenterAndExpand"/>
+                    <Button x:Name="btnGoogleSignIn" FontFamily="Times New Roman" Text="Sign in with Google" VerticalOptions="End" HorizontalOptions="CenterAndExpand" ContentLayout="Right, 10" 
+                    BackgroundColor="PaleVioletRed" Clicked="btnGoogleSignIn_Clicked" />
+                </StackLayout>
+                <Button x:Name="btnSignUp" FontFamily="Times New Roman" Text="Sign Up" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
+                    BackgroundColor="Transparent" Clicked="btnSignUp_Clicked" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
