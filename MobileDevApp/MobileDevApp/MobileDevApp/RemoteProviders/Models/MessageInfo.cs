@@ -1,4 +1,4 @@
-﻿namespace Chat.Business.Models
+﻿namespace MobileDevApp.RemoteProviders.Models
 {
     public class MessageInfo : MessageShortInfo
     {

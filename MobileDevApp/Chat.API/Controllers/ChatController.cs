@@ -9,26 +9,16 @@ using System.Net.Mime;
 
 namespace Chat.API.Controllers
 {
-    /// <summary>
-    /// Chat endpoint.
-    /// </summary>
     [Route("api/chat-info")]
     public class ChatController : ControllerBase
     {
-        private readonly IChatInfoProvider _chatInfoProvider;
+        private readonly IChatsManager _chatsManager;
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="chatInfoProvider">Chat info provider injection</param>
-        public ChatController(IChatInfoProvider chatInfoProvider)
+        public ChatController(IChatsManager chatsManager)
         {
-            _chatInfoProvider = chatInfoProvider ?? throw new ArgumentNullException(nameof(chatInfoProvider));
+            _chatsManager = chatsManager ?? throw new ArgumentNullException(nameof(chatsManager));
         }
 
-        /// <summary>
-        /// All chats of current user.
-        /// </summary>
         [HttpGet("all-chats"),
         Produces(MediaTypeNames.Application.Json),
         ProducesResponseType(typeof(List<ChatShortInfo>), StatusCodes.Status200OK),
@@ -43,17 +33,14 @@ namespace Chat.API.Controllers
                         Message = "User was not authorized properly"
                     });
 
-            List<ChatShortInfo> allUserChats = _chatInfoProvider.GetAllChats(userID);
+            List<ChatShortInfo> allUserChats = _chatsManager.GetAllChats(userID);
 
             return StatusCode(StatusCodes.Status200OK, allUserChats);
         }
 
-        /// <summary>
-        /// All chat messages for specified chat.
-        /// </summary>
         [HttpGet("all-chat-messages/{chatID}"),
         Produces(MediaTypeNames.Application.Json),
-        ProducesResponseType(typeof(List<MessageInfo>), StatusCodes.Status200OK),
+        ProducesResponseType(typeof(List<MessageShortInfo>), StatusCodes.Status200OK),
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status401Unauthorized)]
         public ObjectResult GetAllChatMesages(int chatID, [FromQuery] int? messagesCount)
         {
@@ -65,7 +52,7 @@ namespace Chat.API.Controllers
                         Message = "User was not authorized properly"
                     });
 
-            List<MessageInfo> allChatMessages = _chatInfoProvider.GetChatMessages(userID, chatID, messagesCount);
+            List<MessageShortInfo> allChatMessages = _chatsManager.GetChatMessages(userID, chatID, messagesCount);
 
             return StatusCode(StatusCodes.Status200OK, allChatMessages);
         }

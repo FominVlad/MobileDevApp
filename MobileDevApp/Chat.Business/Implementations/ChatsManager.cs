@@ -10,11 +10,11 @@ using System.Linq;
 
 namespace Chat.Business.Implementations
 {
-    public class ChatInfoProvider : IChatInfoProvider
+    public class ChatsManager : IChatsManager
     {
         private readonly IChatUnitOfWork _chatUnitOfWork;
 
-        public ChatInfoProvider(IChatUnitOfWork chatUnitOfWork)
+        public ChatsManager(IChatUnitOfWork chatUnitOfWork)
         {
             _chatUnitOfWork = chatUnitOfWork ?? throw new ArgumentNullException(nameof(chatUnitOfWork));
         }
@@ -40,7 +40,13 @@ namespace Chat.Business.Implementations
                     {
                         PartnerID = partner.UserID,
                         PartnerImage = partner.Image.Image,
-                        LastMessage = lastMessage.Text,
+                        LastMessage = new MessageShortInfo 
+                        { 
+                            Text = lastMessage.Text,
+                            ReceivedDate = lastMessage.ReceivedDate,
+                            SenderID = lastMessage.SenderID,
+                            IsRead = lastMessage.IsRead
+                        },
                         LastMessageDate = lastMessage.ReceivedDate
                     });
             }
@@ -48,7 +54,7 @@ namespace Chat.Business.Implementations
             return userChatsShortInfo;
         }
 
-        public List<MessageInfo> GetChatMessages(int userID, int chatID, int? messagesCount = null)
+        public List<MessageShortInfo> GetChatMessages(int userID, int chatID, int? messagesCount = null)
         {
             List<Message> chatMessages = _chatUnitOfWork.MessagesRepository.TakeOrdered(
                 new ExpressionSpecification<Message>(message => message.ChatID == chatID &&
@@ -59,13 +65,28 @@ namespace Chat.Business.Implementations
                 true);
 
             return chatMessages
-                .Select(m => new MessageInfo
+                .Select(m => new MessageShortInfo
                     {
                         SenderID = m.SenderID,
                         Text = m.Text,
-                        ReceivedDate = m.ReceivedDate
+                        ReceivedDate = m.ReceivedDate,
+                        IsRead = m.IsRead
                     })
                 .ToList();
+        }
+
+        public bool StoreMessage(MessageInfo newMessage)
+        {
+            var dbMessage = new Message
+            {
+                Text = newMessage.Text,
+                SenderID = newMessage.SenderID,
+                ChatID = newMessage.ChatID,
+                ReceivedDate = newMessage.ReceivedDate,
+                IsRead = newMessage.IsRead
+            };
+
+            return _chatUnitOfWork.MessagesRepository.Create(dbMessage) > 0;
         }
     }
 }

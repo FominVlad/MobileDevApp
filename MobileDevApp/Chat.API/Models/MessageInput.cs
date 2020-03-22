@@ -1,8 +1,9 @@
-﻿namespace Chat.Business.Models
+﻿namespace Chat.API.Models
 {
-    public class MessageInfo : MessageShortInfo
+    public class MessageInput
     {
         public int ReceiverID { get; set; }
         public int ChatID { get; set; }
+        public string Text { get; set; }
     }
 }

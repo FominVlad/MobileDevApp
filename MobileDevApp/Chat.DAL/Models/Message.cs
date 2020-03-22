@@ -13,6 +13,9 @@ namespace Chat.DAL.Models
         [Required]
         public DateTime ReceivedDate { get; set; }
 
+        [Required]
+        public bool IsRead { get; set; }
+
         public int SenderID { get; set; }
 
         public User Sender { get; set; }
