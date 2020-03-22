@@ -6,13 +6,21 @@ using System.Net.Http;
 
 namespace MobileDevApp.RemoteProviders.Implementations
 {
-    public class UserRegisterService : IUserRegisterService
+    public class UserService : IUserService
     {
         private readonly IHttpProvider _httpProvider;
 
-        public UserRegisterService(IHttpProvider httpProvider)
+        public UserService(IHttpProvider httpProvider)
         {
             _httpProvider = httpProvider ?? throw new ArgumentNullException(nameof(httpProvider));
+        }
+
+        public UserInfo Info(string userName)
+        {
+            var requestMessage = new HttpRequestMessage(
+                HttpMethod.Get, $"{Configuration.UserInfoGettingRoute}/{userName}");
+
+            return _httpProvider.SendRequest<UserInfo>(requestMessage);
         }
 
         public UserInfo Register(UserRegister newUser)

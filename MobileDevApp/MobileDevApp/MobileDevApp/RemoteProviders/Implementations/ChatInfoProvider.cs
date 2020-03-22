@@ -23,11 +23,21 @@ namespace MobileDevApp.RemoteProviders.Implementations
             return _httpProvider.SendRequest<List<ChatShortInfo>>(requestMessage);
         }
 
-        public List<MessageShortInfo> GetAllChatMesages(string userAuthToken, int chatID, int? messagesCount = null)
+        public List<MessageShortInfo> GetAllChatMesages(string userAuthToken, 
+            int chatID,
+            int? skipCount = null,
+            int? takeCount = null)
         {
             var requestQuery = $"{Configuration.ChatInfoAllChatMessagesRoute}/{chatID}";
-            if (messagesCount.HasValue)
-                requestQuery = $"{requestQuery}?messagesCount={messagesCount}";
+
+            string queryParamsDelimiter = "?";
+            if (skipCount.HasValue)
+            {
+                requestQuery = $"{requestQuery}?skipCount={skipCount.Value}";
+                queryParamsDelimiter = "&";
+            }
+            if (skipCount.HasValue)
+                requestQuery = $"{requestQuery}{queryParamsDelimiter}takeCount={takeCount.Value}";
 
             var requestMessage = new HttpRequestMessage(HttpMethod.Get, requestQuery);
             requestMessage.Headers.Add(Configuration.AuthHeaderKey, userAuthToken);

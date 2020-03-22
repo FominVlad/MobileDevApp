@@ -23,6 +23,21 @@ namespace Chat.Business.Implementations
             _secret = secret ?? throw new ArgumentNullException(nameof(secret));
         }
 
+        public UserInfo GetUserInfo(string userName)
+        {
+            if (userName == null)
+                throw new ArgumentNullException(nameof(userName));
+
+            var expression = new ExpressionSpecification<User>(
+                user => user.Name == userName);
+
+            User registeredUser = _chatUnitOfWork.UsersRepository.FirstOrDefault(
+                expression,
+                user => user.Include(u => u.Image));
+
+            return ConvertToUserInfo(registeredUser);
+        }
+
         public UserInfo GetUserInfo(UserLogin userLoginData)
         {
             if (userLoginData == null)

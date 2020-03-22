@@ -1,4 +1,5 @@
-﻿using Chat.Business.Interfaces;
+﻿
+using Chat.Business.Interfaces;
 using Chat.Business.Models;
 using Chat.DAL.Interfaces;
 using Chat.DAL.Models;
@@ -54,15 +55,15 @@ namespace Chat.Business.Implementations
             return userChatsShortInfo;
         }
 
-        public List<MessageShortInfo> GetChatMessages(int userID, int chatID, int? messagesCount = null)
+        public List<MessageShortInfo> GetChatMessages(int userID, int chatID,
+            int? skipCount = null, int? takeCount = null)
         {
             List<Message> chatMessages = _chatUnitOfWork.MessagesRepository.TakeOrdered(
                 new ExpressionSpecification<Message>(message => message.ChatID == chatID &&
                     message.Chat.Users.Any(u => u.UserID == userID)),
                 message => message.Include(m => m.Chat).ThenInclude(c => c.Users),
                 message => message.ReceivedDate,
-                messagesCount,
-                true);
+                skipCount, takeCount, true);
 
             return chatMessages
                 .Select(m => new MessageShortInfo

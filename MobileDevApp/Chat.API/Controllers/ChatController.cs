@@ -42,7 +42,9 @@ namespace Chat.API.Controllers
         Produces(MediaTypeNames.Application.Json),
         ProducesResponseType(typeof(List<MessageShortInfo>), StatusCodes.Status200OK),
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status401Unauthorized)]
-        public ObjectResult GetAllChatMesages(int chatID, [FromQuery] int? messagesCount)
+        public ObjectResult GetAllChatMesages(int chatID, 
+            [FromQuery] int? skipCount, 
+            [FromQuery] int? takeCount)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userID))
                 return StatusCode(
@@ -52,7 +54,8 @@ namespace Chat.API.Controllers
                         Message = "User was not authorized properly"
                     });
 
-            List<MessageShortInfo> allChatMessages = _chatsManager.GetChatMessages(userID, chatID, messagesCount);
+            List<MessageShortInfo> allChatMessages = 
+                _chatsManager.GetChatMessages(userID, chatID, skipCount, takeCount);
 
             return StatusCode(StatusCodes.Status200OK, allChatMessages);
         }

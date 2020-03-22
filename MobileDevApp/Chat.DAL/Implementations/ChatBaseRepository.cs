@@ -63,18 +63,23 @@ namespace Chat.DAL.Implementations
             ISpecification<T> specification,
             Func<IQueryable<T>, IQueryable<T>> includer,
             Func<T, TSelector> orderKeySelector,
-            int? numbToTake = null,
+            int? skipCount = null,
+            int? takeCount = null,
             bool isDescending = false)
         {
             IEnumerable<T> allEntities = GetQueryToFind(specification, includer);
 
-            IOrderedEnumerable<T> orderedFoundEntitites = isDescending ? 
+            allEntities = isDescending ? 
                 allEntities.OrderByDescending(orderKeySelector) : 
                 allEntities.OrderBy(orderKeySelector);
 
-            return numbToTake.HasValue ? 
-                orderedFoundEntitites.Take(numbToTake.Value).ToList() : 
-                orderedFoundEntitites.ToList();
+            if (skipCount.HasValue)
+                allEntities = allEntities.Skip(skipCount.Value);
+
+            if(takeCount.HasValue)
+                allEntities = allEntities.Take(skipCount.Value);
+
+            return allEntities.ToList();
         }
 
         #region Private

@@ -23,7 +23,8 @@ namespace Chat.DAL.Interfaces
             ISpecification<T> specification,
             Func<IQueryable<T>, IQueryable<T>> includer,
             Func<T, TSelector> orderKeySelector,
-            int? numbToTake = null,
+            int? skipCount = null,
+            int? takeCount = null,
             bool isDescending = false);
     }
 }
