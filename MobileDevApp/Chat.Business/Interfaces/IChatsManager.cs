@@ -7,7 +7,6 @@ namespace Chat.Business.Interfaces
     {
         List<ChatShortInfo> GetAllChats(int userID);
         List<MessageShortInfo> GetChatMessages(int userID, int chatID, int? messagesCount = null);
-
-        bool StoreMessage(MessageInfo newMessage);
+        MessageInfo StoreMessage(MessageInfo newMessage);
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Chat.DAL.Migrations
 {
     [DbContext(typeof(ChatDbContext))]
-    [Migration("20200322104522_Initial")]
+    [Migration("20200322125003_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,12 @@ namespace Chat.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ReceiverID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderID")
+                        .HasColumnType("int");
 
                     b.HasKey("ChatID");
 
@@ -64,6 +70,9 @@ namespace Chat.DAL.Migrations
 
                     b.Property<int>("ChatID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ReceivedDate")
                         .HasColumnType("datetime2");

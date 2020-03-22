@@ -21,10 +21,10 @@ namespace Chat.Business.Implementations
 
         public List<ChatShortInfo> GetAllChats(int userID)
         {
-            List<ChatEntity> userChats = _chatUnitOfWork.ChatsRepository.FindAll(
+            List <ChatEntity> userChats = _chatUnitOfWork.ChatsRepository.FindAll(
                 new ExpressionSpecification<ChatEntity>(chat => chat.Users.Any(u => u.UserID == userID)),
-                chat => chat.Include(c => c.Users).ThenInclude(m => m.User).ThenInclude(u => u.Image)
-                            .Include(c => c.Messages));
+                    chat => chat.Include(c => c.Users).ThenInclude(m => m.User).ThenInclude(u => u.Image)
+                                .Include(c => c.Messages));
 
             List<ChatShortInfo> userChatsShortInfo = new List<ChatShortInfo>(userChats.Count);
             User partner;
@@ -38,16 +38,16 @@ namespace Chat.Business.Implementations
                 userChatsShortInfo.Add(
                     new ChatShortInfo
                     {
+                        ChatID = chat.ChatID,
                         PartnerID = partner.UserID,
-                        PartnerImage = partner.Image.Image,
+                        PartnerImage = partner.Image?.Image,
                         LastMessage = new MessageShortInfo 
                         { 
                             Text = lastMessage.Text,
                             ReceivedDate = lastMessage.ReceivedDate,
                             SenderID = lastMessage.SenderID,
                             IsRead = lastMessage.IsRead
-                        },
-                        LastMessageDate = lastMessage.ReceivedDate
+                        }
                     });
             }
 
@@ -75,18 +75,49 @@ namespace Chat.Business.Implementations
                 .ToList();
         }
 
-        public bool StoreMessage(MessageInfo newMessage)
+        public MessageInfo StoreMessage(MessageInfo newMessage)
         {
+            ExpressionSpecification<ChatEntity> findChatExp = newMessage.ChatID != null ?
+                new ExpressionSpecification<ChatEntity>(c => c.ChatID == newMessage.ChatID) :
+                new ExpressionSpecification<ChatEntity>(
+                    c => c.Users.Any(u => u.UserID == newMessage.SenderID) &&
+                         c.Users.Any(u => u.UserID == newMessage.ReceiverID));
+
+            ChatEntity chat = _chatUnitOfWork.ChatsRepository.FirstOrDefault(findChatExp,
+                chatEnt => chatEnt.Include(c => c.Users));
+
             var dbMessage = new Message
             {
                 Text = newMessage.Text,
                 SenderID = newMessage.SenderID,
-                ChatID = newMessage.ChatID,
                 ReceivedDate = newMessage.ReceivedDate,
                 IsRead = newMessage.IsRead
             };
 
-            return _chatUnitOfWork.MessagesRepository.Create(dbMessage) > 0;
+            if (chat == null)
+            {
+                chat = new ChatEntity
+                {
+                    SenderID = newMessage.SenderID,
+                    ReceiverID = newMessage.ReceiverID
+                };
+                if (_chatUnitOfWork.ChatsRepository.Create(chat) <= 0)
+                    return null;
+                chat = _chatUnitOfWork.ChatsRepository.FirstOrDefault(
+                    new ExpressionSpecification<ChatEntity>(
+                        c => c.SenderID == newMessage.SenderID && c.ReceiverID == newMessage.ReceiverID),
+                    chatEntity => chatEntity.Include(c => c.Users));
+                if (chat == null)
+                    return null;
+                chat.Users.Add(new ChatUser { ChatID = chat.ChatID, UserID = newMessage.SenderID });
+                chat.Users.Add(new ChatUser { ChatID = chat.ChatID, UserID = newMessage.ReceiverID });
+                if (_chatUnitOfWork.ChatsRepository.Update(chat) <= 0)
+                    return null;
+            }
+
+            dbMessage.ChatID = chat.ChatID;
+            newMessage.ChatID = chat.ChatID;
+            return newMessage;
         }
     }
 }

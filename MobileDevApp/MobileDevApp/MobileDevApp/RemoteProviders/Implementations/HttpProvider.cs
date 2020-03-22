@@ -1,12 +1,11 @@
-﻿using MobileDevApp.RemoteProviders;
-using MobileDevApp.RemoteProviders.Interfaces;
+﻿using MobileDevApp.RemoteProviders.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 
-namespace FoodDelivery.Business.Implementations
+namespace MobileDevApp.RemoteProviders.Implementations
 {
     public class HttpProvider : IHttpProvider
     {

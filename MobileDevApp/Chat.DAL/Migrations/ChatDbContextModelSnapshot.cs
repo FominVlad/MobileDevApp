@@ -26,6 +26,12 @@ namespace Chat.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("ReceiverID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SenderID")
+                        .HasColumnType("int");
+
                     b.HasKey("ChatID");
 
                     b.ToTable("Chats");
@@ -62,6 +68,9 @@ namespace Chat.DAL.Migrations
 
                     b.Property<int>("ChatID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("ReceivedDate")
                         .HasColumnType("datetime2");

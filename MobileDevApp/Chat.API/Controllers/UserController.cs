@@ -12,8 +12,8 @@ namespace Chat.API.Controllers
     /// <summary>
     /// Authentication endpoint.
     /// </summary>
-    [Route("api/chat-auth-user")]
-    public class AuthController : ControllerBase
+    [Route("api/chat-user")]
+    public class UserController : ControllerBase
     {
         private readonly IUserManager _userManager;
 
@@ -21,7 +21,7 @@ namespace Chat.API.Controllers
         /// Constructor.
         /// </summary>
         /// <param name="userManager">User management injection</param>
-        public AuthController(IUserManager userManager)
+        public UserController(IUserManager userManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }

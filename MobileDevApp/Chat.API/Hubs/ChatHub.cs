@@ -35,11 +35,12 @@ namespace Chat.API.Hubs
                 ReceivedDate = DateTime.Now,
                 IsRead = Clients.User(message.ReceiverID.ToString()) != null ? true : false
             };
-            if (!_chatsManager.StoreMessage(messageInfo))
+            messageInfo = _chatsManager.StoreMessage(messageInfo);
+            if (messageInfo == null)
                 await this.Clients.Users(new List<string> { this.Context.UserIdentifier }).SendAsync("Receive", null, error);
 
             await this.Clients.Users(new List<string> { this.Context.UserIdentifier, message.ReceiverID.ToString() })
-                .SendAsync("Receive", message, null);
+                .SendAsync("Receive", messageInfo, null);
         }
     }
 }

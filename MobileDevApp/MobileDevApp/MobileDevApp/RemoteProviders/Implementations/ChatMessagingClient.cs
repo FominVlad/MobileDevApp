@@ -14,12 +14,6 @@ namespace MobileDevApp.RemoteProviders.Implementations
 
         private readonly HubConnection _hubConnection;
 
-        public MessageInput Message { get; set; }
-
-        public ObservableCollection<MessageInfo> Messages { get; }
-
-        public ObservableCollection<ErrorMessage> Errors { get; }
-
         private bool _isBusy;
         public bool IsBusy
         {
@@ -48,6 +42,12 @@ namespace MobileDevApp.RemoteProviders.Implementations
             }
         }
 
+        public MessageInput Message { get; set; }
+
+        public ObservableCollection<MessageInfo> Messages { get; private set; }
+
+        public ObservableCollection<ErrorMessage> Errors { get; private set; }
+
         public Command SendMessageCommand { get; private set; }
 
         public ChatMessagingClient(string userAuthToken)
@@ -59,61 +59,69 @@ namespace MobileDevApp.RemoteProviders.Implementations
                     httpOptions.Headers.Add(Configuration.AuthHeaderKey, userAuthToken);
                 })
                 .Build();
-
-            Messages = new ObservableCollection<MessageInfo>();
-
-            IsConnected = false;
-            IsBusy = false;
-            SendMessageCommand = new Command(async () => await SendMessage(), () => IsConnected);
-
             _hubConnection.Closed += async (error) =>
             {
                 IsConnected = false;
                 await Task.Delay(5000);
-                await Connect();
+                Connect();
             };
-
             _hubConnection.On<MessageInfo, ErrorMessage>("Receive", (message, error) =>
             {
-                SendLocalMessage(message, error);
+                ReceiveMessage(message, error);
             });
+
+            Messages = new ObservableCollection<MessageInfo>();
+            Errors = new ObservableCollection<ErrorMessage>();
+            IsConnected = false;
+            IsBusy = false;
+
+            SendMessageCommand = new Command(() => SendMessage(), () => IsConnected);
         }
 
         // подключение к чату
-        public async Task Connect()
+        public void Connect()
         {
             if (IsConnected)
                 return;
             try
             {
-                await _hubConnection.StartAsync();
+                _hubConnection.StartAsync().Wait();
                 IsConnected = true;
             }
             catch (Exception ex)
             {
+                Errors.Add(new ErrorMessage { Message = ex.Message });
             }
         }
 
         // Отключение от чата
-        public async Task Disconnect()
+        public void Disconnect()
         {
             if (!IsConnected)
                 return;
 
-            await _hubConnection.StopAsync();
-            IsConnected = false;
+            try
+            {
+                _hubConnection.StopAsync().Wait();
+                IsConnected = false;
+            }
+            catch (Exception ex)
+            {
+                Errors.Add(new ErrorMessage { Message = ex.Message });
+            }
         }
 
         // Отправка сообщения
-        async Task SendMessage()
+        public void SendMessage()
         {
             try
             {
                 IsBusy = true;
-                await _hubConnection.InvokeAsync("Send", Message);
+                _hubConnection.InvokeAsync("Send", Message).Wait();
             }
             catch (Exception ex)
             {
+                Errors.Add(new ErrorMessage { Message = ex.Message });
             }
             finally
             {
@@ -122,12 +130,12 @@ namespace MobileDevApp.RemoteProviders.Implementations
         }
 
         // Добавление сообщения
-        private void SendLocalMessage(MessageInfo message, ErrorMessage error)
+        private void ReceiveMessage(MessageInfo message, ErrorMessage error)
         {
             if(message != null)
-                Messages.Insert(0, message);
+                Messages.Add(message);
             if (error != null)
-                Errors.Insert(0, error);
+                Errors.Add(error);
         }
 
         public void OnPropertyChanged(string prop = "")

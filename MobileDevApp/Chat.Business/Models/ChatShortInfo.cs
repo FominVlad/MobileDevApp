@@ -1,15 +1,13 @@
-﻿using System;
-
-namespace Chat.Business.Models
+﻿namespace Chat.Business.Models
 {
     public class ChatShortInfo
     {
+        public int ChatID { get; set; }
+
         public int PartnerID { get; set; }
 
         public byte[] PartnerImage { get; set; }
 
         public MessageShortInfo LastMessage { get; set; }
-
-        public DateTime? LastMessageDate { get; set; }
     }
 }

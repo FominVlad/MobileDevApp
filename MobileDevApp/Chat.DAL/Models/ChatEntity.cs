@@ -8,6 +8,10 @@ namespace Chat.DAL.Models
         [Key]
         public int ChatID { get; set; }
 
+        public int SenderID { get; set; }
+
+        public int ReceiverID { get; set; }
+
         public virtual ICollection<ChatUser> Users { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }

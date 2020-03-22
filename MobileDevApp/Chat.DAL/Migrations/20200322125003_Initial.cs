@@ -12,7 +12,9 @@ namespace Chat.DAL.Migrations
                 columns: table => new
                 {
                     ChatID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SenderID = table.Column<int>(nullable: false),
+                    ReceiverID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,6 +74,7 @@ namespace Chat.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Text = table.Column<string>(maxLength: 7000, nullable: false),
                     ReceivedDate = table.Column<DateTime>(nullable: false),
+                    IsRead = table.Column<bool>(nullable: false),
                     SenderID = table.Column<int>(nullable: false),
                     ChatID = table.Column<int>(nullable: false)
                 },
