@@ -45,7 +45,7 @@ namespace Chat.API
                 new ChatBaseRepository<ChatUser>(sp.GetRequiredService<IChatDbContext>(), db => db.ChatUsers));
             services.AddScoped<IChatUnitOfWork, ChatUnitOfWork>();
 
-            services.AddScoped<IChatInfoProvider, ChatInfoProvider>();
+            services.AddScoped<IChatsManager, ChatsManager>();
             services.AddScoped<IUserManager>(sp =>
             {
                 return new UserManager(
