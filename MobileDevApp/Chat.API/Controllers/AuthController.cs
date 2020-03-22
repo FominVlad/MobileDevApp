@@ -9,16 +9,27 @@ using System.Net.Mime;
 
 namespace Chat.API.Controllers
 {
+    /// <summary>
+    /// Authentication endpoint.
+    /// </summary>
     [Route("api/chat-auth-user")]
     public class AuthController : ControllerBase
     {
         private readonly IUserManager _userManager;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="userManager">User management injection</param>
         public AuthController(IUserManager userManager)
         {
             _userManager = userManager ?? throw new ArgumentNullException(nameof(userManager));
         }
 
+        /// <summary>
+        /// Register new user.
+        /// </summary>
+        /// <param name="newUser=">New user</param>
         [HttpPost("register"),
         AllowAnonymous,
         Produces(MediaTypeNames.Application.Json),
@@ -40,6 +51,10 @@ namespace Chat.API.Controllers
             return StatusCode(StatusCodes.Status200OK, registeredUser);
         }
 
+        /// <summary>
+        /// Login user.
+        /// </summary>
+        /// <param name="userLoginData">User data to login</param>
         [HttpPost("login"),
         AllowAnonymous,
         Produces(MediaTypeNames.Application.Json),
@@ -61,13 +76,17 @@ namespace Chat.API.Controllers
             return StatusCode(StatusCodes.Status200OK, registeredUser);
         }
 
+        /// <summary>
+        /// Editing user.
+        /// </summary>
+        /// <param name="userEditInfo">User data to edit</param>
         [HttpPost("edit"),
         Produces(MediaTypeNames.Application.Json),
         Consumes(MediaTypeNames.Application.Json),
         ProducesResponseType(typeof(UserInfo), StatusCodes.Status200OK),
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status401Unauthorized),
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status500InternalServerError)]
-        public ObjectResult Edit(UserEdit userEditInfo)
+        public ObjectResult Edit([FromBody] UserEdit userEditInfo)
         {
             if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userID))
                 return StatusCode(

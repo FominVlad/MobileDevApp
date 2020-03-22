@@ -4,7 +4,6 @@ using Patterns.Specification.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 namespace Chat.DAL.Implementations
 {
     public class ChatBaseRepository<T> : IChatRepository<T> where T : class
@@ -25,12 +24,6 @@ namespace Chat.DAL.Implementations
             return _chatDbContext.SaveChanges();
         }
 
-        public Task<int> CreateAsync(T entity)
-        {
-            _dbTableSelector(_chatDbContext).Add(entity);
-            return _chatDbContext.SaveChangesAsync();
-        }
-
         public T Delete(ISpecification<T> deleteSpecification)
         {
             T toDelete;
@@ -47,39 +40,16 @@ namespace Chat.DAL.Implementations
             return toDelete;
         }
 
-        public Task DeleteAsync(ISpecification<T> deleteSpecification)
-        {
-            DbSet<T> dbTable = _dbTableSelector(_chatDbContext);
-            T toDelete = dbTable.FirstOrDefault(o => deleteSpecification.IsSatisfiedBy(o));
-
-            if (toDelete != default(T))
-                dbTable.Remove(toDelete);
-
-            return _chatDbContext.SaveChangesAsync();
-        }
-
         public List<T> FindAll(ISpecification<T> specification = null,
             Func<IQueryable<T>, IQueryable<T>> includer = null)
         {
             return GetQueryToFind(specification, includer).ToList();
         }
 
-        public Task<List<T>> FindAllAsync(ISpecification<T> specification = null,
-            Func<IQueryable<T>, IQueryable<T>> includer = null)
-        {
-            return GetQueryToFind(specification, includer).ToListAsync();
-        }
-
         public T FirstOrDefault(ISpecification<T> specification,
             Func<IQueryable<T>, IQueryable<T>> includer = null)
         {
             return GetQueryToFind(specification, includer).FirstOrDefault();
-        }
-
-        public Task<T> FirstOrDefaultAsync(ISpecification<T> specification,
-            Func<IQueryable<T>, IQueryable<T>> includer = null)
-        {
-            return GetQueryToFind(specification, includer).FirstOrDefaultAsync();
         }
 
         public int Update(T entity)
@@ -89,13 +59,6 @@ namespace Chat.DAL.Implementations
             return _chatDbContext.SaveChanges();
         }
 
-        public Task<int> UpdateAsync(T entity)
-        {
-            _dbTableSelector(_chatDbContext).Attach(entity);
-            _chatDbContext.Entry(entity).State = EntityState.Modified;
-            return _chatDbContext.SaveChangesAsync();
-        }
-
         public List<T> TakeOrdered<TSelector>(
             ISpecification<T> specification,
             Func<IQueryable<T>, IQueryable<T>> includer,
@@ -103,7 +66,7 @@ namespace Chat.DAL.Implementations
             int? numbToTake = null,
             bool isDescending = false)
         {
-            IQueryable<T> allEntities = GetQueryToFind(specification, includer);
+            IEnumerable<T> allEntities = GetQueryToFind(specification, includer);
 
             IOrderedEnumerable<T> orderedFoundEntitites = isDescending ? 
                 allEntities.OrderByDescending(orderKeySelector) : 
@@ -116,7 +79,7 @@ namespace Chat.DAL.Implementations
 
         #region Private
 
-        private IQueryable<T> GetQueryToFind(ISpecification<T> specification,
+        private IEnumerable<T> GetQueryToFind(ISpecification<T> specification,
             Func<IQueryable<T>, IQueryable<T>> includer)
         {
             IQueryable<T> toFind = _dbTableSelector(_chatDbContext);
@@ -124,10 +87,11 @@ namespace Chat.DAL.Implementations
             if (includer != null)
                 toFind = includer(toFind);
 
+            IEnumerable<T> toReturn = toFind.AsEnumerable();
             if (specification != null)
-                toFind = toFind.Where(o => specification.IsSatisfiedBy(o));
+                toReturn = toReturn.Where(o => specification.IsSatisfiedBy(o));
 
-            return toFind;
+            return toReturn;
         }
 
         #endregion

@@ -19,7 +19,7 @@ namespace Chat.DAL.Models
         [Required, MaxLength(1000)]
         public string PasswordHash { get; set; }
 
-        [Required, MaxLength(100)]
+        [Required, MaxLength(1000)]
         public string Token { get; set; }
 
         [MaxLength(1000)]
@@ -28,10 +28,8 @@ namespace Chat.DAL.Models
         [Required, MaxLength(200)]
         public string QRCode { get; set; }
 
-        public int UserImageID { get; set; }
-
         public UserImage Image { get; set; }
 
-        public virtual ICollection<ChatEntity> Chats { get; set; }
+        public virtual ICollection<ChatUser> Chats { get; set; }
     }
 }

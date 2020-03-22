@@ -11,17 +11,20 @@ namespace Chat.DAL.Implementations
         public IChatRepository<Message> MessagesRepository { get; private set; }
         public IChatRepository<User> UsersRepository { get; private set; }
         public IChatRepository<ChatEntity> ChatsRepository { get; private set; }
+        public IChatRepository<ChatUser> ChatUsersRepository { get; private set; }
 
         public ChatUnitOfWork(
             IChatDbContext chatDbContext,
             IChatRepository<Message> messagesRepository,
             IChatRepository<User> usersRepository,
-            IChatRepository<ChatEntity> chatsRepository)
+            IChatRepository<ChatEntity> chatsRepository,
+            IChatRepository<ChatUser> chatUsersRepository)
         {
             _chatDbContext = chatDbContext ?? throw new ArgumentNullException(nameof(chatDbContext));
             MessagesRepository = messagesRepository ?? throw new ArgumentNullException(nameof(messagesRepository));
             UsersRepository = usersRepository ?? throw new ArgumentNullException(nameof(usersRepository));
             ChatsRepository = chatsRepository ?? throw new ArgumentNullException(nameof(chatsRepository));
+            ChatUsersRepository = chatUsersRepository ?? throw new ArgumentNullException(nameof(chatUsersRepository));
         }
 
         #region IDisposable

@@ -22,9 +22,8 @@ namespace Chat.Business.Implementations
         public List<ChatShortInfo> GetAllChats(int userID)
         {
             List<ChatEntity> userChats = _chatUnitOfWork.ChatsRepository.FindAll(
-                new ExpressionSpecification<ChatEntity>(chat => chat.FirstMemberID == userID || chat.SecondMemberID == userID),
-                chat => chat.Include(c => c.FirstMember).ThenInclude(m => m.Image)
-                            .Include(c => c.SecondMember).ThenInclude(m => m.Image)
+                new ExpressionSpecification<ChatEntity>(chat => chat.Users.Any(u => u.UserID == userID)),
+                chat => chat.Include(c => c.Users).ThenInclude(m => m.User).ThenInclude(u => u.Image)
                             .Include(c => c.Messages));
 
             List<ChatShortInfo> userChatsShortInfo = new List<ChatShortInfo>(userChats.Count);
@@ -33,7 +32,7 @@ namespace Chat.Business.Implementations
             Message lastMessage;
             foreach(ChatEntity chat in userChats)
             {
-                partner = chat.FirstMemberID == userID ? chat.SecondMember : chat.FirstMember;
+                partner = chat.Users.First(u => u.UserID != userID).User;
                 lastMessageID = chat.Messages.Max(m => m.MessageID);
                 lastMessage = chat.Messages.First(m => m.MessageID == lastMessageID);
                 userChatsShortInfo.Add(
@@ -53,8 +52,8 @@ namespace Chat.Business.Implementations
         {
             List<Message> chatMessages = _chatUnitOfWork.MessagesRepository.TakeOrdered(
                 new ExpressionSpecification<Message>(message => message.ChatID == chatID &&
-                    (message.Chat.FirstMemberID == userID || message.Chat.SecondMemberID == userID)),
-                message => message.Include(m => m.Chat),
+                    message.Chat.Users.Any(u => u.UserID == userID)),
+                message => message.Include(m => m.Chat).ThenInclude(c => c.Users),
                 message => message.ReceivedDate,
                 messagesCount,
                 true);

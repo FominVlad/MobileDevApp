@@ -9,16 +9,26 @@ using System.Net.Mime;
 
 namespace Chat.API.Controllers
 {
+    /// <summary>
+    /// Chat endpoint.
+    /// </summary>
     [Route("api/chat-info")]
     public class ChatController : ControllerBase
     {
         private readonly IChatInfoProvider _chatInfoProvider;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="chatInfoProvider">Chat info provider injection</param>
         public ChatController(IChatInfoProvider chatInfoProvider)
         {
             _chatInfoProvider = chatInfoProvider ?? throw new ArgumentNullException(nameof(chatInfoProvider));
         }
 
+        /// <summary>
+        /// All chats of current user.
+        /// </summary>
         [HttpGet("all-chats"),
         Produces(MediaTypeNames.Application.Json),
         ProducesResponseType(typeof(List<ChatShortInfo>), StatusCodes.Status200OK),
@@ -38,6 +48,9 @@ namespace Chat.API.Controllers
             return StatusCode(StatusCodes.Status200OK, allUserChats);
         }
 
+        /// <summary>
+        /// All chat messages for specified chat.
+        /// </summary>
         [HttpGet("all-chat-messages/{chatID}"),
         Produces(MediaTypeNames.Application.Json),
         ProducesResponseType(typeof(List<MessageInfo>), StatusCodes.Status200OK),

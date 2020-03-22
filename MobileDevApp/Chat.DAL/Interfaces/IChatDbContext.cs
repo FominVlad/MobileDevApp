@@ -12,6 +12,7 @@ namespace Chat.DAL.Interfaces
         DbSet<User> Users { get; }
         DbSet<ChatEntity> Chats { get; }
         DbSet<Message> Messages { get; }
+        DbSet<ChatUser> ChatUsers { get; }
         int SaveChanges();
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         EntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;

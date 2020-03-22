@@ -14,5 +14,7 @@ namespace Chat.DAL.Implementations
         public DbSet<ChatEntity> Chats { get; set; }
 
         public DbSet<Message> Messages { get; set; }
+
+        public DbSet<ChatUser> ChatUsers { get; set; }
     }
 }

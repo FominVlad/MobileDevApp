@@ -8,5 +8,6 @@ namespace Chat.DAL.Interfaces
         IChatRepository<Message> MessagesRepository { get; }
         IChatRepository<User> UsersRepository { get; }
         IChatRepository<ChatEntity> ChatsRepository { get; }
+        IChatRepository<ChatUser> ChatUsersRepository { get; }
     }
 }

@@ -28,13 +28,9 @@ namespace Chat.Business.Implementations
             if (userLoginData == null)
                 throw new ArgumentNullException(nameof(userLoginData));
 
-            Func<User, string> loginPropSelector = userLoginData.LoginType == LoginType.PhoneNumber ?
-                new Func<User, string>(user => user.PhoneNumber) :
-                new Func<User, string>(user => user.Email);
-
             var expression = new ExpressionSpecification<User>(
-                user => loginPropSelector(user) == userLoginData.Login &&
-                        userLoginData.PasswordHash == user.PasswordHash);
+                user => user.Email == userLoginData.Login
+                        && userLoginData.PasswordHash == user.PasswordHash);
 
             User registeredUser = _chatUnitOfWork.UsersRepository.FirstOrDefault(
                 expression,
@@ -56,7 +52,8 @@ namespace Chat.Business.Implementations
             User registeredUser = new User
             {
                 Name = newUser.Name,
-                PasswordHash = newUser.PasswordHash
+                PasswordHash = newUser.PasswordHash,
+                QRCode = newUser.QRCode
             };
             string loginClaimType = null;
             if (newUser.LoginType == LoginType.PhoneNumber)
@@ -111,7 +108,13 @@ namespace Chat.Business.Implementations
             registeredUser.PhoneNumber = newUserInfo.PhoneNumber ?? registeredUser.PhoneNumber;
             registeredUser.Email = newUserInfo.Email ?? registeredUser.Email;
             registeredUser.Bio = newUserInfo.Bio ?? registeredUser.Bio;
-            registeredUser.Image.Image = newUserInfo.Image.Length > 0 ? newUserInfo.Image : registeredUser.Image.Image;
+            if(newUserInfo.Image != null)
+            {
+                if (registeredUser.Image == null)
+                    registeredUser.Image = new UserImage { Image = newUserInfo.Image };
+                else
+                    registeredUser.Image.Image = newUserInfo.Image;
+            }
 
            if(_chatUnitOfWork.UsersRepository.Update(registeredUser) <= 0)
                 return null;
@@ -132,7 +135,7 @@ namespace Chat.Business.Implementations
                 PhoneNumber = user.PhoneNumber,
                 Email = user.Email,
                 Bio = user.Bio,
-                Image = user.Image.Image
+                Image = user.Image?.Image
             };
         }
     }

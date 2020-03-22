@@ -5,17 +5,10 @@ namespace Chat.DAL.Models
 {
     public class ChatEntity
     {
+        [Key]
         public int ChatID { get; set; }
 
-        [Required]
-        public int FirstMemberID { get; set; }
-
-        public User FirstMember { get; set; }
-
-        [Required]
-        public int SecondMemberID { get; set; }
-
-        public User SecondMember { get; set; }
+        public virtual ICollection<ChatUser> Users { get; set; }
 
         public virtual ICollection<Message> Messages { get; set; }
     }

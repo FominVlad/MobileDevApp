@@ -1,6 +1,8 @@
 using Chat.API.Auth;
 using Chat.API.Filters;
 using Chat.API.Hubs;
+using Chat.Business.Implementations;
+using Chat.Business.Interfaces;
 using Chat.DAL.Implementations;
 using Chat.DAL.Interfaces;
 using Chat.DAL.Models;
@@ -39,7 +41,17 @@ namespace Chat.API
                 new ChatBaseRepository<User>(sp.GetRequiredService<IChatDbContext>(), db => db.Users));
             services.AddScoped<IChatRepository<Message>>(sp =>
                 new ChatBaseRepository<Message>(sp.GetRequiredService<IChatDbContext>(), db => db.Messages));
+            services.AddScoped<IChatRepository<ChatUser>>(sp =>
+                new ChatBaseRepository<ChatUser>(sp.GetRequiredService<IChatDbContext>(), db => db.ChatUsers));
             services.AddScoped<IChatUnitOfWork, ChatUnitOfWork>();
+
+            services.AddScoped<IChatInfoProvider, ChatInfoProvider>();
+            services.AddScoped<IUserManager>(sp =>
+            {
+                return new UserManager(
+                    chatUnitOfWork: sp.GetService<IChatUnitOfWork>(),
+                    secret: Configuration["Auth:Secret"]);
+            });
 
             services.AddAuthentication(ChatAuthenticationScheme.SchemeName)
                .AddScheme<ChatAuthenticationScheme, ChatAuthenticationHandler>(ChatAuthenticationScheme.SchemeName, null);
@@ -86,10 +98,13 @@ namespace Chat.API
                 endpoints.MapHub<ChatHub>("/chat");
             });
 
-            app.UseSwagger();
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "chat-api/swagger/{documentName}/swagger.json";
+            });
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/chat-api/v1/swagger.json", "Chat.API");
+                c.SwaggerEndpoint("/chat-api/swagger/v1/swagger.json", "Chat.API");
                 c.RoutePrefix = string.Empty;
             });
         }
