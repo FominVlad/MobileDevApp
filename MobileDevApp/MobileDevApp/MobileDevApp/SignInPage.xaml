@@ -6,24 +6,28 @@
              mc:Ignorable="d"
              Title="Sign In"
              x:Class="MobileDevApp.SignInPage">
-    
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="Styles\SignInPageStyles.css" />
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <Grid x:Name="grdInternetConn" IsVisible="False">
-                <Label Text="No internet connection" FontSize="Body"/>
-                <Image x:Name="imgNoInternetConnection" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Label x:Name="lblNoConn" StyleId="lblNoConn" Grid.Row="1" Text="No internet connection" FontSize="Medium" HorizontalOptions="Center" VerticalOptions="End"/>
+                <Image Grid.Row="2" Grid.RowSpan="4" x:Name="imgNoInternetConnection" HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
             </Grid>
             <Grid x:Name="grdContent" IsVisible="False">
                 <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="Center">
                     <ActivityIndicator x:Name="loaderIndicator" Color="Blue" IsRunning="False" IsVisible="False" IsEnabled="False" BackgroundColor="Transparent"/>
                 </AbsoluteLayout>
                 <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                    <Label x:Name="lblLogin"  Text="Login:"/>
-                    <Entry x:Name="entryLogin" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                    <Label x:Name="lblLogin" StyleClass="lblInput" Text="Login:"/>
+                    <Entry x:Name="entryLogin" StyleClass="lblInput" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
-                    <Label x:Name="lblPassword" Text="Password:"/>
-                    <Entry x:Name="entryPassword" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                    <Label x:Name="lblPassword" StyleClass="lblInput" Text="Password:"/>
+                    <Entry x:Name="entryPassword" StyleClass="lblInput" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
                     <Button Text="Sign in" x:Name="btnSignIn" Clicked="btnSignIn_Clicked" VerticalOptions="End" HorizontalOptions="CenterAndExpand"/>
