@@ -13,6 +13,14 @@ using Android.Gms.Tasks;
 using Android.Content.PM;
 using Android.Views;
 using Xamarin.Forms;
+using MobileDevApp;
+using System.Net.Http;
+using System;
+using System.Threading.Tasks;
+using System.IO;
+using System.Net;
+using System.Text;
+using MobileDevApp.Helpers;
 
 namespace MobileDevApp.Droid
 {
@@ -23,6 +31,7 @@ namespace MobileDevApp.Droid
 
         GoogleSignInOptions gso;
         GoogleApiClient googleApiClient;
+        SetGoogleUserInfo setGoogleUserInfo;
 
         FirebaseAuth firebaseAuth;
 
@@ -43,8 +52,6 @@ namespace MobileDevApp.Droid
             googleApiClient.Connect();
 
             firebaseAuth = GetFirebaseAuth();
-
-            //SigninButton_Click();
 
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
@@ -96,17 +103,12 @@ namespace MobileDevApp.Droid
 
         public void OnSuccess(Java.Lang.Object result)
         {
-            LoadApplication(new App());
-            //displayNameText.Text = "Display Name: " + firebaseAuth.CurrentUser.DisplayName;
-            //emailText.Text = "Email: " + firebaseAuth.CurrentUser.Email;
-            //photourlText.Text = "Photo URL: " + firebaseAuth.CurrentUser.PhotoUrl.Path;
-
-            Toast.MakeText(this, "Login successful", ToastLength.Short).Show();
+            Toast.MakeText(this, "Success", ToastLength.Short).Show();
         }
 
         public void OnFailure(Java.Lang.Exception e)
         {
-            Toast.MakeText(this, "Login Failed", ToastLength.Short).Show();
+            Toast.MakeText(this, "Fail", ToastLength.Short).Show();
         }
 
         private void LoginWithFirebase(GoogleSignInAccount account)
@@ -127,21 +129,35 @@ namespace MobileDevApp.Droid
                 {
                     GoogleSignInAccount account = result.SignInAccount;
                     LoginWithFirebase(account);
+
+                    WebClient wc = new WebClient();
+                    byte[] b = wc.DownloadData(account.PhotoUrl.ToString());
+
+                    StringEncoder stringEncoder = new StringEncoder();
+
+                    string photoBytes = stringEncoder.DecodeToString(b);
+
+                    setGoogleUserInfo(new Models.GoogleUser() 
+                    { 
+                        Login = account.Email, 
+                        UserName = account.DisplayName,
+                        PhotoBytes = photoBytes
+                    });
                 }
             }
         }
 
-        public void SigninButton_Click()
+        public void SigninButton_Click(SetGoogleUserInfo setGoogleUserInfo)
         {
-            if (firebaseAuth.CurrentUser == null)
-            {
-                var intent = Auth.GoogleSignInApi.GetSignInIntent(googleApiClient);
-                StartActivityForResult(intent, 1);
-            }
-            else
+            if (firebaseAuth.CurrentUser != null)
             {
                 firebaseAuth.SignOut();
             }
+
+            this.setGoogleUserInfo = setGoogleUserInfo;
+
+            var intent = Auth.GoogleSignInApi.GetSignInIntent(googleApiClient);
+            StartActivityForResult(intent, 1);
         }
     }
 }

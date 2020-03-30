@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <None Remove="Resources\add.png" />
+    <None Remove="Resources\ChatLogo.png" />
     <None Remove="Resources\googleicon.png" />
     <None Remove="Resources\help.png" />
     <None Remove="Resources\noInternetConnection.png" />
@@ -27,6 +28,7 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Resources\add.png" />
+    <EmbeddedResource Include="Resources\chatLogo.png" />
     <EmbeddedResource Include="Resources\googleicon.png" />
     <EmbeddedResource Include="Resources\help.png" />
     <EmbeddedResource Include="Resources\noInternetConnection.png" />
@@ -44,6 +46,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
@@ -84,6 +87,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="SignInPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

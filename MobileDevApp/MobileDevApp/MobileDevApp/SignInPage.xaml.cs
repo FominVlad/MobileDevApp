@@ -36,8 +36,8 @@ namespace MobileDevApp
         private void SetComponentsProp()
         {
             btnSignUp.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.signup.png");
-            btnGoogleSignIn.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.googleicon.png");
             imgNoInternetConnection.Source = ImageSource.FromResource("MobileDevApp.Resources.noInternetConnection.png");
+            imgAppLogo.Source = ImageSource.FromResource("MobileDevApp.Resources.chatLogo.png");
 
             CheckConnection();
         }
@@ -55,15 +55,9 @@ namespace MobileDevApp
             (Application.Current).MainPage = new NavigationPage(new MainPage());
         }
 
-        private void btnSignUp_Clicked(object sender, EventArgs e)
+        private async void btnSignUp_Clicked(object sender, EventArgs e)
         {
-
-        }
-
-        private void btnGoogleSignIn_Clicked(object sender, EventArgs e)
-        {
-            IGoogleAuth tst = DependencyService.Get<IGoogleAuth>();
-            tst.GetGoogle();
+            await Navigation.PushAsync(new SignUpPage());
         }
 
         private void btnReload_Clicked(object sender, EventArgs e)
