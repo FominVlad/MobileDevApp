@@ -14,14 +14,15 @@
 
     <ContentPage.Content>
         <StackLayout x:Name="mainLayout">
-            <Label x:Name="lblMessageList" Text="MESSAGE LIST"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <Image x:Name="btnAddMessage" StyleId="btnAddMessage" HorizontalOptions="End" VerticalOptions="End" >
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="btnAddMessage_Clicked" NumberOfTapsRequired="1" />
-                </Image.GestureRecognizers>
-            </Image>
+            
+            <AbsoluteLayout VerticalOptions="FillAndExpand">
+                <ListView x:Name="phonesList" VerticalOptions="StartAndExpand" />
+                <Image x:Name="btnAddMessage" StyleId="btnAddMessage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,75,75" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="btnAddMessage_Clicked" NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+            </AbsoluteLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

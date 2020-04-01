@@ -68,6 +68,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="DialogPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="HelpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
