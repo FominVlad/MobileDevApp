@@ -1,4 +1,4 @@
-﻿
+﻿using MobileDevApp.Helpers;
 using MobileDevApp.Models;
 using System;
 using System.Json;
@@ -56,6 +56,11 @@ namespace MobileDevApp
             App.Database.Settings.Update(settings);
             App.Database.SaveChanges();
             (Application.Current).MainPage = new NavigationPage(new MainPage());
+        }
+
+        private void btnTest_Clicked(object sender, EventArgs e)
+        {
+            DependencyService.Get<INotification>().CreateNotification("SPTutorials", "TEST TEXT");
         }
     }
 }

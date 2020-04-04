@@ -21,12 +21,18 @@ using System.IO;
 using System.Net;
 using System.Text;
 using MobileDevApp.Helpers;
+using Android.Support.V4.App;
+using TaskStackBuilder = Android.Support.V4.App.TaskStackBuilder;
 
 namespace MobileDevApp.Droid
 {
     [Activity(Label = "MobileDevApp", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IOnSuccessListener, IOnFailureListener
     {
+        static readonly int NOTIFICATION_ID = 1000;
+        static readonly string CHANNEL_ID = "location_notification";
+        internal static readonly string COUNT_KEY = "count";
+
         internal static MainActivity Instance { get; private set; }
 
         GoogleSignInOptions gso;

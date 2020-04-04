@@ -105,6 +105,7 @@
   <ItemGroup>
     <Compile Include="GoogleAuth.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="NotificationHelper.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
