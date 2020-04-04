@@ -10,6 +10,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -84,9 +85,114 @@ namespace MobileDevApp
             */
         }
 
-        private async void btnSignUp_Clicked(object sender, System.EventArgs e)
+        private void btnSignUp_Clicked(object sender, System.EventArgs e)
         {
+            if (ValidateName(entryName.Text) && ValidateLogin(entryLogin.Text) &&
+                ValidatePassword(entryPassword.Text, entryConfirmPassword.Text))
+            {
+                DisplayCustomAlert("OKAY!", "All is OK!");
+            }
+        }
 
+        private bool ValidateLogin(string login)
+        {
+            if (string.IsNullOrEmpty(login))
+            {
+                DisplayCustomAlert("Error!", "Login cannot be empty.");
+                return false;
+            }
+
+            if (login.Length < 8)
+            {
+                DisplayCustomAlert("Error!", "Login must be longer than 8 characters.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateName(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                DisplayCustomAlert("Error!", "Name cannot be empty.");
+                return false;
+            }
+
+            if (name.Length == 0)
+            {
+                DisplayCustomAlert("Error!", "Name must be at least 1 character");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidatePassword(string password, string confirmPassword)
+        {
+            if (string.IsNullOrEmpty(password))
+            {
+                DisplayCustomAlert("Error!", "Password cannot be empty.");
+                return false;
+            }
+
+            if (string.IsNullOrEmpty(confirmPassword))
+            {
+                DisplayCustomAlert("Error!", "Password confirm cannot be empty.");
+                return false;
+            }
+
+            if (!password.Equals(confirmPassword))
+            {
+                DisplayCustomAlert("Error!", "Password must be the same as password confirmation.");
+                return false;
+            }
+
+            if (password.Length < 8)
+            {
+                DisplayCustomAlert("Error!", "Password must be longer than 8 characters.");
+                return false;
+            }
+
+            Regex hasNumber = new Regex(@"[0-9]+");
+            Regex hasUpperChar = new Regex(@"[A-Z]+");
+            Regex hasMiniMaxChars = new Regex(@".{8,15}");
+            Regex hasLowerChar = new Regex(@"[a-z]+");
+            Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
+
+            if (!hasLowerChar.IsMatch(password))
+            {
+                DisplayCustomAlert("Error!", "Password should contain at least one lower case letter.");
+                return false;
+            }
+            else if (!hasUpperChar.IsMatch(password))
+            {
+                DisplayCustomAlert("Error!", "Password should contain at least one upper case letter.");
+                return false;
+            }
+            else if (!hasMiniMaxChars.IsMatch(password))
+            {
+                DisplayCustomAlert("Error!", "Password should not be lesser than 8 or greater than 15 characters.");
+                return false;
+            }
+            else if (!hasNumber.IsMatch(password))
+            {
+                DisplayCustomAlert("Error!", "Password should contain at least one numeric value.");
+                return false;
+            }
+
+            else if (!hasSymbols.IsMatch(password))
+            {
+                DisplayCustomAlert("Error!", "Password should contain at least one special case character.");
+                return false;
+            }
+
+            return true;
+        }
+
+        private async void DisplayCustomAlert(string topic, string alertText)
+        {
+            await DisplayAlert(topic, alertText, "OK");
         }
     }
 }

@@ -28,7 +28,7 @@
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="50" TextColor="Black"/>
                     <Label x:Name="lblPassword" StyleClass="lblInput" Text="Password:"/>
-                    <Entry x:Name="entryPassword" StyleClass="lblInput" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                    <Entry x:Name="entryPassword" IsPassword="True" StyleClass="lblInput" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
                    HorizontalTextAlignment="Center" MaxLength="25" TextColor="Black"/>
                     <Button Text="Sign in" x:Name="btnSignIn" Clicked="btnSignIn_Clicked" VerticalOptions="End" HorizontalOptions="CenterAndExpand"/>
