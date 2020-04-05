@@ -60,7 +60,7 @@ namespace MobileDevApp
 
         private void btnTest_Clicked(object sender, EventArgs e)
         {
-            DependencyService.Get<INotification>().CreateNotification("SPTutorials", "TEST TEXT");
+            
         }
     }
 }

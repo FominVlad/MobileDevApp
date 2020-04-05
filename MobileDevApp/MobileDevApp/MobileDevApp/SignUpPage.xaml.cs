@@ -1,5 +1,6 @@
 ﻿using MobileDevApp.Helpers;
 using MobileDevApp.Models;
+using MobileDevApp.Services;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
@@ -85,12 +86,58 @@ namespace MobileDevApp
             */
         }
 
-        private void btnSignUp_Clicked(object sender, System.EventArgs e)
+        private async void btnSignUp_Clicked(object sender, System.EventArgs e)
         {
-            if (ValidateName(entryName.Text) && ValidateLogin(entryLogin.Text) &&
-                ValidatePassword(entryPassword.Text, entryConfirmPassword.Text))
+            try
             {
-                DisplayCustomAlert("OKAY!", "All is OK!");
+                if (ValidateName(entryName.Text) && ValidateLogin(entryLogin.Text) &&
+                ValidatePassword(entryPassword.Text, entryConfirmPassword.Text))
+                {
+                    UserRegister user = GetUserFromEntry();
+
+                    UserService userService = new UserService();
+
+                    UserInfo createdUser = await userService.RefisterUser(user);
+
+                    if (createdUser != null)
+                    {
+                        DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
+                    }
+                    else
+                    {
+                        DisplayCustomAlert("Error!", "Unknown error...");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private UserRegister GetUserFromEntry()
+        {
+            return new UserRegister()
+            {
+                Name = entryName.Text,
+                QRCode = "null",
+                Login = entryLogin.Text,
+                PasswordHash = entryPassword.Text,
+                LoginType = GetLoginType(entryLogin.Text)
+            };
+        }
+
+        private LoginType GetLoginType(string login)
+        {
+            Regex emailRegex = new Regex(@"^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
+
+            if(emailRegex.IsMatch(login))
+            {
+                return LoginType.Email;
+            }
+            else
+            {
+                return LoginType.PhoneNumber;
             }
         }
 
@@ -105,6 +152,15 @@ namespace MobileDevApp
             if (login.Length < 8)
             {
                 DisplayCustomAlert("Error!", "Login must be longer than 8 characters.");
+                return false;
+            }
+
+            Regex emailRegex = new Regex(@"^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
+            Regex phoneRegex = new Regex(@"^\+?[0-9]{3}-?[0-9]{6,12}$");
+
+            if (!emailRegex.IsMatch(login) && !phoneRegex.IsMatch(login))
+            {
+                DisplayCustomAlert("Error!", "Login must be phone number or email.");
                 return false;
             }
 

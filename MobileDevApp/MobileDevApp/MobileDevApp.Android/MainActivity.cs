@@ -59,6 +59,12 @@ namespace MobileDevApp.Droid
 
             firebaseAuth = GetFirebaseAuth();
 
+            bool flag = false;
+            if (Intent.Extras != null)
+            {
+                flag = true;
+            }
+
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
             this.RequestedOrientation = ScreenOrientation.Portrait;
