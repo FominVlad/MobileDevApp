@@ -25,11 +25,43 @@ namespace MobileDevApp.Services
             return client;
         }
 
-        public async Task<UserInfo> RefisterUser(UserRegister user)
+        public async Task<UserInfo> RegisterUser(UserRegister user)
         {
             HttpClient client = GetClient();
 
             var response = await client.PostAsync($"{url}register/",
+                new StringContent(
+                    JsonConvert.SerializeObject(user),
+                    Encoding.UTF8, "application/json"));
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+
+            return JsonConvert.DeserializeObject<UserInfo>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<UserInfo> LoginUser(UserLogin user)
+        {
+            HttpClient client = GetClient();
+
+            var response = await client.PostAsync($"{url}login/",
+                new StringContent(
+                    JsonConvert.SerializeObject(user),
+                    Encoding.UTF8, "application/json"));
+
+            if (response.StatusCode != HttpStatusCode.OK)
+                return null;
+
+            return JsonConvert.DeserializeObject<UserInfo>(
+                await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task<UserInfo> EditUser(RemoteProviders.Models.UserEdit user)
+        {
+            HttpClient client = GetClient();
+
+            var response = await client.PostAsync($"{url}edit/",
                 new StringContent(
                     JsonConvert.SerializeObject(user),
                     Encoding.UTF8, "application/json"));

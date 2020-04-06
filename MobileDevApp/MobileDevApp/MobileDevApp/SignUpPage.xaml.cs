@@ -65,7 +65,6 @@ namespace MobileDevApp
             loaderIndicator.IsEnabled = isEnabled;
             loaderIndicator.IsRunning = isEnabled;
             loaderIndicator.IsVisible = isEnabled;
-            
         }
 
         public void SetInfoFromGoogle(GoogleUser googleUser)
@@ -93,28 +92,31 @@ namespace MobileDevApp
                 if (ValidateName(entryName.Text) && ValidateLogin(entryLogin.Text) &&
                 ValidatePassword(entryPassword.Text, entryConfirmPassword.Text))
                 {
+                    IsLoading(true);
+
                     UserRegister user = GetUserFromEntry();
 
                     UserService userService = new UserService();
 
-                    UserInfo createdUser = await userService.RefisterUser(user);
+                    UserInfo createdUser = await userService.RegisterUser(user);
 
                     if (createdUser != null)
                     {
                         AddUserToDb(createdUser);
                         DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
-                        IsLoading(true);
+                        
                         (Application.Current).MainPage = new NavigationPage(new MainPage());
                     }
                     else
                     {
-                        DisplayCustomAlert("Error!", "Unknown error...");
+                        throw new Exception();
                     }
                 }
             }
             catch (Exception ex)
             {
-
+                DisplayCustomAlert("Error!", "Unknown error...");
+                IsLoading(false);
             }
         }
 

@@ -58,15 +58,19 @@ namespace MobileDevApp
             (Application.Current).MainPage = new NavigationPage(new MainPage());
         }
 
-        private void btnTest_Clicked(object sender, EventArgs e)
-        {
-            
-        }
-
         private void btnSignOut_Clicked(object sender, EventArgs e)
         {
-            App.Database.userInfo.Remove(App.Database.userInfo.FirstOrDefault());
-            App.Database.SaveChanges();
+            if (App.Database.userInfo.Any())
+            {
+                App.Database.userInfo.Remove(App.Database.userInfo.FirstOrDefault());
+                App.Database.SaveChanges();
+
+                (Application.Current).MainPage = new NavigationPage(new SignInPage());
+            }
+            else
+            {
+                throw new Exception("User not authorized!");
+            }
         }
     }
 }

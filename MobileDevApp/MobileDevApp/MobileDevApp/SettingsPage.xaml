@@ -23,7 +23,6 @@
                         Grid.Row="0" Grid.Column="2" />
             </Grid>
             <Button x:Name="btnSignOut" Text="Sign out" Clicked="btnSignOut_Clicked"/>
-            <Button x:Name="btnTest" Clicked="btnTest_Clicked" />
 
         </StackLayout>
     </ContentPage.Content>

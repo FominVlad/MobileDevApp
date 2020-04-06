@@ -17,6 +17,7 @@
     <None Remove="Resources\help.png" />
     <None Remove="Resources\noInternetConnection.png" />
     <None Remove="Resources\pencil.png" />
+    <None Remove="Resources\personChangeIcon.png" />
     <None Remove="Resources\personIcon.png" />
     <None Remove="Resources\ready.png" />
     <None Remove="Resources\reload.png" />
@@ -33,6 +34,7 @@
     <EmbeddedResource Include="Resources\help.png" />
     <EmbeddedResource Include="Resources\noInternetConnection.png" />
     <EmbeddedResource Include="Resources\pencil.png" />
+    <EmbeddedResource Include="Resources\personChangeIcon.png" />
     <EmbeddedResource Include="Resources\personIcon.png" />
     <EmbeddedResource Include="Resources\ready.png" />
     <EmbeddedResource Include="Resources\reload.png" />
@@ -49,9 +51,10 @@
     <PackageReference Include="sqlite-net-pcl" Version="1.7.302-beta" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="4.0.0.190-beta" />
+    <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
     <PackageReference Include="Xamarin.Auth" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.908675" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.5.2" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
   </ItemGroup>

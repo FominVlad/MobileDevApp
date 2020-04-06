@@ -4,6 +4,12 @@ using Xamarin.Essentials;
 using System;
 using System.Linq;
 using MobileDevApp.Models;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using MobileDevApp.Services;
+using MobileDevApp.RemoteProviders.Models;
+using MobileDevApp.Helpers;
+using System.IO;
 
 namespace MobileDevApp
 {
@@ -16,6 +22,8 @@ namespace MobileDevApp
         private bool IsOwner { get; set; } = true;
 
         public string Id { get; set; }
+
+        private byte[] iconByteStr { get; set; }
 
         public ProfilePage()
         {
@@ -48,12 +56,10 @@ namespace MobileDevApp
             btnSaveProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.ready.png");
             btnHelp.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.help.png");
             btnMyQr.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.scanQR.png");
+            btnRedactImage.Source = ImageSource.FromResource("MobileDevApp.Resources.personChangeIcon.png");
 
             ScreenHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
             ScreenWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
-
-            imgProfileIcon.WidthRequest = ScreenWidth / 8;
-            imgProfileIcon.HeightRequest = ScreenWidth / 8;
 
             btnRedactProfile.WidthRequest = ScreenWidth / 25;
             btnRedactProfile.HeightRequest = ScreenWidth / 25;
@@ -61,9 +67,13 @@ namespace MobileDevApp
             btnSaveProfile.WidthRequest = ScreenWidth / 25;
             btnSaveProfile.HeightRequest = ScreenWidth / 25;
 
-           
+            frameProfileIcon.WidthRequest = ScreenWidth / 5;
+            frameProfileIcon.HeightRequest = ScreenWidth / 5;
 
-            if(!IsOwner)
+            frameRedactImage.WidthRequest = ScreenWidth / 5;
+            frameRedactImage.HeightRequest = ScreenWidth / 5;
+
+            if (!IsOwner)
             {
                 btnRedactProfile.IsVisible = false;
                 btnSaveProfile.IsVisible = false;
@@ -88,7 +98,7 @@ namespace MobileDevApp
 
         private void SetUserInfo()
         {
-            UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
+            Models.UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
 
             if(userInfo != null)
             {
@@ -108,6 +118,9 @@ namespace MobileDevApp
 
             btnRedactProfile.IsVisible = false;
             btnSaveProfile.IsVisible = true;
+
+            frameProfileIcon.IsVisible = false;
+            frameRedactImage.IsVisible = true;
         }
 
         private void btnSaveProfile_Clicked(object sender, System.EventArgs e)
@@ -119,6 +132,32 @@ namespace MobileDevApp
 
             btnRedactProfile.IsVisible = true;
             btnSaveProfile.IsVisible = false;
+
+            frameProfileIcon.IsVisible = true;
+            frameRedactImage.IsVisible = false;
+
+            EditUserInfo();
+        }
+
+        private void EditUserInfo()
+        {
+            UserService userService = new UserService();
+
+            UserEdit userEdit = GetUserInfo();
+
+            userService.EditUser(userEdit);
+        }
+
+        private UserEdit GetUserInfo()
+        {
+            return new UserEdit()
+            {
+                Name = entryUserName.Text,
+                PhoneNumber = entryUserPhoneNumber.Text,
+                Email = entryUserId.Text,
+                Bio = editorUserDescription.Text,
+                Image = iconByteStr
+            };
         }
 
         private void btnHelp_Clicked(object sender, System.EventArgs e)
@@ -139,6 +178,24 @@ namespace MobileDevApp
         private async void btnMyQr_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new QrCodePage("Test QR Code User ID"));
+        }
+
+        private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            try
+            {
+                if (CrossMedia.Current.IsPickPhotoSupported)
+                {
+                    StringEncoder stringEncoder = new StringEncoder();
+                    MediaFile photo = await CrossMedia.Current.PickPhotoAsync();
+                    imgProfileIcon.Source = ImageSource.FromFile(photo.Path);
+                    iconByteStr = File.ReadAllBytes(photo.Path);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
     }
 }
