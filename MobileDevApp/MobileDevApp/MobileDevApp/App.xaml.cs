@@ -40,11 +40,27 @@ namespace MobileDevApp
             }
         }
 
+        public static UserInfo UserInfo
+        {
+            get
+            {
+                return Database.userInfo.FirstOrDefault();
+            }
+        }
+
         public App()
         {
             InitializeComponent();
             //MainPage = new NavigationPage(new MainPage());
-            MainPage = new NavigationPage(new SignInPage());
+            if(!Database.userInfo.Any())
+            {
+                MainPage = new NavigationPage(new SignInPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+            
         }
 
         public void CreateNewPage()

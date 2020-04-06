@@ -12,7 +12,7 @@ namespace MobileDevApp
         public string dbName { get; private set; }
         private string dbPath { get; set; }
 
-        public AppDbContext(string dbPath = null, string dbName = "testDb24674132332.db")
+        public AppDbContext(string dbPath = null, string dbName = "testDb24674125322332.db")
         {
             this.dbPath = dbPath ?? 
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dbName);
@@ -52,7 +52,7 @@ namespace MobileDevApp
             Models.Settings settings = new Models.Settings()
             {
                 Id = 1,
-                ColourScheme = colourSchemeDark
+                ColourScheme = colourSchemeLight
             };
 
             if (!Settings.Any())
@@ -70,5 +70,6 @@ namespace MobileDevApp
 
         public DbSet<Models.Settings> Settings { get; set; }
         public DbSet<ColourScheme> ColourSchemes { get; set; }
+        public DbSet<UserInfo> userInfo { get; set; }
     }
 }

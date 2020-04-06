@@ -3,6 +3,7 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using System;
 using System.Linq;
+using MobileDevApp.Models;
 
 namespace MobileDevApp
 {
@@ -21,6 +22,8 @@ namespace MobileDevApp
             InitializeComponent();
 
             SetColourScheme();
+
+            SetUserInfo();
 
             SetComponentsProp();
         }
@@ -58,11 +61,7 @@ namespace MobileDevApp
             btnSaveProfile.WidthRequest = ScreenWidth / 25;
             btnSaveProfile.HeightRequest = ScreenWidth / 25;
 
-            entryUserName.Text = "Test User";
-            entryUserId.Text = this.Id;
-            entryUserPhoneNumber.Text = "+380123456789";
-            editorUserDescription.Text = "Its test text about me. Its test text about me. " +
-                "Its test text about me.";
+           
 
             if(!IsOwner)
             {
@@ -85,6 +84,19 @@ namespace MobileDevApp
             lblDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
             editorUserDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
             btnHelp.TextColor = Color.FromHex(App.ColourScheme.TextColour);
+        }
+
+        private void SetUserInfo()
+        {
+            UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
+
+            if(userInfo != null)
+            {
+                entryUserName.Text = userInfo.Name;
+                entryUserId.Text = userInfo.Email;
+                entryUserPhoneNumber.Text = userInfo.PhoneNumber;
+                editorUserDescription.Text = userInfo.Bio;
+            }
         }
 
         private void btnRedactProfile_Clicked(object sender, System.EventArgs e)

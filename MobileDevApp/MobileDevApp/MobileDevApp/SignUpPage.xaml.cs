@@ -101,7 +101,10 @@ namespace MobileDevApp
 
                     if (createdUser != null)
                     {
+                        AddUserToDb(createdUser);
                         DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
+                        IsLoading(true);
+                        (Application.Current).MainPage = new NavigationPage(new MainPage());
                     }
                     else
                     {
@@ -115,14 +118,30 @@ namespace MobileDevApp
             }
         }
 
+        private void AddUserToDb(UserInfo user)
+        {
+            if(!App.Database.userInfo.Any())
+            {
+                App.Database.userInfo.Add(user);
+                App.Database.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("User is already logged in!");
+            }
+        }
+
         private UserRegister GetUserFromEntry()
         {
+            HashHelper hashHelper = new HashHelper();
+            string pwdHash = hashHelper.GenerateHash(entryPassword.Text);
+
             return new UserRegister()
             {
                 Name = entryName.Text,
                 QRCode = "null",
                 Login = entryLogin.Text,
-                PasswordHash = entryPassword.Text,
+                PasswordHash = pwdHash,
                 LoginType = GetLoginType(entryLogin.Text)
             };
         }

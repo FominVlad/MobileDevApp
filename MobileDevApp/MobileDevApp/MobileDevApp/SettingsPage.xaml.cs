@@ -62,5 +62,11 @@ namespace MobileDevApp
         {
             
         }
+
+        private void btnSignOut_Clicked(object sender, EventArgs e)
+        {
+            App.Database.userInfo.Remove(App.Database.userInfo.FirstOrDefault());
+            App.Database.SaveChanges();
+        }
     }
 }
