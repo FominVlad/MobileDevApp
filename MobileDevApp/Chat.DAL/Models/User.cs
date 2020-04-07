@@ -25,9 +25,6 @@ namespace Chat.DAL.Models
         [MaxLength(1000)]
         public string Bio { get; set; }
 
-        [Required, MaxLength(200)]
-        public string QRCode { get; set; }
-
         public UserImage Image { get; set; }
 
         public virtual ICollection<ChatUser> Chats { get; set; }
