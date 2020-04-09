@@ -24,19 +24,19 @@ namespace MobileDevApp
             btnAddMessage.WidthRequest = ScreenWidth / 15;
             btnAddMessage.HeightRequest = ScreenWidth / 15;
 
-            string[] tmp = new string[50];
+            //string[] tmp = new string[50];
 
-            for(int i = 0; i < 50; i++)
-            {
-                tmp[i] = i.ToString();
-            }
+            //for(int i = 0; i < 50; i++)
+            //{
+            //    tmp[i] = i.ToString();
+            //}
 
-            phonesList.ItemsSource = tmp;
+            //phonesList.ItemsSource = tmp;
         }
 
         private void SetColourScheme()
         {
-            BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
+            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
         }
 
         private async void btnAddMessage_Clicked(object sender, System.EventArgs e)

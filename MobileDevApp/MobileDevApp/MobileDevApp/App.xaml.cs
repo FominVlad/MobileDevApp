@@ -51,8 +51,10 @@ namespace MobileDevApp
         public App()
         {
             InitializeComponent();
+            FillResourcesFromDb();
+
             //MainPage = new NavigationPage(new MainPage());
-            if(!Database.userInfo.Any())
+            if (!Database.userInfo.Any())
             {
                 MainPage = new NavigationPage(new SignInPage());
             }
@@ -60,7 +62,14 @@ namespace MobileDevApp
             {
                 MainPage = new NavigationPage(new MainPage());
             }
-            
+        }
+
+        private void FillResourcesFromDb()
+        {
+            Resources.Add("textColor", Color.FromHex(ColourScheme.TextColour));
+            Resources.Add("headerColor", Color.FromHex(ColourScheme.HeaderColour));
+            Resources.Add("buttonColor", Color.FromHex(ColourScheme.ButtonColour));
+            Resources.Add("pageColor", Color.FromHex(ColourScheme.PageColour));
         }
 
         public void CreateNewPage()

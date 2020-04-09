@@ -6,20 +6,21 @@
              mc:Ignorable="d"
              x:Class="MobileDevApp.ProfilePage"
              Title="Profile"
-             Icon="profile.png">
+             Icon="profile.png"
+             BackgroundColor="{DynamicResource Key=pageColor}">
 
     <ContentPage.Resources>
-        <StyleSheetExtension Source="Styles\ProfilePageStyles.css" />
+        <StyleSheetExtension Source="..\Styles\ProfilePageStyles.css" />
     </ContentPage.Resources>
     
     <ContentPage.Content>
         <Grid>
             <StackLayout StyleId="stackLayoutMain" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Grid VerticalOptions="Start">
-                    <Frame x:Name="frameProfileIcon" IsVisible="True" HasShadow="False" BorderColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Frame x:Name="frameProfileIcon" BackgroundColor="{DynamicResource Key=pageColor}" IsVisible="True" HasShadow="False" BorderColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
                         <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center" />
                     </Frame>
-                    <Frame x:Name="frameRedactImage" IsVisible="False" HasShadow="False" BorderColor="Transparent" StyleId="imgProfileIcon" VerticalOptions="Center" HorizontalOptions="Center">
+                    <Frame x:Name="frameRedactImage" BackgroundColor="{DynamicResource Key=pageColor}" IsVisible="False" HasShadow="False" BorderColor="Transparent" StyleId="imgProfileIcon" VerticalOptions="Center" HorizontalOptions="Center">
                         <Image x:Name="btnRedactImage"  StyleId="imgProfileIcon" VerticalOptions="Center" 
                              HorizontalOptions="Center" >
                             <Image.GestureRecognizers>
@@ -40,27 +41,30 @@
                         </Image.GestureRecognizers>
                     </Image>
                 </Grid>
-                <Entry x:Name="entryUserName" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                <Entry x:Name="entryUserName" TextColor="{DynamicResource Key=textColor}" StyleId="entryUserName" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="CenterAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
-                   HorizontalTextAlignment="Center" MaxLength="50" TextColor="Black" />
-                <Label x:Name="lblID" StyleClass="userInfoLabel" Text="User ID:"/>
-                <Entry x:Name="entryUserId" StyleClass="userInfo" StyleId="entryUserId" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                   HorizontalTextAlignment="Center" MaxLength="50"/>
+                <Label x:Name="lblID" TextColor="{DynamicResource Key=textColor}" StyleClass="userInfoLabel" Text="User ID:"/>
+                <Entry x:Name="entryUserId" TextColor="{DynamicResource Key=textColor}" StyleClass="userInfo" StyleId="entryUserId" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" ClearButtonVisibility="WhileEditing"
-                   HorizontalTextAlignment="Center" MaxLength="50" TextColor="Black"/>
-                <Label x:Name="lblPhoneNum" StyleClass="userInfoLabel" Text="User phone number:"/>
-                <Entry x:Name="entryUserPhoneNumber" StyleClass="userInfo" StyleId="entryUserPhoneNumber" IsSpellCheckEnabled="False"
+                   HorizontalTextAlignment="Center" MaxLength="50"/>
+                <Label x:Name="lblPhoneNum" TextColor="{DynamicResource Key=textColor}" StyleClass="userInfoLabel" Text="User phone number:"/>
+                <Entry x:Name="entryUserPhoneNumber" TextColor="{DynamicResource Key=textColor}" StyleClass="userInfo" StyleId="entryUserPhoneNumber" IsSpellCheckEnabled="False"
                    IsTextPredictionEnabled="False" VerticalOptions="Start" HorizontalOptions="FillAndExpand" IsEnabled="False" 
-                   ClearButtonVisibility="WhileEditing" HorizontalTextAlignment="Center" MaxLength="50" TextColor="Black"/>
-                <Label x:Name="lblDescription" StyleClass="userInfoLabel" Text="User description:" />
-                <Editor x:Name="editorUserDescription" StyleClass="userInfo" StyleId="editorUserDescription" IsEnabled="False" 
+                   ClearButtonVisibility="WhileEditing" HorizontalTextAlignment="Center" MaxLength="50"/>
+                <Label x:Name="lblDescription" TextColor="{DynamicResource Key=textColor}" StyleClass="userInfoLabel" Text="User description:" />
+                <Editor x:Name="editorUserDescription" TextColor="{DynamicResource Key=textColor}" StyleClass="userInfo" StyleId="editorUserDescription" IsEnabled="False" 
                     AutoSize="TextChanges" MaxLength="500" Placeholder="Description..." HeightRequest="150" />
             </StackLayout>
-            <Button x:Name="btnHelp" FontFamily="Times New Roman" Text="Help" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
+            <Button x:Name="btnHelp" TextColor="{DynamicResource Key=textColor}" FontFamily="Times New Roman" Text="Help" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
                     BackgroundColor="Transparent" Clicked="btnHelp_Clicked" />
-            <Button x:Name="btnMyQr" FontFamily="Times New Roman" Text="My QrCode" VerticalOptions="End" HorizontalOptions="Start" ContentLayout="Left, 10" 
+            <Button x:Name="btnMyQr" TextColor="{DynamicResource Key=textColor}" FontFamily="Times New Roman" Text="My QrCode" VerticalOptions="End" HorizontalOptions="Start" ContentLayout="Left, 10" 
                     BackgroundColor="Transparent" Clicked="btnMyQr_Clicked" />
-            <Button x:Name="btnWriteMessage" Text="Write a message" VerticalOptions="End" HorizontalOptions="Center" 
+            <Button x:Name="btnWriteMessage" TextColor="{DynamicResource Key=textColor}" BackgroundColor="{DynamicResource Key=buttonColor}" Text="Write a message" VerticalOptions="End" HorizontalOptions="Center" 
                     Clicked="btnWriteMessage_Clicked" IsVisible="False"/>
+            <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator x:Name="loaderIndicator" Color="Blue" IsRunning="False" IsVisible="False" IsEnabled="False" BackgroundColor="Transparent"/>
+            </AbsoluteLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

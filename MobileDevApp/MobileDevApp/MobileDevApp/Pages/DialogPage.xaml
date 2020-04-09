@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="MobileDevApp.DialogPage">
+             x:Class="MobileDevApp.DialogPage"
+             BackgroundColor="{DynamicResource Key=pageColor}">
     
     <ContentPage.Content>
         <StackLayout>

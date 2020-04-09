@@ -6,17 +6,17 @@
              mc:Ignorable="d"
              x:Class="MobileDevApp.Messages"
              Title="Messages"
-             IconImageSource="message.png">
+             IconImageSource="message.png"
+             BackgroundColor="{DynamicResource Key=pageColor}">
 
     <ContentPage.Resources>
-        <StyleSheetExtension Source="Styles\MessagesPageStyles.css" />
+        <StyleSheetExtension Source="..\Styles\MessagesPageStyles.css" />
     </ContentPage.Resources>
-
+    
     <ContentPage.Content>
         <StackLayout x:Name="mainLayout">
-            
             <AbsoluteLayout VerticalOptions="FillAndExpand">
-                <ListView x:Name="phonesList" VerticalOptions="StartAndExpand" />
+                <!--<ListView x:Name="phonesList" VerticalOptions="StartAndExpand" />-->
                 <Image x:Name="btnAddMessage" StyleId="btnAddMessage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,75,75" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btnAddMessage_Clicked" NumberOfTapsRequired="1" />
