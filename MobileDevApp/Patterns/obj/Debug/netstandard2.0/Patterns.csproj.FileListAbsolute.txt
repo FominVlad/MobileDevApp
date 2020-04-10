@@ -1,0 +1,9 @@
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\bin\Debug\netstandard2.0\Patterns.deps.json
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\bin\Debug\netstandard2.0\Patterns.dll
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\bin\Debug\netstandard2.0\Patterns.pdb
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.csproj.CoreCompileInputs.cache
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.AssemblyInfoInputs.cache
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.AssemblyInfo.cs
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.dll
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.pdb
+C:\Users\DELL-\source\repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.csprojAssemblyReference.cache
