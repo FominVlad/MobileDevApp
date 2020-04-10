@@ -6,6 +6,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using MobileDevApp.Helpers;
 using MobileDevApp.Models;
+using MobileDevApp.RemoteProviders.Models;
 using MobileDevApp.Services;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
@@ -20,9 +21,7 @@ namespace MobileDevApp
         public SignInPage()
         {
             InitializeComponent();
-
             SetColourScheme();
-
             SetComponentsProp();
 
             CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
@@ -30,9 +29,8 @@ namespace MobileDevApp
 
         private void SetColourScheme()
         {
-            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
-            ((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
+            //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
+            //((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
         }
 
         private void Current_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
@@ -66,20 +64,20 @@ namespace MobileDevApp
         {
             try
             {
-                if (ValidateString(entryLogin.Text) && ValidateString(entryPassword.Text))
+                Validator validator = new Validator();
+                string exception = "";
+
+                if (validator.ValidateString(entryLogin.Text, out exception) && validator.ValidateString(entryPassword.Text, out exception))
                 {
                     IsLoading(true);
                     (Application.Current).MainPage = new NavigationPage(new MainPage());
-
                     UserService userService = new UserService();
-
                     UserLogin userLogin = GetUserFromEntry();
-
-                    UserInfo user = await userService.LoginUser(userLogin);
+                    Models.UserInfo user = await userService.LoginUser(userLogin);
 
                     if (user != null)
                     {
-                        AddUserToDb(user);
+                        App.Database.AddUserIfNotExist(user);
                         DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {user.Name} logined successfully!");
 
                         (Application.Current).MainPage = new NavigationPage(new MainPage());
@@ -89,68 +87,30 @@ namespace MobileDevApp
                         throw new Exception();
                     }
                 }
+                else
+                {
+                    await DisplayAlert("Error!", exception, "OK");
+                }
             }
             catch (Exception ex)
             {
-                DisplayCustomAlert("Error!", "Unknown error...");
+                await DisplayAlert("Error!", "Unknown error...", "OK");
                 IsLoading(false);
-            }
-        }
-
-        private void AddUserToDb(UserInfo user)
-        {
-            if (!App.Database.userInfo.Any())
-            {
-                App.Database.userInfo.Add(user);
-                App.Database.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("User is already logged in!");
             }
         }
 
         private UserLogin GetUserFromEntry()
         {
             HashHelper hashHelper = new HashHelper();
+            Validator validator = new Validator();
             string pwdHash = hashHelper.GenerateHash(entryPassword.Text);
 
             return new UserLogin()
             {
                 Login = entryLogin.Text,
                 PasswordHash = pwdHash,
-                LoginType = GetLoginType(entryLogin.Text)
+                LoginType = validator.GetLoginType(entryLogin.Text)
             };
-        }
-
-        private LoginType GetLoginType(string login)
-        {
-            Regex emailRegex = new Regex(@"^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
-
-            if (emailRegex.IsMatch(login))
-            {
-                return LoginType.Email;
-            }
-            else
-            {
-                return LoginType.PhoneNumber;
-            }
-        }
-
-        private bool ValidateString(string str)
-        {
-            if (string.IsNullOrEmpty(str))
-            {
-                DisplayCustomAlert("Error!", "Login cannot be empty.");
-                return false;
-            }
-
-            return true;
-        }
-
-        private async void DisplayCustomAlert(string topic, string alertText)
-        {
-            await DisplayAlert(topic, alertText, "OK");
         }
 
         private async void btnSignUp_Clicked(object sender, EventArgs e)

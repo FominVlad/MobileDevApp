@@ -12,15 +12,7 @@ namespace MobileDevApp
         {
 
             InitializeComponent();
-            SetColourScheme();
             NavigationPage.SetHasNavigationBar(this, false);
-        }
-
-        private void SetColourScheme()
-        {
-            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
-            //BarBackgroundColor = Color.FromHex(App.ColourScheme.HeaderColour);
-            //BarTextColor = Color.FromHex(App.ColourScheme.TextColour);
         }
     }
 }

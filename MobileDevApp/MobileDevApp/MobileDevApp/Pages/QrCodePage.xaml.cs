@@ -46,7 +46,6 @@ namespace MobileDevApp
 
         private void SetColourScheme()
         {
-            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
             ((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
         }

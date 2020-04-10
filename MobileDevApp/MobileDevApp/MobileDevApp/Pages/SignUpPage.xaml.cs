@@ -1,5 +1,6 @@
 ﻿using MobileDevApp.Helpers;
 using MobileDevApp.Models;
+using MobileDevApp.RemoteProviders.Models;
 using MobileDevApp.Services;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
@@ -27,19 +28,15 @@ namespace MobileDevApp
         public SignUpPage()
         {
             InitializeComponent();
-
             CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
-
             SetColourScheme();
-
             SetComponentsProp();
         }
 
         private void SetColourScheme()
         {
-            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
-            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
-            ((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
+            //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
+            //((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
         }
 
         private void SetComponentsProp()
@@ -98,20 +95,21 @@ namespace MobileDevApp
         {
             try
             {
-                if (ValidateName(entryName.Text) && ValidateLogin(entryLogin.Text) &&
-                ValidatePassword(entryPassword.Text, entryConfirmPassword.Text))
+                Validator validator = new Validator();
+                string exception = "";
+
+                if (validator.ValidateName(entryName.Text, out exception) && validator.ValidateLogin(entryLogin.Text, out exception) &&
+                    validator.ValidatePasswordsEquals(entryPassword.Text, entryConfirmPassword.Text, out exception) 
+                    && validator.ValidatePassword(entryPassword.Text, out exception))
                 {
                     IsLoading(true);
-
                     UserRegister user = GetUserFromEntry();
-
                     UserService userService = new UserService();
-
-                    UserInfo createdUser = await userService.RegisterUser(user);
+                    Models.UserInfo createdUser = await userService.RegisterUser(user);
 
                     if (createdUser != null)
                     {
-                        AddUserToDb(createdUser);
+                        App.Database.AddUserIfNotExist(createdUser);
                         DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
                         
                         (Application.Current).MainPage = new NavigationPage(new MainPage());
@@ -121,164 +119,31 @@ namespace MobileDevApp
                         throw new Exception();
                     }
                 }
+                else
+                {
+                    await DisplayAlert("Error!", exception, "OK");
+                }
             }
             catch (Exception ex)
             {
-                DisplayCustomAlert("Error!", "Unknown error...");
+                await DisplayAlert("Error!", "Unknown error...", "OK");
                 IsLoading(false);
-            }
-        }
-
-        private void AddUserToDb(UserInfo user)
-        {
-            if(!App.Database.userInfo.Any())
-            {
-                App.Database.userInfo.Add(user);
-                App.Database.SaveChanges();
-            }
-            else
-            {
-                throw new Exception("User is already logged in!");
             }
         }
 
         private UserRegister GetUserFromEntry()
         {
             HashHelper hashHelper = new HashHelper();
+            Validator validator = new Validator();
             string pwdHash = hashHelper.GenerateHash(entryPassword.Text);
 
             return new UserRegister()
             {
                 Name = entryName.Text,
-                QRCode = "null",
                 Login = entryLogin.Text,
                 PasswordHash = pwdHash,
-                LoginType = GetLoginType(entryLogin.Text)
+                LoginType = validator.GetLoginType(entryLogin.Text)
             };
-        }
-
-        private LoginType GetLoginType(string login)
-        {
-            Regex emailRegex = new Regex(@"^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
-
-            if(emailRegex.IsMatch(login))
-            {
-                return LoginType.Email;
-            }
-            else
-            {
-                return LoginType.PhoneNumber;
-            }
-        }
-
-        private bool ValidateLogin(string login)
-        {
-            if (string.IsNullOrEmpty(login))
-            {
-                DisplayCustomAlert("Error!", "Login cannot be empty.");
-                return false;
-            }
-
-            if (login.Length < 8)
-            {
-                DisplayCustomAlert("Error!", "Login must be longer than 8 characters.");
-                return false;
-            }
-
-            Regex emailRegex = new Regex(@"^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
-            Regex phoneRegex = new Regex(@"^\+?[0-9]{3}-?[0-9]{6,12}$");
-
-            if (!emailRegex.IsMatch(login) && !phoneRegex.IsMatch(login))
-            {
-                DisplayCustomAlert("Error!", "Login must be phone number or email.");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                DisplayCustomAlert("Error!", "Name cannot be empty.");
-                return false;
-            }
-
-            if (name.Length == 0)
-            {
-                DisplayCustomAlert("Error!", "Name must be at least 1 character");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidatePassword(string password, string confirmPassword)
-        {
-            if (string.IsNullOrEmpty(password))
-            {
-                DisplayCustomAlert("Error!", "Password cannot be empty.");
-                return false;
-            }
-
-            if (string.IsNullOrEmpty(confirmPassword))
-            {
-                DisplayCustomAlert("Error!", "Password confirm cannot be empty.");
-                return false;
-            }
-
-            if (!password.Equals(confirmPassword))
-            {
-                DisplayCustomAlert("Error!", "Password must be the same as password confirmation.");
-                return false;
-            }
-
-            if (password.Length < 8)
-            {
-                DisplayCustomAlert("Error!", "Password must be longer than 8 characters.");
-                return false;
-            }
-
-            Regex hasNumber = new Regex(@"[0-9]+");
-            Regex hasUpperChar = new Regex(@"[A-Z]+");
-            Regex hasMiniMaxChars = new Regex(@".{8,15}");
-            Regex hasLowerChar = new Regex(@"[a-z]+");
-            Regex hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
-
-            if (!hasLowerChar.IsMatch(password))
-            {
-                DisplayCustomAlert("Error!", "Password should contain at least one lower case letter.");
-                return false;
-            }
-            else if (!hasUpperChar.IsMatch(password))
-            {
-                DisplayCustomAlert("Error!", "Password should contain at least one upper case letter.");
-                return false;
-            }
-            else if (!hasMiniMaxChars.IsMatch(password))
-            {
-                DisplayCustomAlert("Error!", "Password should not be lesser than 8 or greater than 15 characters.");
-                return false;
-            }
-            else if (!hasNumber.IsMatch(password))
-            {
-                DisplayCustomAlert("Error!", "Password should contain at least one numeric value.");
-                return false;
-            }
-
-            else if (!hasSymbols.IsMatch(password))
-            {
-                DisplayCustomAlert("Error!", "Password should contain at least one special case character.");
-                return false;
-            }
-
-            return true;
-        }
-
-        private async void DisplayCustomAlert(string topic, string alertText)
-        {
-            await DisplayAlert(topic, alertText, "OK");
         }
     }
 }

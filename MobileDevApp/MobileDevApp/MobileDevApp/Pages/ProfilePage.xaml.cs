@@ -30,8 +30,6 @@ namespace MobileDevApp
         {
             InitializeComponent();
 
-            SetColourScheme();
-
             SetUserInfo();
 
             SetComponentsProp();
@@ -45,8 +43,6 @@ namespace MobileDevApp
 
             InitializeComponent();
 
-            SetColourScheme();
-
             SetComponentsProp();
         }
 
@@ -57,7 +53,7 @@ namespace MobileDevApp
             btnSaveProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.ready.png");
             btnHelp.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.help.png");
             btnMyQr.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.scanQR.png");
-            btnRedactImage.Source = ImageSource.FromResource("MobileDevApp.Resources.personChangeIcon.png");
+            //btnRedactImage.Source = ImageSource.FromResource("MobileDevApp.Resources.personChangeIcon.png");
 
             ScreenHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
             ScreenWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
@@ -71,8 +67,8 @@ namespace MobileDevApp
             frameProfileIcon.WidthRequest = ScreenWidth / 5;
             frameProfileIcon.HeightRequest = ScreenWidth / 5;
 
-            frameRedactImage.WidthRequest = ScreenWidth / 5;
-            frameRedactImage.HeightRequest = ScreenWidth / 5;
+            //frameRedactImage.WidthRequest = ScreenWidth / 5;
+            //frameRedactImage.HeightRequest = ScreenWidth / 5;
 
             if (!IsOwner)
             {
@@ -84,29 +80,23 @@ namespace MobileDevApp
             }
         }
 
-        private void SetColourScheme()
-        {
-            /*BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
-            lblID.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            entryUserName.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            entryUserId.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            lblPhoneNum.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            entryUserPhoneNumber.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            lblDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            editorUserDescription.TextColor = Color.FromHex(App.ColourScheme.TextColour);
-            btnHelp.TextColor = Color.FromHex(App.ColourScheme.TextColour);*/
-        }
-
         private void SetUserInfo()
         {
             Models.UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
 
-            if(userInfo != null)
+            if (userInfo != null)
             {
                 entryUserName.Text = userInfo.Name;
                 entryUserId.Text = userInfo.Email;
                 entryUserPhoneNumber.Text = userInfo.PhoneNumber;
                 editorUserDescription.Text = userInfo.Bio;
+
+                if (userInfo.Image != null)
+                {
+                    Stream stream = new MemoryStream(userInfo.Image);
+
+                    imgProfileIcon.Source = ImageSource.FromStream(() => { return stream; });
+                }
             }
         }
 
@@ -120,11 +110,13 @@ namespace MobileDevApp
             btnRedactProfile.IsVisible = false;
             btnSaveProfile.IsVisible = true;
 
-            frameProfileIcon.IsVisible = false;
-            frameRedactImage.IsVisible = true;
+            imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personChangeIcon.png");
+
+            //frameProfileIcon.IsVisible = false;
+            //frameRedactImage.IsVisible = true;
         }
 
-        private void btnSaveProfile_Clicked(object sender, System.EventArgs e)
+        private async void btnSaveProfile_Clicked(object sender, System.EventArgs e)
         {
             try
             {
@@ -138,12 +130,14 @@ namespace MobileDevApp
                 btnRedactProfile.IsVisible = true;
                 btnSaveProfile.IsVisible = false;
 
-                frameProfileIcon.IsVisible = true;
-                frameRedactImage.IsVisible = false;
+                //imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+
+                //frameProfileIcon.IsVisible = true;
+                //frameRedactImage.IsVisible = false;
             }
             catch (Exception ex)
             {
-                DisplayCustomAlert("Error!", "Unknown error...");
+                await DisplayAlert("Error!", "Unknown error...", "OK");
             }
             IsLoading(false);
         }
@@ -152,7 +146,10 @@ namespace MobileDevApp
         {
             try
             {
-                if (ValidateEmail(entryUserId.Text) && /*ValidatePhoneNumber(entryUserPhoneNumber.Text) &&*/ ValidateName(entryUserName.Text))
+                Validator validator = new Validator();
+                string exception = "";
+
+                if (validator.ValidateEmail(entryUserId.Text, out exception) && /*ValidatePhoneNumber(entryUserPhoneNumber.Text) &&*/ validator.ValidateName(entryUserName.Text, out exception))
                 {
                     IsLoading(true);
 
@@ -169,13 +166,18 @@ namespace MobileDevApp
                     }
                     else
                     {
-                        throw new Exception();
+                        //throw new Exception();
                     }
+                }
+                else
+                {
+                    await DisplayAlert("Error!", exception, "OK");
                 }
             }
             catch (Exception ex)
             {
-
+                await DisplayAlert("Error!", "Unknown error...", "OK");
+                //throw new Exception();
             }
         }
 
@@ -190,61 +192,6 @@ namespace MobileDevApp
             {
                 throw new Exception("User is not logged in!");
             }
-        }
-
-        private bool ValidateName(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                DisplayCustomAlert("Error!", "Name cannot be empty.");
-                return false;
-            }
-
-            if (name.Length == 0)
-            {
-                DisplayCustomAlert("Error!", "Name must be at least 1 character");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidateEmail(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-            {
-                DisplayCustomAlert("Error!", "Login cannot be empty.");
-                return false;
-            }
-
-            Regex emailRegex = new Regex(@"^\w.+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$");
-
-            if (!emailRegex.IsMatch(email))
-            {
-                DisplayCustomAlert("Error!", "Email must be valid.");
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool ValidatePhoneNumber(string phoneNumber)
-        {
-            if (string.IsNullOrEmpty(phoneNumber))
-            {
-                DisplayCustomAlert("Error!", "Name cannot be empty.");
-                return false;
-            }
-
-            Regex phoneRegex = new Regex(@"^\+?[0-9]{3}-?[0-9]{6,12}$");
-
-            if (!phoneRegex.IsMatch(phoneNumber))
-            {
-                DisplayCustomAlert("Error!", "Phone number must be like +xx(xxx)xxxxxxx.");
-                return false;
-            }
-
-            return true;
         }
 
         private UserEdit GetUserInfo()
@@ -295,11 +242,6 @@ namespace MobileDevApp
             {
 
             }
-        }
-
-        private async void DisplayCustomAlert(string topic, string alertText)
-        {
-            await DisplayAlert(topic, alertText, "OK");
         }
 
         public void IsLoading(bool isEnabled)

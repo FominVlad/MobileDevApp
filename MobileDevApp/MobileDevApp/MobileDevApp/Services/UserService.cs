@@ -1,4 +1,5 @@
-﻿using MobileDevApp.Models;
+﻿
+using MobileDevApp.RemoteProviders.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace MobileDevApp.Services
             return client;
         }
 
-        public async Task<UserInfo> RegisterUser(UserRegister user)
+        public async Task<Models.UserInfo> RegisterUser(UserRegister user)
         {
             HttpClient client = GetClient();
 
@@ -37,11 +38,11 @@ namespace MobileDevApp.Services
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
 
-            return JsonConvert.DeserializeObject<UserInfo>(
+            return JsonConvert.DeserializeObject<Models.UserInfo>(
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<UserInfo> LoginUser(UserLogin user)
+        public async Task<Models.UserInfo> LoginUser(UserLogin user)
         {
             HttpClient client = GetClient();
 
@@ -53,11 +54,11 @@ namespace MobileDevApp.Services
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
 
-            return JsonConvert.DeserializeObject<UserInfo>(
+            return JsonConvert.DeserializeObject<Models.UserInfo>(
                 await response.Content.ReadAsStringAsync());
         }
 
-        public async Task<UserInfo> EditUser(RemoteProviders.Models.UserEdit user)
+        public async Task<Models.UserInfo> EditUser(RemoteProviders.Models.UserEdit user)
         {
             HttpClient client = GetClient();
 
@@ -69,7 +70,7 @@ namespace MobileDevApp.Services
             if (response.StatusCode != HttpStatusCode.OK)
                 return null;
 
-            return JsonConvert.DeserializeObject<UserInfo>(
+            return JsonConvert.DeserializeObject<Models.UserInfo>(
                 await response.Content.ReadAsStringAsync());
         }
     }

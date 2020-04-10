@@ -18,11 +18,7 @@
             <StackLayout StyleId="stackLayoutMain" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <Grid VerticalOptions="Start">
                     <Frame x:Name="frameProfileIcon" BackgroundColor="{DynamicResource Key=pageColor}" IsVisible="True" HasShadow="False" BorderColor="Transparent" HorizontalOptions="Center" VerticalOptions="Center">
-                        <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Frame>
-                    <Frame x:Name="frameRedactImage" BackgroundColor="{DynamicResource Key=pageColor}" IsVisible="False" HasShadow="False" BorderColor="Transparent" StyleId="imgProfileIcon" VerticalOptions="Center" HorizontalOptions="Center">
-                        <Image x:Name="btnRedactImage"  StyleId="imgProfileIcon" VerticalOptions="Center" 
-                             HorizontalOptions="Center" >
+                        <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" HorizontalOptions="Center" VerticalOptions="Center">
                             <Image.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  NumberOfTapsRequired="1" />
                             </Image.GestureRecognizers>

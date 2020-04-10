@@ -68,6 +68,35 @@ namespace MobileDevApp
             optionsBuilder.UseSqlite($"Filename={dbPath}");
         }
 
+        public bool AddUserIfNotExist(UserInfo user)
+        {
+            if(!userInfo.Any())
+            {
+                userInfo.Add(user);
+                SaveChanges();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool DeleteUserIfExist()
+        {
+            if (userInfo.Any())
+            {
+                userInfo.Remove(userInfo.FirstOrDefault());
+                SaveChanges();
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public DbSet<Models.Settings> Settings { get; set; }
         public DbSet<ColourScheme> ColourSchemes { get; set; }
         public DbSet<UserInfo> userInfo { get; set; }

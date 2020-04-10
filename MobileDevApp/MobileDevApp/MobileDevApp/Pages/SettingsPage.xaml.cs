@@ -15,13 +15,7 @@ namespace MobileDevApp
         public Settings()
         {
             InitializeComponent();
-            SetColourScheme();
             SetSwitches();
-        }
-
-        private void SetColourScheme()
-        {
-            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
         }
 
         private void SetSwitches()
@@ -80,17 +74,9 @@ namespace MobileDevApp
 
         private void btnSignOut_Clicked(object sender, EventArgs e)
         {
-            if (App.Database.userInfo.Any())
-            {
-                App.Database.userInfo.Remove(App.Database.userInfo.FirstOrDefault());
-                App.Database.SaveChanges();
+            App.Database.DeleteUserIfExist();
 
-                (Application.Current).MainPage = new NavigationPage(new SignInPage());
-            }
-            else
-            {
-                throw new Exception("User not authorized!");
-            }
+            (Application.Current).MainPage = new NavigationPage(new SignInPage());
         }
     }
 }

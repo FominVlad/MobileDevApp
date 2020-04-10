@@ -16,18 +16,20 @@ namespace MobileDevApp
         public SearchProfilePage()
         {
             InitializeComponent();
-
             SetColourScheme();
-
-            btnSearch.Source = ImageSource.FromResource("MobileDevApp.Resources.search.png");
-            btnScanQr.Source = ImageSource.FromResource("MobileDevApp.Resources.searchQR.png");
+            SetComponentsProp();
         }
 
         private void SetColourScheme()
         {
-            //BackgroundColor = Color.FromHex(App.ColourScheme.PageColour);
             ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
             ((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
+        }
+
+        private void SetComponentsProp()
+        {
+            btnSearch.Source = ImageSource.FromResource("MobileDevApp.Resources.search.png");
+            btnScanQr.Source = ImageSource.FromResource("MobileDevApp.Resources.searchQR.png");
         }
 
         private void btnSearch_Tapped(object sender, EventArgs e)
