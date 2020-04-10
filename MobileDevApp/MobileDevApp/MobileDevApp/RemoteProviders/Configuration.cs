@@ -11,8 +11,10 @@
         public static readonly string BaseApiRoute = "http://172.17.254.81:3000/";
 
         public static readonly string UserInfoBaseRoute = $"{BaseApiRoute}api/chat-user";
-        
-        public static readonly string UserInfoGettingRoute = $"{UserInfoBaseRoute}/info";
+
+        public static readonly string UserInfoIdGettingRoute = $"{UserInfoBaseRoute}/info-id";
+
+        public static readonly string UserInfoNameGettingRoute = $"{UserInfoBaseRoute}/info-name";
 
         public static readonly string UserInfoRegisterRoute = $"{UserInfoBaseRoute}/register";
 

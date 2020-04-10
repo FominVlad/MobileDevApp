@@ -19,6 +19,7 @@ namespace Chat.DAL.Interfaces
 
         int Update(T entity);
 
+
         List<T> TakeOrdered<TSelector>(
             ISpecification<T> specification,
             Func<IQueryable<T>, IQueryable<T>> includer,

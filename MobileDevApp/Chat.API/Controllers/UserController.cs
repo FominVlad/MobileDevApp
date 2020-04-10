@@ -29,14 +29,37 @@ namespace Chat.API.Controllers
         /// <summary>
         /// User info.
         /// </summary>
-        /// <param name="userName">User name to find data</param>
-        [HttpGet("info/{userName}"),
+        /// <param name="userId">User id to find data about the user</param>
+        [HttpGet("info-id/{userId}"),
         Produces(MediaTypeNames.Application.Json),
         ProducesResponseType(typeof(UserInfo), StatusCodes.Status200OK),
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status400BadRequest)]
-        public ObjectResult Info(string userName)
+        public ObjectResult Info(int userId)
         {
-            UserInfo registeredUser = _userManager.GetUserInfo(userName);
+            UserInfo registeredUser = _userManager.GetUserInfo(userId);
+
+            if (registeredUser == null)
+                return StatusCode(
+                    statusCode: StatusCodes.Status400BadRequest,
+                    value: new ErrorMessage
+                    {
+                        Message = "User was not found"
+                    });
+
+            return StatusCode(StatusCodes.Status200OK, registeredUser);
+        }
+
+        /// <summary>
+        /// User info.
+        /// </summary>
+        /// <param name="userSearchInfo">User search info to find data</param>
+        [HttpGet("info-name/{userSearchInfo}"),
+        Produces(MediaTypeNames.Application.Json),
+        ProducesResponseType(typeof(UserInfo), StatusCodes.Status200OK),
+        ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status400BadRequest)]
+        public ObjectResult Info(string userSearchInfo)
+        {
+            UserInfo registeredUser = _userManager.GetUserInfo(userSearchInfo);
 
             if (registeredUser == null)
                 return StatusCode(
