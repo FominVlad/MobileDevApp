@@ -35,7 +35,7 @@ namespace MobileDevApp.RemoteProviders.Implementations
 
                     return JsonConvert.DeserializeObject<TResult>(responseStr);
                 }
-                catch
+                catch (Exception ex)
                 {
                     var sw = Stopwatch.StartNew();
                     currentWaitingTime = TimeSpan.FromMilliseconds(Configuration.HttpWaitMs) - TimeSpan.FromMilliseconds(sw.ElapsedMilliseconds);                  

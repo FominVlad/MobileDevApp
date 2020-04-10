@@ -1,7 +1,7 @@
 ﻿using MobileDevApp.Helpers;
 using MobileDevApp.Models;
+using MobileDevApp.RemoteProviders.Implementations;
 using MobileDevApp.RemoteProviders.Models;
-using MobileDevApp.Services;
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
@@ -103,13 +103,20 @@ namespace MobileDevApp
                     && validator.ValidatePassword(entryPassword.Text, out exception))
                 {
                     IsLoading(true);
+                    //UserRegister user = GetUserFromEntry();
+                    //UserService userService = new UserService();
+                    //Models.UserInfo createdUser = await userService.RegisterUser(user);
+
+                    HttpClient httpClient = new HttpClient();
+                    //httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                    HttpProvider httpProvider = new HttpProvider(httpClient);
+                    UserService userService = new UserService(httpProvider);
                     UserRegister user = GetUserFromEntry();
-                    UserService userService = new UserService();
-                    Models.UserInfo createdUser = await userService.RegisterUser(user);
+                    RemoteProviders.Models.UserInfo createdUser = userService.Register(user);
 
                     if (createdUser != null)
                     {
-                        App.Database.AddUserIfNotExist(createdUser);
+                        //App.Database.AddUserIfNotExist(createdUser);
                         DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
                         
                         (Application.Current).MainPage = new NavigationPage(new MainPage());

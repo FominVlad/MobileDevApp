@@ -3,12 +3,15 @@ using System.Linq;
 using MobileDevApp.Models;
 using System;
 using System.IO;
+using MobileDevApp.RemoteProviders.Implementations;
+using System.Net.Http;
 
 namespace MobileDevApp
 {
     public partial class App : Application
     {
         private static AppDbContext database;
+        private static UserService userService;
         public static AppDbContext Database
         {
             get
@@ -19,6 +22,22 @@ namespace MobileDevApp
                 }
 
                 return database;
+            }
+        }
+
+        public static UserService UserService
+        {
+            get
+            {
+                if (userService == null)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                    HttpProvider httpProvider = new HttpProvider(httpClient);
+                    userService = new UserService(httpProvider);
+                }
+
+                return userService;
             }
         }
 
