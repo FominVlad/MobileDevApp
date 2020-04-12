@@ -6257,23 +6257,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL-\\.nuget\\packages\\": {},
+    "C:\\Users\\anast\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj",
+      "projectUniqueName": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj",
       "projectName": "Chat.DAL",
-      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj",
-      "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\obj\\",
+      "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj",
+      "packagesPath": "C:\\Users\\anast\\.nuget\\packages\\",
+      "outputPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.DAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\DELL-\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\anast\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -6287,8 +6287,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj"
+            "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
+              "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj"
             }
           }
         }
@@ -6339,7 +6339,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

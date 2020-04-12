@@ -10,3 +10,14 @@ C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstan
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.csproj.CopyComplete
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.dll
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.pdb
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\bin\Debug\netstandard2.0\Chat.DAL.deps.json
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\bin\Debug\netstandard2.0\Chat.DAL.dll
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\bin\Debug\netstandard2.0\Chat.DAL.pdb
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\bin\Debug\netstandard2.0\Patterns.dll
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\bin\Debug\netstandard2.0\Patterns.pdb
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.csprojAssemblyReference.cache
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.AssemblyInfoInputs.cache
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.AssemblyInfo.cs
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.csproj.CopyComplete
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.dll
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Chat.DAL\obj\Debug\netstandard2.0\Chat.DAL.pdb

@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {}
+    "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
+    "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
+        "projectUniqueName": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
         "projectName": "Patterns",
-        "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
-        "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\obj\\",
+        "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
+        "packagesPath": "C:\\Users\\anast\\.nuget\\packages\\",
+        "outputPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
         ],
         "configFilePaths": [
-          "C:\\Users\\DELL-\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\anast\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
@@ -59,7 +59,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -7,3 +7,11 @@ C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstan
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.dll
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.pdb
 C:\Users\DELL-\source\repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.csprojAssemblyReference.cache
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\bin\Debug\netstandard2.0\Patterns.deps.json
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\bin\Debug\netstandard2.0\Patterns.dll
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\bin\Debug\netstandard2.0\Patterns.pdb
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.csprojAssemblyReference.cache
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.AssemblyInfoInputs.cache
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.AssemblyInfo.cs
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.dll
+D:\KPI\mobile\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.pdb
