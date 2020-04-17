@@ -6,7 +6,6 @@ using System.Linq;
 using MobileDevApp.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
-using MobileDevApp.Services;
 using MobileDevApp.RemoteProviders.Models;
 using MobileDevApp.Helpers;
 using System.IO;
@@ -30,9 +29,9 @@ namespace MobileDevApp
         {
             InitializeComponent();
 
-            SetUserInfo();
-
             SetComponentsProp();
+
+            SetUserInfo();
         }
 
         public ProfilePage(bool IsOwner, string id = "@TestUserId")
@@ -48,7 +47,11 @@ namespace MobileDevApp
 
         private void SetComponentsProp()
         {
-            imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+            if(App.UserInfo.Image == null)
+            {
+                imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+            }
+
             btnRedactProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.pencil.png");
             btnSaveProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.ready.png");
             btnHelp.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.help.png");
@@ -82,7 +85,7 @@ namespace MobileDevApp
 
         private void SetUserInfo()
         {
-            Models.UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
+            UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
 
             if (userInfo != null)
             {
@@ -102,6 +105,7 @@ namespace MobileDevApp
 
         private void btnRedactProfile_Clicked(object sender, System.EventArgs e)
         {
+            iconByteStr = null;
             entryUserName.IsEnabled = true;
             entryUserId.IsEnabled = true;
             entryUserPhoneNumber.IsEnabled = true;
@@ -130,6 +134,11 @@ namespace MobileDevApp
                 btnRedactProfile.IsVisible = true;
                 btnSaveProfile.IsVisible = false;
 
+                if(iconByteStr == null)
+                {
+                    imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+                }
+
                 //imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
 
                 //frameProfileIcon.IsVisible = true;
@@ -154,10 +163,7 @@ namespace MobileDevApp
                     IsLoading(true);
 
                     UserEdit userEdit = GetUserInfo();
-
-                    UserService userService = new UserService();
-
-                    Models.UserInfo editedUser = await userService.EditUser(userEdit);
+                    UserInfo editedUser = App.UserService.Edit(userEdit, App.UserInfo.AccessToken);
 
                     if (editedUser != null)
                     {
@@ -166,7 +172,7 @@ namespace MobileDevApp
                     }
                     else
                     {
-                        //throw new Exception();
+                        throw new Exception();
                     }
                 }
                 else
@@ -181,7 +187,7 @@ namespace MobileDevApp
             }
         }
 
-        private void AddUserToDb(Models.UserInfo user)
+        private void AddUserToDb(UserInfo user)
         {
             if (App.Database.userInfo.Any())
             {

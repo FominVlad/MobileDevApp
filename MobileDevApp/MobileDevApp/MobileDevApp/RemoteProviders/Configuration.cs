@@ -8,7 +8,7 @@
 
         public static readonly string AuthHeaderKey = "Authentication";
 
-        public static readonly string BaseApiRoute = "http://192.168.0.110:3000/";
+        public static readonly string BaseApiRoute = "http://192.168.1.180:3000/";
 
         public static readonly string UserInfoBaseRoute = $"{BaseApiRoute}api/chat-user/";
 

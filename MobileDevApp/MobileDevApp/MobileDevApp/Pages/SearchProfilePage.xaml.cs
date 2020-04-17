@@ -10,6 +10,12 @@ using ZXing.Net.Mobile.Forms;
 
 namespace MobileDevApp
 {
+    public class Test
+    {
+        public string name { get; set; }
+        public ImageSource img { get; set; }
+    }
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SearchProfilePage : ContentPage
     {
@@ -32,9 +38,20 @@ namespace MobileDevApp
             btnScanQr.Source = ImageSource.FromResource("MobileDevApp.Resources.searchQR.png");
         }
 
-        private void btnSearch_Tapped(object sender, EventArgs e)
+        private async void btnSearch_Tapped(object sender, EventArgs e)
         {
-
+            try
+            {
+                lwSearchREsults.ItemsSource = new List<Test>()
+                {
+                    new Test() { img = ImageSource.FromResource("MobileDevApp.Resources.search.png"), name = "Name testsss" }
+                };
+                //App.UserService.Info();
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error!", "Unknown error...", "OK");
+            }
         }
 
         private async void btnScanQr_Tapped(object sender, EventArgs e)

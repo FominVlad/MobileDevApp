@@ -28,6 +28,22 @@
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
+            <ListView x:Name="lwSearchREsults">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Frame Grid.Column="0">
+                                        <Image x:Name="imgProfileIcon" StyleId="imgProfileIcon" Source="{Binding img}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                    <Label x:Name="lblUserName" Grid.Column="1" Text="{Binding name}" Grid.ColumnSpan="3"/>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

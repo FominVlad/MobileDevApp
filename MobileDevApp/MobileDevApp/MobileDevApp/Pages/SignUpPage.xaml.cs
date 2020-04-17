@@ -11,6 +11,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,6 +26,8 @@ namespace MobileDevApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class SignUpPage : ContentPage
     {
+        private byte[] profileImage { get; set; }
+
         public SignUpPage()
         {
             InitializeComponent();
@@ -78,17 +81,10 @@ namespace MobileDevApp
             IsLoading(false);
             this.entryLogin.Text = googleUser.Login;
             this.entryName.Text = googleUser.UserName;
-            /*
+
             StringEncoder stringEncoder = new StringEncoder();
 
-            byte[] imgBytes = stringEncoder.EncodeToBytes(googleUser.PhotoBytes);
-
-            Stream stream = new MemoryStream(imgBytes);
-            
-            imgPhoto.Source = ImageSource.FromStream(() => { return stream; });
-            imgPhoto.HeightRequest = 200;
-            imgPhoto.WidthRequest = 200;
-            */
+            profileImage = stringEncoder.EncodeToBytes(googleUser.PhotoBytes);
         }
 
         private async void btnSignUp_Clicked(object sender, System.EventArgs e)
@@ -103,20 +99,13 @@ namespace MobileDevApp
                     && validator.ValidatePassword(entryPassword.Text, out exception))
                 {
                     IsLoading(true);
-                    //UserRegister user = GetUserFromEntry();
-                    //UserService userService = new UserService();
-                    //Models.UserInfo createdUser = await userService.RegisterUser(user);
 
-                    HttpClient httpClient = new HttpClient();
-                    //httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
-                    HttpProvider httpProvider = new HttpProvider(httpClient);
-                    UserService userService = new UserService(httpProvider);
                     UserRegister user = GetUserFromEntry();
-                    RemoteProviders.Models.UserInfo createdUser = userService.Register(user);
+                    UserInfo createdUser = App.UserService.Register(user);
 
                     if (createdUser != null)
                     {
-                        //App.Database.AddUserIfNotExist(createdUser);
+                        App.Database.AddUserIfNotExist(createdUser);
                         DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
                         
                         (Application.Current).MainPage = new NavigationPage(new MainPage());
@@ -138,6 +127,24 @@ namespace MobileDevApp
             }
         }
 
+        private byte[] GetDefaultPhotoBytes()
+        {
+            var assembly = this.GetType().GetTypeInfo().Assembly;
+            byte[] bytes = null;
+
+            using (System.IO.Stream s = assembly.GetManifestResourceStream("MobileDevApp.Resources.personIcon.png"))
+            {
+                if (s != null)
+                {
+                    long length = s.Length;
+                    bytes = new byte[length];
+                    s.Read(bytes, 0, (int)length);
+                }
+            }
+
+            return bytes;
+        }
+
         private UserRegister GetUserFromEntry()
         {
             HashHelper hashHelper = new HashHelper();
@@ -149,7 +156,8 @@ namespace MobileDevApp
                 Name = entryName.Text,
                 Login = entryLogin.Text,
                 PasswordHash = pwdHash,
-                LoginType = validator.GetLoginType(entryLogin.Text)
+                LoginType = validator.GetLoginType(entryLogin.Text),
+                Image = profileImage == null ? GetDefaultPhotoBytes() : profileImage
             };
         }
     }
