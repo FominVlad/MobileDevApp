@@ -1,5 +1,4 @@
-﻿
-using Chat.Business.Interfaces;
+﻿using Chat.Business.Interfaces;
 using Chat.Business.Models;
 using Chat.DAL.Interfaces;
 using Chat.DAL.Models;
