@@ -3,12 +3,15 @@ using System.Linq;
 using MobileDevApp.Models;
 using System;
 using System.IO;
+using MobileDevApp.RemoteProviders.Implementations;
+using System.Net.Http;
 
 namespace MobileDevApp
 {
     public partial class App : Application
     {
         private static AppDbContext database;
+        private static UserService userService;
         public static AppDbContext Database
         {
             get
@@ -19,6 +22,22 @@ namespace MobileDevApp
                 }
 
                 return database;
+            }
+        }
+
+        public static UserService UserService
+        {
+            get
+            {
+                if (userService == null)
+                {
+                    HttpClient httpClient = new HttpClient();
+                    httpClient.DefaultRequestHeaders.Add("Accept", "application/json");
+                    HttpProvider httpProvider = new HttpProvider(httpClient);
+                    userService = new UserService(httpProvider);
+                }
+
+                return userService;
             }
         }
 
@@ -40,7 +59,39 @@ namespace MobileDevApp
             }
         }
 
+        public static UserInfo UserInfo
+        {
+            get
+            {
+                return Database.userInfo.FirstOrDefault();
+            }
+        }
+
         public App()
+        {
+            InitializeComponent();
+            FillResourcesFromDb();
+
+            //MainPage = new NavigationPage(new MainPage());
+            if (!Database.userInfo.Any())
+            {
+                MainPage = new NavigationPage(new SignInPage());
+            }
+            else
+            {
+                MainPage = new NavigationPage(new MainPage());
+            }
+        }
+
+        private void FillResourcesFromDb()
+        {
+            Resources.Add("textColor", Color.FromHex(ColourScheme.TextColour));
+            Resources.Add("headerColor", Color.FromHex(ColourScheme.HeaderColour));
+            Resources.Add("buttonColor", Color.FromHex(ColourScheme.ButtonColour));
+            Resources.Add("pageColor", Color.FromHex(ColourScheme.PageColour));
+        }
+
+        public void CreateNewPage()
         {
             InitializeComponent();
             MainPage = new NavigationPage(new MainPage());

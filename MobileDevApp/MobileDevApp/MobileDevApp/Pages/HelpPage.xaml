@@ -5,20 +5,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="MobileDevApp.HelpPage"
-             Title="Help">
-    
+             Title="Help"
+             BackgroundColor="{DynamicResource Key=pageColor}">
+
     <ContentPage.Resources>
-        <StyleSheetExtension Source="Styles\HelpPageStyles.css" />
+        <StyleSheetExtension Source="..\Styles\HelpPageStyles.css" />
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="lblInfo" StyleId="lblInfo" VerticalOptions="Start"
+            <Label x:Name="lblInfo" TextColor="{DynamicResource Key=textColor}" StyleId="lblInfo" VerticalOptions="Start"
                 HorizontalOptions="FillAndExpand" FontSize="Medium" />
-            <Editor x:Name="editorMessageText" StyleId="editorMessageText" VerticalOptions="Start" 
+            <Editor x:Name="editorMessageText" StyleId="editorMessageText" TextColor="{DynamicResource Key=textColor}" VerticalOptions="Start" 
                     HorizontalOptions="FillAndExpand" AutoSize="TextChanges" MaxLength="500" 
                     Placeholder="Message text..." HeightRequest="150"/>
-            <Button Text="Send" x:Name="btnSendMessage" StyleId="btnSendMessage" Clicked="btnSendMessage_Clicked"
+            <Button Text="Send" BackgroundColor="{DynamicResource Key=buttonColor}" TextColor="{DynamicResource Key=textColor}" x:Name="btnSendMessage" StyleId="btnSendMessage" Clicked="btnSendMessage_Clicked"
                     HorizontalOptions="Center" VerticalOptions="Start" BorderRadius="15"/>
         </StackLayout>
     </ContentPage.Content>

@@ -6,7 +6,6 @@ namespace Chat.DAL.Models
     {
         public int UserImageID { get; set; }
 
-        [Required]
         public byte[] Image { get; set; }
 
         [Required]
