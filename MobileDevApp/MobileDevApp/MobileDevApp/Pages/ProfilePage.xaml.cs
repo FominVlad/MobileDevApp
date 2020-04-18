@@ -251,7 +251,7 @@ namespace MobileDevApp
         {
             try
             {
-                if (CrossMedia.Current.IsPickPhotoSupported)
+                if (btnSaveProfile.IsVisible && CrossMedia.Current.IsPickPhotoSupported)
                 {
                     StringEncoder stringEncoder = new StringEncoder();
                     MediaFile photo = await CrossMedia.Current.PickPhotoAsync();
