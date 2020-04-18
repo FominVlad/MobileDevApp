@@ -18,12 +18,8 @@ namespace MobileDevApp
     {
         public int ScreenHeight { get; private set; }
         public int ScreenWidth { get; private set; }
-
-        private bool IsOwner { get; set; } = true;
-
-        public string Id { get; set; }
-
         private byte[] iconByteStr { get; set; }
+        private UserInfo userInfo { get; set; }
 
         public ProfilePage()
         {
@@ -34,15 +30,18 @@ namespace MobileDevApp
             SetUserInfo();
         }
 
-        public ProfilePage(bool IsOwner, string id = "@TestUserId")
+        public ProfilePage(UserInfo userInfo)
         {
-            this.IsOwner = IsOwner;
+            if (userInfo == null)
+            {
+                throw new Exception("Param userInfo cannot be null!");
+            }
 
-            this.Id = id;
+            this.userInfo = userInfo;
 
             InitializeComponent();
 
-            SetComponentsProp();
+            SetSearchedComponentsProp();
         }
 
         private void SetComponentsProp()
@@ -72,15 +71,31 @@ namespace MobileDevApp
 
             //frameRedactImage.WidthRequest = ScreenWidth / 5;
             //frameRedactImage.HeightRequest = ScreenWidth / 5;
+        }
 
-            if (!IsOwner)
+        private void SetSearchedComponentsProp()
+        {
+            if (userInfo.Image != null)
             {
-                btnRedactProfile.IsVisible = false;
-                btnSaveProfile.IsVisible = false;
-                btnHelp.IsVisible = false;
-                btnMyQr.IsVisible = false;
-                btnWriteMessage.IsVisible = true;
+                Stream stream = new MemoryStream(userInfo.Image);
+
+                imgProfileIcon.Source = ImageSource.FromStream(() => { return stream; });
             }
+            else
+            {
+                imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+            }
+
+            entryUserName.Text = userInfo.Name;
+            entryUserId.Text = userInfo.Email;
+            entryUserPhoneNumber.Text = userInfo.PhoneNumber;
+            editorUserDescription.Text = userInfo.Bio;
+
+            btnRedactProfile.IsVisible = false;
+            btnSaveProfile.IsVisible = false;
+            btnHelp.IsVisible = false;
+            btnMyQr.IsVisible = false;
+            btnWriteMessage.IsVisible = true;
         }
 
         private void SetUserInfo()

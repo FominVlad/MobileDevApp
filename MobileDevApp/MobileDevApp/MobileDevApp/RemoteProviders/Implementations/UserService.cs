@@ -15,18 +15,20 @@ namespace MobileDevApp.RemoteProviders.Implementations
             _httpProvider = httpProvider ?? throw new ArgumentNullException(nameof(httpProvider));
         }
 
-        public UserInfo Info(int userId)
+        public UserInfo Info(int userId, string userAuthToken)
         {
             var requestMessage = new HttpRequestMessage(
                 HttpMethod.Get, $"{Configuration.UserInfoIdGettingRoute}/{userId}");
+            requestMessage.Headers.Add(Configuration.AuthHeaderKey, userAuthToken);
 
             return _httpProvider.SendRequest<UserInfo>(requestMessage);
         }
 
-        public UserInfo Info(string userSearchInfo)
+        public UserInfo Info(string userSearchInfo, string userAuthToken)
         {
             var requestMessage = new HttpRequestMessage(
                 HttpMethod.Get, $"{Configuration.UserInfoNameGettingRoute}/{userSearchInfo}");
+            requestMessage.Headers.Add(Configuration.AuthHeaderKey, userAuthToken);
 
             return _httpProvider.SendRequest<UserInfo>(requestMessage);
         }
