@@ -84,7 +84,7 @@ namespace Chat.Business.Implementations
                          c.Users.Any(u => u.UserID == newMessage.ReceiverID));
 
             ChatEntity chat = _chatUnitOfWork.ChatsRepository.FirstOrDefault(findChatExp,
-                chatEnt => chatEnt.Include(c => c.Users));
+                chatEnt => chatEnt.Include(c => c.Users).Include(c => c.Messages));
 
             var dbMessage = new Message
             {
@@ -117,6 +117,10 @@ namespace Chat.Business.Implementations
 
             dbMessage.ChatID = chat.ChatID;
             newMessage.ChatID = chat.ChatID;
+
+            if (_chatUnitOfWork.MessagesRepository.Create(dbMessage) <= 0)
+                return null;
+
             return newMessage;
         }
     }
