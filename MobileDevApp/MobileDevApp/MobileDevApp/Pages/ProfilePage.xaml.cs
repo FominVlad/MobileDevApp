@@ -244,7 +244,7 @@ namespace MobileDevApp
 
         private async void btnMyQr_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new QrCodePage("Test QR Code User ID"));
+            await Navigation.PushAsync(new QrCodePage(App.UserInfo.UserID));
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)

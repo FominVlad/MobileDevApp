@@ -16,8 +16,13 @@ namespace MobileDevApp
         public int ScreenHeight { get; private set; }
         public int ScreenWidth { get; private set; }
 
-        public QrCodePage(string userId)
+        public QrCodePage(int? userId)
         {
+            if(userId == null)
+            {
+                throw new Exception("userId cannot be null!");
+            }
+
             InitializeComponent();
 
             ScreenHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
@@ -28,7 +33,7 @@ namespace MobileDevApp
             SetColourScheme();
         }
 
-        private void GenerateQr(string userId)
+        private void GenerateQr(int? userId)
         {
             ZXingBarcodeImageView barcode = new ZXingBarcodeImageView
             {
@@ -38,7 +43,7 @@ namespace MobileDevApp
             barcode.BarcodeFormat = ZXing.BarcodeFormat.QR_CODE;
             barcode.BarcodeOptions.Width = ScreenWidth;
             barcode.BarcodeOptions.Height = ScreenWidth;
-            barcode.BarcodeValue = userId;
+            barcode.BarcodeValue = userId.ToString();
             barcode.BackgroundColor = Color.Transparent;
 
             mainStackLayout.Children.Insert(1, barcode);

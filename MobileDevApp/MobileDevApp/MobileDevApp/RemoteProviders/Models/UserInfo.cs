@@ -5,7 +5,9 @@ namespace MobileDevApp.RemoteProviders.Models
     public class UserInfo : UserEdit
     {
         [PrimaryKey, Column("UserID")]
-        public int? Id { get; set; } 
+        public int? Id { get; set; }
+
+        public int? UserID { get; set; }
 
         public string AccessToken { get; set; }
 
