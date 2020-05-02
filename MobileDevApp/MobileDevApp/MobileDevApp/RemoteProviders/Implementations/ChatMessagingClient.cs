@@ -79,13 +79,13 @@ namespace MobileDevApp.RemoteProviders.Implementations
         }
 
         // подключение к чату
-        public void Connect()
+        public async void Connect()
         {
             if (IsConnected)
                 return;
             try
             {
-                _hubConnection.StartAsync().Wait();
+                await _hubConnection.StartAsync();
                 IsConnected = true;
             }
             catch (Exception ex)
@@ -95,14 +95,14 @@ namespace MobileDevApp.RemoteProviders.Implementations
         }
 
         // Отключение от чата
-        public void Disconnect()
+        public async void Disconnect()
         {
             if (!IsConnected)
                 return;
 
             try
             {
-                _hubConnection.StopAsync().Wait();
+                await _hubConnection.StopAsync();
                 IsConnected = false;
             }
             catch (Exception ex)
@@ -112,12 +112,12 @@ namespace MobileDevApp.RemoteProviders.Implementations
         }
 
         // Отправка сообщения
-        public void SendMessage()
+        public async void SendMessage()
         {
             try
             {
                 IsBusy = true;
-                _hubConnection.InvokeAsync("Send", Message).Wait();
+                await _hubConnection.InvokeAsync("Send", Message);
             }
             catch (Exception ex)
             {
