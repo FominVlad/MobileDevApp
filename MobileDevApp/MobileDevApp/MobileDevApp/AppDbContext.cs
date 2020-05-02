@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MobileDevApp.Models;
+using MobileDevApp.RemoteProviders.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,7 +13,7 @@ namespace MobileDevApp
         public string dbName { get; private set; }
         private string dbPath { get; set; }
 
-        public AppDbContext(string dbPath = null, string dbName = "testDb24674125322332.db")
+        public AppDbContext(string dbPath = null, string dbName = "testDb24627416725322332.db")
         {
             this.dbPath = dbPath ?? 
                 Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), dbName);

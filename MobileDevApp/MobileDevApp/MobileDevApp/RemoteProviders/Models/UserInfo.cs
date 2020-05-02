@@ -1,8 +1,13 @@
-﻿namespace MobileDevApp.RemoteProviders.Models
+﻿using SQLite;
+
+namespace MobileDevApp.RemoteProviders.Models
 {
     public class UserInfo : UserEdit
     {
-        public int? UserID { get; set; } 
+        [PrimaryKey, Column("UserID")]
+        public int? Id { get; set; }
+
+        public int? UserID { get; set; }
 
         public string AccessToken { get; set; }
 
@@ -20,7 +25,7 @@
         public UserInfo(UserEdit baseInfo, int userID)
             :this(baseInfo)
         {
-            this.UserID = userID;
+            this.Id = userID;
         }
     }
 }

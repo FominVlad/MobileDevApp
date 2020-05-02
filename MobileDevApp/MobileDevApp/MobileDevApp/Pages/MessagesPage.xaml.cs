@@ -41,7 +41,8 @@ namespace MobileDevApp
 
         private async void btnAddMessage_Clicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new SearchProfilePage());
+            //await Navigation.PushAsync(new SearchProfilePage());
+            await Navigation.PushAsync(new DialogPage());
         }
     }
 }

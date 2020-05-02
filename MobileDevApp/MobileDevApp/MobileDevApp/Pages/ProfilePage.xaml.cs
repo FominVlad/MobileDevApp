@@ -6,7 +6,6 @@ using System.Linq;
 using MobileDevApp.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
-using MobileDevApp.Services;
 using MobileDevApp.RemoteProviders.Models;
 using MobileDevApp.Helpers;
 using System.IO;
@@ -19,36 +18,39 @@ namespace MobileDevApp
     {
         public int ScreenHeight { get; private set; }
         public int ScreenWidth { get; private set; }
-
-        private bool IsOwner { get; set; } = true;
-
-        public string Id { get; set; }
-
         private byte[] iconByteStr { get; set; }
+        private UserInfo userInfo { get; set; }
 
         public ProfilePage()
         {
             InitializeComponent();
 
-            SetUserInfo();
-
             SetComponentsProp();
+
+            SetUserInfo();
         }
 
-        public ProfilePage(bool IsOwner, string id = "@TestUserId")
+        public ProfilePage(UserInfo userInfo)
         {
-            this.IsOwner = IsOwner;
+            if (userInfo == null)
+            {
+                throw new Exception("Param userInfo cannot be null!");
+            }
 
-            this.Id = id;
+            this.userInfo = userInfo;
 
             InitializeComponent();
 
-            SetComponentsProp();
+            SetSearchedComponentsProp();
         }
 
         private void SetComponentsProp()
         {
-            imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+            if(App.UserInfo.Image == null)
+            {
+                imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+            }
+
             btnRedactProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.pencil.png");
             btnSaveProfile.Source = ImageSource.FromResource("MobileDevApp.Resources.ready.png");
             btnHelp.ImageSource = ImageSource.FromResource("MobileDevApp.Resources.help.png");
@@ -69,20 +71,36 @@ namespace MobileDevApp
 
             //frameRedactImage.WidthRequest = ScreenWidth / 5;
             //frameRedactImage.HeightRequest = ScreenWidth / 5;
+        }
 
-            if (!IsOwner)
+        private void SetSearchedComponentsProp()
+        {
+            if (userInfo.Image != null)
             {
-                btnRedactProfile.IsVisible = false;
-                btnSaveProfile.IsVisible = false;
-                btnHelp.IsVisible = false;
-                btnMyQr.IsVisible = false;
-                btnWriteMessage.IsVisible = true;
+                Stream stream = new MemoryStream(userInfo.Image);
+
+                imgProfileIcon.Source = ImageSource.FromStream(() => { return stream; });
             }
+            else
+            {
+                imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+            }
+
+            entryUserName.Text = userInfo.Name;
+            entryUserId.Text = userInfo.Email;
+            entryUserPhoneNumber.Text = userInfo.PhoneNumber;
+            editorUserDescription.Text = userInfo.Bio;
+
+            btnRedactProfile.IsVisible = false;
+            btnSaveProfile.IsVisible = false;
+            btnHelp.IsVisible = false;
+            btnMyQr.IsVisible = false;
+            btnWriteMessage.IsVisible = true;
         }
 
         private void SetUserInfo()
         {
-            Models.UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
+            UserInfo userInfo = App.Database.userInfo.FirstOrDefault();
 
             if (userInfo != null)
             {
@@ -102,6 +120,7 @@ namespace MobileDevApp
 
         private void btnRedactProfile_Clicked(object sender, System.EventArgs e)
         {
+            iconByteStr = null;
             entryUserName.IsEnabled = true;
             entryUserId.IsEnabled = true;
             entryUserPhoneNumber.IsEnabled = true;
@@ -130,6 +149,11 @@ namespace MobileDevApp
                 btnRedactProfile.IsVisible = true;
                 btnSaveProfile.IsVisible = false;
 
+                if(iconByteStr == null)
+                {
+                    imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
+                }
+
                 //imgProfileIcon.Source = ImageSource.FromResource("MobileDevApp.Resources.personIcon.png");
 
                 //frameProfileIcon.IsVisible = true;
@@ -154,10 +178,7 @@ namespace MobileDevApp
                     IsLoading(true);
 
                     UserEdit userEdit = GetUserInfo();
-
-                    UserService userService = new UserService();
-
-                    Models.UserInfo editedUser = await userService.EditUser(userEdit);
+                    UserInfo editedUser = App.UserService.Edit(userEdit, App.UserInfo.AccessToken);
 
                     if (editedUser != null)
                     {
@@ -166,7 +187,7 @@ namespace MobileDevApp
                     }
                     else
                     {
-                        //throw new Exception();
+                        throw new Exception();
                     }
                 }
                 else
@@ -181,7 +202,7 @@ namespace MobileDevApp
             }
         }
 
-        private void AddUserToDb(Models.UserInfo user)
+        private void AddUserToDb(UserInfo user)
         {
             if (App.Database.userInfo.Any())
             {
@@ -223,14 +244,14 @@ namespace MobileDevApp
 
         private async void btnMyQr_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new QrCodePage("Test QR Code User ID"));
+            await Navigation.PushAsync(new QrCodePage(App.UserInfo.UserID));
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
             try
             {
-                if (CrossMedia.Current.IsPickPhotoSupported)
+                if (btnSaveProfile.IsVisible && CrossMedia.Current.IsPickPhotoSupported)
                 {
                     StringEncoder stringEncoder = new StringEncoder();
                     MediaFile photo = await CrossMedia.Current.PickPhotoAsync();
