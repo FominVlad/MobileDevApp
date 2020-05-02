@@ -75,7 +75,7 @@ namespace Chat.API.Controllers
         /// <summary>
         /// Register new user.
         /// </summary>
-        /// <param name="newUser=">New user</param>
+        /// <param name="newUser">New user</param>
         [HttpPost("register"),
         AllowAnonymous,
         Produces(MediaTypeNames.Application.Json),
@@ -134,7 +134,10 @@ namespace Chat.API.Controllers
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status500InternalServerError)]
         public ObjectResult Edit([FromBody] UserEdit userEditInfo)
         {
-            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userID))
+            int userID = -1;
+            if (User?.Identity == null || 
+                !User.Identity.IsAuthenticated || 
+                !int.TryParse(User.Identity.Name, out userID))
                 return StatusCode(
                     statusCode: StatusCodes.Status401Unauthorized,
                     value: new ErrorMessage
@@ -150,7 +153,7 @@ namespace Chat.API.Controllers
                     statusCode: StatusCodes.Status500InternalServerError,
                     value: new ErrorMessage
                     {
-                        Message = "Failed to edit the userr info"
+                        Message = "Failed to edit the user info"
                     });
 
             return StatusCode(StatusCodes.Status200OK, editedUser);

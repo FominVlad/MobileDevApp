@@ -25,7 +25,9 @@ namespace Chat.API.Controllers
         ProducesResponseType(typeof(ErrorMessage), StatusCodes.Status401Unauthorized)]
         public ObjectResult GetAllChats()
         {
-            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userID))
+            if (User?.Identity == null || 
+                !User.Identity.IsAuthenticated || 
+                !int.TryParse(User.Identity.Name, out int userID))
                 return StatusCode(
                     statusCode: StatusCodes.Status401Unauthorized,
                     value: new ErrorMessage
@@ -46,7 +48,9 @@ namespace Chat.API.Controllers
             [FromQuery] int? skipCount, 
             [FromQuery] int? takeCount)
         {
-            if (!User.Identity.IsAuthenticated || !int.TryParse(User.Identity.Name, out int userID))
+            if (User?.Identity == null || 
+                !User.Identity.IsAuthenticated || 
+                !int.TryParse(User.Identity.Name, out int userID))
                 return StatusCode(
                     statusCode: StatusCodes.Status401Unauthorized,
                     value: new ErrorMessage

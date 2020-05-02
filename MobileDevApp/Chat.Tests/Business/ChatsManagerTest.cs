@@ -125,10 +125,50 @@ namespace Chat.Tests.Business
             Assert.AreEqual(3, firstMessage.SenderID);
             Assert.IsTrue(firstMessage.IsRead);
 
-            MessageShortInfo lastMessage = allChatMessages.First();
-            Assert.AreEqual("Hi!", lastMessage.Text);
-            Assert.AreEqual(3, lastMessage.SenderID);
-            Assert.IsTrue(lastMessage.IsRead);
+            MessageShortInfo lastMessage = allChatMessages.Last();
+            Assert.AreEqual("Fine)", lastMessage.Text);
+            Assert.AreEqual(2, lastMessage.SenderID);
+            Assert.IsFalse(lastMessage.IsRead);
+        }
+
+        [Test]
+        public void StoreMessageTest()
+        {
+            // Arrange
+            ChatEntity testChat = _testChatEntities.First();
+            MessageInfo message = new MessageInfo
+            {
+                ReceiverID = 2,
+                Text = "How are you?",
+                ReceivedDate = DateTime.Now.AddMinutes(-20),
+                SenderID = 1,
+                IsRead = true
+            };
+            Message dbMessage = new Message
+            {
+                MessageID = 3,
+                Text = message.Text,
+                ReceivedDate = message.ReceivedDate,
+                IsRead = message.IsRead,
+                SenderID = message.SenderID
+            };
+
+            _mockChatUnitOfWork.Setup(uow => uow.ChatsRepository.FirstOrDefault(
+                It.IsAny<ExpressionSpecification<ChatEntity>>(),
+                It.IsAny<Func<IQueryable<ChatEntity>, IQueryable<ChatEntity>>>()))
+                .Returns(testChat);
+            _mockChatUnitOfWork.Setup(uow => uow.MessagesRepository.Create(It.IsAny<Message>()))
+                .Callback(() => testChat.Messages.Add(dbMessage))
+                .Returns(1);
+
+            var chatsManager = new ChatsManager(_mockChatUnitOfWork.Object);
+
+            // Act
+            message = chatsManager.StoreMessage(message);
+
+            // Assert
+            Assert.AreEqual(1, message.ChatID);
+            Assert.AreEqual(3, testChat.Messages.Count);
         }
     }
 }

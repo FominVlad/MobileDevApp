@@ -55,9 +55,13 @@ namespace Chat.Business.Implementations
             if (userLoginData == null)
                 throw new ArgumentNullException(nameof(userLoginData));
 
-            var expression = new ExpressionSpecification<User>(
-                user => user.Email == userLoginData.Login
-                        && userLoginData.PasswordHash == user.PasswordHash);
+            ExpressionSpecification<User> expression = userLoginData.LoginType == LoginType.Email ?
+                new ExpressionSpecification<User>(
+                user => user.Email == userLoginData.Login &&
+                userLoginData.PasswordHash == user.PasswordHash) :
+                new ExpressionSpecification<User>(
+                user => user.PhoneNumber == userLoginData.Login &&
+                userLoginData.PasswordHash == user.PasswordHash);
 
             User registeredUser = _chatUnitOfWork.UsersRepository.FirstOrDefault(
                 expression,
