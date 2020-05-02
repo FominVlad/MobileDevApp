@@ -4235,24 +4235,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anast\\.nuget\\packages\\": {},
+    "C:\\Users\\DELL-\\.nuget\\packages\\": {},
     "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
+      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
       "projectName": "MobileDevApp.Android",
-      "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
-      "packagesPath": "C:\\Users\\anast\\.nuget\\packages\\",
-      "outputPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\obj\\",
+      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
+      "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
       ],
       "configFilePaths": [
-        "C:\\Users\\anast\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\DELL-\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
@@ -4266,8 +4266,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
-              "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj"
+            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj"
             }
           }
         }
@@ -4353,7 +4353,7 @@
       "code": "NU1605",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Detected package downgrade: Xamarin.Essentials from 1.5.2 to 1.5.1. Reference the package directly from the project to select a different version. \r\n MobileDevApp.Android -> MobileDevApp -> Xamarin.Essentials (>= 1.5.2) \r\n MobileDevApp.Android -> Xamarin.Essentials (>= 1.5.1)",
+      "message": "Обнаружено понижение версии пакета Xamarin.Essentials с 1.5.2 на 1.5.1. Чтобы выбрать другую версию, создайте ссылку на пакет напрямую из проекта. \r\n MobileDevApp.Android -> MobileDevApp -> Xamarin.Essentials (>= 1.5.2) \r\n MobileDevApp.Android -> Xamarin.Essentials (>= 1.5.1)",
       "libraryId": "Xamarin.Essentials",
       "targetGraphs": [
         "MonoAndroid,Version=v9.0"

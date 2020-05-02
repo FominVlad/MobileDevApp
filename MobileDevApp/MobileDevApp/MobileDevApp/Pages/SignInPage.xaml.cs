@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using MobileDevApp.Helpers;
 using MobileDevApp.Models;
+using MobileDevApp.RemoteProviders.Implementations;
 using MobileDevApp.RemoteProviders.Models;
-using MobileDevApp.Services;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using Xamarin.Forms;
@@ -70,10 +71,9 @@ namespace MobileDevApp
                 if (validator.ValidateString(entryLogin.Text, out exception) && validator.ValidateString(entryPassword.Text, out exception))
                 {
                     IsLoading(true);
-                    (Application.Current).MainPage = new NavigationPage(new MainPage());
-                    UserService userService = new UserService();
+
                     UserLogin userLogin = GetUserFromEntry();
-                    Models.UserInfo user = await userService.LoginUser(userLogin);
+                    UserInfo user = App.UserService.Login(userLogin);
 
                     if (user != null)
                     {

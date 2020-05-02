@@ -24,8 +24,6 @@
                         Grid.Row="0" Grid.Column="2" />
             </Grid>
             <Button x:Name="btnSignOut" BackgroundColor="{DynamicResource Key=buttonColor}" Text="Sign out" Clicked="btnSignOut_Clicked"/>
-            <Label x:Name="test" TextColor="{DynamicResource Key=textColor}" Text="Test text"/>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

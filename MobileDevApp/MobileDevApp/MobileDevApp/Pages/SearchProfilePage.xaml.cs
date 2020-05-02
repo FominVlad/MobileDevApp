@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MobileDevApp.RemoteProviders.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,29 +33,64 @@ namespace MobileDevApp
             btnScanQr.Source = ImageSource.FromResource("MobileDevApp.Resources.searchQR.png");
         }
 
-        private void btnSearch_Tapped(object sender, EventArgs e)
+        private async void btnSearch_Tapped(object sender, EventArgs e)
         {
+            try
+            {
+                UserInfo userInfo = App.UserService.Info(entrySearchString.Text, App.UserInfo.AccessToken);
 
+                if (userInfo != null)
+                {
+                    ProfilePage profilePage = new ProfilePage(userInfo);
+
+                    await Navigation.PushAsync(profilePage);
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error!", "Unknown error...", "OK");
+            }
         }
 
         private async void btnScanQr_Tapped(object sender, EventArgs e)
         {
-            ZXingScannerPage scannerPage = new ZXingScannerPage();
-            NavigationPage.SetHasNavigationBar(scannerPage, false);
-
-            await Navigation.PushAsync(scannerPage);
-
-            scannerPage.OnScanResult += (result) =>
+            try
             {
-                Device.BeginInvokeOnMainThread(async () =>
+                ZXingScannerPage scannerPage = new ZXingScannerPage();
+                NavigationPage.SetHasNavigationBar(scannerPage, false);
+
+                await Navigation.PushAsync(scannerPage);
+
+                scannerPage.OnScanResult += (result) =>
                 {
-                    await Navigation.PopAsync();
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        await Navigation.PopAsync();
 
-                    ProfilePage profilePage = new ProfilePage(false, result.Text);
+                        if(!Int32.TryParse(result.Text, out int userId))
+                        {
+                            throw new Exception("Qr code is not user id!");
+                        }
 
-                    await Navigation.PushAsync(profilePage);
-                });
-            };
+                        UserInfo userInfo = App.UserService.Info(userId, App.UserInfo.AccessToken);
+
+                        if (userInfo != null)
+                        {
+                            ProfilePage profilePage = new ProfilePage(userInfo);
+
+                            await Navigation.PushAsync(profilePage);
+                        }
+                        else
+                        {
+                            throw new Exception("userInfo is null!");
+                        }
+                    });
+                };
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error!", "Unexpected error.", "OK");
+            }
         }
     }
 }
