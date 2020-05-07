@@ -6,6 +6,8 @@
 
         public int PartnerID { get; set; }
 
+        public string PartnerName { get; set; }
+
         public byte[] PartnerImage { get; set; }
 
         public MessageShortInfo LastMessage { get; set; }
