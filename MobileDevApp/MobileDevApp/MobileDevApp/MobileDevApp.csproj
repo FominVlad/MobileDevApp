@@ -15,6 +15,7 @@
     <None Remove="Resources\ChatLogo.png" />
     <None Remove="Resources\googleicon.png" />
     <None Remove="Resources\help.png" />
+    <None Remove="Resources\letter.png" />
     <None Remove="Resources\noInternetConnection.png" />
     <None Remove="Resources\pencil.png" />
     <None Remove="Resources\personChangeIcon.png" />
@@ -32,6 +33,7 @@
     <EmbeddedResource Include="Resources\chatLogo.png" />
     <EmbeddedResource Include="Resources\googleicon.png" />
     <EmbeddedResource Include="Resources\help.png" />
+    <EmbeddedResource Include="Resources\letter.png" />
     <EmbeddedResource Include="Resources\noInternetConnection.png" />
     <EmbeddedResource Include="Resources\pencil.png" />
     <EmbeddedResource Include="Resources\personChangeIcon.png" />

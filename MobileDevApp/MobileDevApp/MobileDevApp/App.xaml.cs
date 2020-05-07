@@ -13,7 +13,6 @@ namespace MobileDevApp
     {
         private static AppDbContext database;
         private static UserService userService;
-        private static ChatMessagingClient messagingClient;
         private static ChatInfoProvider chatService;
         
         public static AppDbContext Database
@@ -26,24 +25,6 @@ namespace MobileDevApp
                 }
 
                 return database;
-            }
-        }
-
-        public static ChatMessagingClient MessagingClient
-        {
-            get
-            {
-                if (UserInfo == null && UserInfo.AccessToken == null)
-                {
-                    return null;
-                }
-
-                if (messagingClient == null)
-                {
-                    messagingClient = new ChatMessagingClient(App.UserInfo.AccessToken);
-                }
-
-                return messagingClient;
             }
         }
 

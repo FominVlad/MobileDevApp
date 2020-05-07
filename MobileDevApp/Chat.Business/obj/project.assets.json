@@ -6434,11 +6434,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
+      "projectUniqueName": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
       "projectName": "Chat.Business",
-      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
+      "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
       "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\obj\\",
+      "outputPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -6458,11 +6458,11 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj"
+            "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj"
             },
-            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj"
+            "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj"
             }
           }
         }

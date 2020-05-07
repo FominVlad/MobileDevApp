@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rCdGZ1Us+AhVH/fI3WbTeFEbykwlCPqndlKSXP/hITr4q5pRw2W7FIkuLklkerh/1ysEChJ9duE+puNVoUdpfw==",
+  "dgSpecHash": "SCyqw/BM+xYdK8dCid0qEdu3MW382L+++Kq5/jKWU+Y5V97DTmMcw1biOU7qM0JM19zQkGGJWiRpV3N1SEGQRQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj",
+  "projectFilePath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL-\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\3.1.2\\microsoft.aspnetcore.connections.abstractions.3.1.2.nupkg.sha512",
     "C:\\Users\\DELL-\\.nuget\\packages\\microsoft.aspnetcore.http.connections.client\\3.1.2\\microsoft.aspnetcore.http.connections.client.3.1.2.nupkg.sha512",

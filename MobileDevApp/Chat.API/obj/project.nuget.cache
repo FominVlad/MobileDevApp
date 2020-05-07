@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NeYm+H/AwbFaPYksbzQ3W+7YLxedkodMOf+qhVtVxIOEBJxTmj6xBG4dqsgNQ+YluFeuWzEp8VSIqq8ob10jmA==",
+  "dgSpecHash": "cpV9J/W3kUWdEtebVZTXdS8Xq0gthuRUWbuxatmOn/deeT3o83pOOHTNM3BK8/Jf5TyviSQ4eOJwIoSBlDKVxQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.API\\Chat.API.csproj",
+  "projectFilePath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.API\\Chat.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL-\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.0\\microsoft.bcl.asyncinterfaces.1.1.0.nupkg.sha512",
     "C:\\Users\\DELL-\\.nuget\\packages\\microsoft.bcl.hashcode\\1.1.0\\microsoft.bcl.hashcode.1.1.0.nupkg.sha512",

@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="clr-namespace:MobileDevApp.Helpers"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:MobileDevApp.Helpers"
              mc:Ignorable="d"
              x:Class="MobileDevApp.Messages"
              Title="Messages"
@@ -13,6 +14,8 @@
         <StyleSheetExtension Source="..\Styles\MessagesPageStyles.css" />
         <ResourceDictionary>
             <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+            <converters:EmbeddedToImageSourceConverter x:Key="converter"/>
+            <converters:InverseBoolConverter x:Key="InverseBoolConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
@@ -20,16 +23,22 @@
         <StackLayout x:Name="mainLayout">
             <AbsoluteLayout VerticalOptions="FillAndExpand">
                 <ListView x:Name="listMessages" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                          ItemsSource="{Binding chatInfoList}" ItemSelected="listMessages_ItemSelected">
+                          ItemsSource="{Binding chatInfoList}" ItemSelected="listMessages_ItemSelected" 
+                          IsPullToRefreshEnabled="true" RefreshControlColor="Blue" Refreshing="listMessages_Refreshing">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
                                 <ViewCell.View>
                                     <StackLayout Orientation="Horizontal">
                                         <Image Source="{Binding PartnerImage, Converter={StaticResource ByteArrayToImage}}" />
-                                        <Label Text="{Binding PartnerID}" FontAttributes="Bold" />
-                                        <Label Text="{Binding LastMessage.Text}" />
-                                        <Label Text="{Binding LastMessageDate}" />
+                                        <StackLayout>
+                                            <Label Text="{Binding PartnerName}" FontAttributes="Bold" />
+                                            <Label Text="{Binding LastMessage.Text}" />
+                                        </StackLayout>
+                                        <Label Text="{Binding LastMessage.ReceivedDate}" VerticalOptions="Center"/>
+                                        <!--IsVisible="{Binding LastMessage.IsRead, Converter={StaticResource InverseBoolConverter}}"-->
+                                        <!--<Image x:Name="imgIsRead"  
+                                               Source="{Binding ., Converter={StaticResource converter}, ConverterParameter='MobileDevApp.Resources.letter.png'}" />-->
                                     </StackLayout>
                                 </ViewCell.View>
                             </ViewCell>

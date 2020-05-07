@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "06WzBWLQeHlHm2HeVAZkohB+ZEFFUbq9E5whFNQzb/LudgbSKt6A+FTRDSfSEnCGZyu3BTsCXwWTeINrWQjz8g==",
+  "dgSpecHash": "9ePxc3ixQRMCDugUt8hhsd2PKudXL3RruU1XRxCY0Fc+z6VDmg8EZOhiHNFf2+Gcv/Pt2tfHJt8but3pEffGcQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
+  "projectFilePath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\DELL-\\.nuget\\packages\\fastandroidcamera\\2.0.0\\fastandroidcamera.2.0.0.nupkg.sha512",
     "C:\\Users\\DELL-\\.nuget\\packages\\microsoft.aspnetcore.connections.abstractions\\3.1.2\\microsoft.aspnetcore.connections.abstractions.3.1.2.nupkg.sha512",

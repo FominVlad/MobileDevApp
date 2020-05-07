@@ -1,5 +1,6 @@
 ﻿using MobileDevApp.RemoteProviders.Models;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -14,14 +15,13 @@ namespace MobileDevApp
         public int ScreenHeight { get; private set; }
         public int ScreenWidth { get; private set; }
 
-        public List<ChatShortInfo> chatInfoList { get; set; }
+        public ObservableCollection<ChatShortInfo> chatInfoList { get; set; }
 
         public Messages()
         {
             InitializeComponent();
 
-            chatInfoList = App.ChatService.GetAllUserChats(App.UserInfo.AccessToken);
-
+            chatInfoList = GetFilledCollection(App.ChatService.GetAllUserChats(App.UserInfo.AccessToken));
 
             this.BindingContext = this;
 
@@ -29,26 +29,26 @@ namespace MobileDevApp
             ScreenWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
 
             btnAddMessage.Source = ImageSource.FromResource("MobileDevApp.Resources.add.png");
+
             btnAddMessage.WidthRequest = ScreenWidth / 15;
             btnAddMessage.HeightRequest = ScreenWidth / 15;
         }
 
-        protected override void OnAppearing()
+        private ObservableCollection<ChatShortInfo> GetFilledCollection(List<ChatShortInfo> chatList)
         {
-            base.OnAppearing();
-            App.MessagingClient.Connect();
-        }
+            ObservableCollection<ChatShortInfo> resultList = new ObservableCollection<ChatShortInfo>();
 
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            App.MessagingClient.Disconnect();
+            foreach (ChatShortInfo chat in chatList)
+            {
+                resultList.Add(chat);
+            }
+
+            return resultList;
         }
 
         private async void btnAddMessage_Clicked(object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new SearchProfilePage());
-            //await Navigation.PushAsync(new DialogPage());
         }
 
         private async void listMessages_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -60,6 +60,18 @@ namespace MobileDevApp
             {
                 await Navigation.PushAsync(new DialogPage(selectedChat));
             }
+        }
+
+        private void listMessages_Refreshing(object sender, System.EventArgs e)
+        {
+            List<ChatShortInfo> exceptList = GetFilledCollection(App.ChatService.
+                GetAllUserChats(App.UserInfo.AccessToken)).Except(chatInfoList, new ChatShortInfoComparer()).ToList();
+            foreach (ChatShortInfo chat in exceptList)
+            {
+                chatInfoList.Add(chat);
+            }
+            
+            listMessages.IsRefreshing = false;
         }
     }
 }

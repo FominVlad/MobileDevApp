@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {}
+    "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
+    "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj",
+        "projectUniqueName": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj",
         "projectName": "MobileDevApp",
-        "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj",
+        "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj",
         "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\obj\\",
+        "outputPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

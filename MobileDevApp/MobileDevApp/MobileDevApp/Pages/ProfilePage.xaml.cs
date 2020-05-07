@@ -10,6 +10,7 @@ using MobileDevApp.RemoteProviders.Models;
 using MobileDevApp.Helpers;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Collections.Generic;
 
 namespace MobileDevApp
 {
@@ -237,9 +238,20 @@ namespace MobileDevApp
             await Navigation.PushAsync(new HelpPage());
         }
 
-        private void btnWriteMessage_Clicked(object sender, EventArgs e)
+        private async void btnWriteMessage_Clicked(object sender, EventArgs e)
         {
+            ChatShortInfo foundChat = App.ChatService.GetAllUserChats(App.UserInfo.AccessToken)
+                            .Where(o => o.PartnerID == userInfo.Id).FirstOrDefault();
 
+            if (foundChat == null)
+            {
+                foundChat = new ChatShortInfo() {
+                    PartnerName = userInfo.Name,
+                    PartnerID = (int)userInfo.UserID
+                };
+            }
+
+            await Navigation.PushAsync(new DialogPage(foundChat));
         }
 
         private async void btnMyQr_Clicked(object sender, EventArgs e)

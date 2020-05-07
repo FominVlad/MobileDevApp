@@ -9,14 +9,14 @@ namespace MobileDevApp.RemoteProviders.Models
         public int SenderID { get; set; }
         public bool IsRead { get; set; }
 
-        public static MessageInfo ToMessageInfo(MessageShortInfo message)
+        public MessageInfo ToMessageInfo()
         {
             return new MessageInfo
             {
-                Text = message.Text,
-                ReceivedDate = message.ReceivedDate,
-                SenderID = message.SenderID,
-                IsRead = message.IsRead
+                Text = this.Text,
+                ReceivedDate = this.ReceivedDate,
+                SenderID = this.SenderID,
+                IsRead = this.IsRead
             };
         }
     }

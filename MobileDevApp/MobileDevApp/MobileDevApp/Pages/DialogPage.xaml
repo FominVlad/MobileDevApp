@@ -7,6 +7,12 @@
              x:Class="MobileDevApp.DialogPage"
              BackgroundColor="{DynamicResource Key=pageColor}">
 
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
+            <!--<Label x:Name="lblPartnerName" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
     <ContentPage.Content>
         <StackLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
@@ -16,7 +22,8 @@
                 <Entry x:Name="textMess" HorizontalOptions="FillAndExpand" Text="{Binding Text}"/>
                 <Button Text="Отправить" IsEnabled="{Binding IsConnected}" Clicked="Button_Clicked"/>
             </StackLayout>
-            <ListView x:Name="listMessages">
+            <Image Source="{Binding partnerImage}"/>
+            <ListView x:Name="listMessages" ItemsSource="{Binding Messages}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

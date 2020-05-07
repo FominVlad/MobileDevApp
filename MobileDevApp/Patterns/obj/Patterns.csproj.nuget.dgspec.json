@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {}
+    "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {}
   },
   "projects": {
-    "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
+    "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
+        "projectUniqueName": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
         "projectName": "Patterns",
-        "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
+        "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj",
         "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\obj\\",
+        "outputPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Patterns\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"
