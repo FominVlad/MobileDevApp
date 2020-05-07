@@ -31,7 +31,7 @@
             <summary>
             Register new user.
             </summary>
-            <param name="newUser==">New user</param>
+            <param name="newUser">New user</param>
         </member>
         <member name="M:Chat.API.Controllers.UserController.Login(Chat.Business.Models.UserLogin)">
             <summary>

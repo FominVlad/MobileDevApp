@@ -6,30 +6,31 @@
              mc:Ignorable="d"
              x:Class="MobileDevApp.DialogPage"
              BackgroundColor="{DynamicResource Key=pageColor}">
-    
+
     <ContentPage.Content>
         <StackLayout>
-            <!--<ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
-                           HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
+                               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <StackLayout Padding="10">
-                <Label FontSize="Small" Text="Логин" VerticalOptions="Center"/>
                 <Label FontSize="Small" Text="Сообщение" VerticalOptions="Center"/>
-                <Button Text="Отправить" IsEnabled="{Binding IsConnected}" />
-            </StackLayout>-->
-            <!--<ListView ItemsSource="{Binding Messages}">
+                <Entry x:Name="textMess" HorizontalOptions="FillAndExpand" Text="{Binding Text}"/>
+                <Button Text="Отправить" IsEnabled="{Binding IsConnected}" Clicked="Button_Clicked"/>
+            </StackLayout>
+            <ListView x:Name="listMessages">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding User}" FontAttributes="Bold" />
-                                    <Label Text="{Binding Message}" />
+                                    <Label Text="{Binding SenderID}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Text}" />
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>-->
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
+
 </ContentPage>

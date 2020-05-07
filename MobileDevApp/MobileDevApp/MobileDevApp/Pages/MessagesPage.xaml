@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="clr-namespace:MobileDevApp.Helpers"
              mc:Ignorable="d"
              x:Class="MobileDevApp.Messages"
              Title="Messages"
@@ -11,12 +11,31 @@
 
     <ContentPage.Resources>
         <StyleSheetExtension Source="..\Styles\MessagesPageStyles.css" />
+        <ResourceDictionary>
+            <converters:ByteArrayToImageSourceConverter x:Key="ByteArrayToImage" />
+        </ResourceDictionary>
     </ContentPage.Resources>
     
     <ContentPage.Content>
         <StackLayout x:Name="mainLayout">
             <AbsoluteLayout VerticalOptions="FillAndExpand">
-                <!--<ListView x:Name="phonesList" VerticalOptions="StartAndExpand" />-->
+                <ListView x:Name="listMessages" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                          ItemsSource="{Binding chatInfoList}" ItemSelected="listMessages_ItemSelected">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Image Source="{Binding PartnerImage, Converter={StaticResource ByteArrayToImage}}" />
+                                        <Label Text="{Binding PartnerID}" FontAttributes="Bold" />
+                                        <Label Text="{Binding LastMessage.Text}" />
+                                        <Label Text="{Binding LastMessageDate}" />
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
                 <Image x:Name="btnAddMessage" StyleId="btnAddMessage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,75,75" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btnAddMessage_Clicked" NumberOfTapsRequired="1" />
