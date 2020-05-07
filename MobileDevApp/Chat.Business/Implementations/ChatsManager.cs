@@ -40,6 +40,7 @@ namespace Chat.Business.Implementations
                     {
                         ChatID = chat.ChatID,
                         PartnerID = partner.UserID,
+                        PartnerName = partner.Name,
                         PartnerImage = partner.Image?.Image,
                         LastMessage = new MessageShortInfo 
                         { 
