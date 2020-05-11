@@ -2,42 +2,61 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="clr-namespace:MobileDevApp.Helpers"
              mc:Ignorable="d"
              x:Class="MobileDevApp.DialogPage"
              BackgroundColor="{DynamicResource Key=pageColor}">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center" Spacing="10">
-            <!--<Label x:Name="lblPartnerName" HorizontalOptions="Center" VerticalOptions="Center"/>-->
+        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+            <Label x:Name="lblPartnerName" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Image x:Name="imgPartnerImage" HorizontalOptions="Center" VerticalOptions="Center"/>
         </StackLayout>
     </NavigationPage.TitleView>
-    
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="..\Styles\MessagesPageStyles.css" />
+        <ResourceDictionary>
+            <converters:GetMessagePositionConverter x:Key="GetMessPos" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
         <StackLayout>
             <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}"
                                HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-            <StackLayout Padding="10">
-                <Label FontSize="Small" Text="Сообщение" VerticalOptions="Center"/>
-                <Entry x:Name="textMess" HorizontalOptions="FillAndExpand" Text="{Binding Text}"/>
-                <Button Text="Отправить" IsEnabled="{Binding IsConnected}" Clicked="Button_Clicked"/>
-            </StackLayout>
             <Image Source="{Binding partnerImage}"/>
             <ListView x:Name="listMessages" ItemsSource="{Binding Messages}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding SenderID}" FontAttributes="Bold" />
-                                    <Label Text="{Binding Text}" />
-                                </StackLayout>
+                                <Frame CornerRadius="15"
+                                            Padding="0"
+                                            BackgroundColor="{DynamicResource Key=buttonColor}"
+                                            Margin="15,10,15,10" 
+                                            HasShadow="False" 
+                                           HorizontalOptions="{Binding SenderID, Converter={StaticResource GetMessPos}}">
+                                    <Label HorizontalOptions="Center" BackgroundColor="Transparent" 
+                                                    Text="{Binding Text}" TextColor="{DynamicResource Key=textColor}" />
+                                </Frame>
                             </ViewCell.View>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <Grid>
+                <Entry x:Name="entryTextMess"  Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="0" Placeholder="Message text..." HorizontalOptions="FillAndExpand" Text="{Binding Text}"/>
+                <Frame x:Name="frameSendMessageIcon" BackgroundColor="{DynamicResource Key=pageColor}" 
+                       HasShadow="False" BorderColor="Transparent" HorizontalOptions="Center" VerticalOptions="End"
+                       Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="0">
+                    <Image x:Name="btnSendMessage" IsEnabled="{Binding IsConnected}"  >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="ButtonSendMessage_Clicked" NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Frame>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
-
 </ContentPage>

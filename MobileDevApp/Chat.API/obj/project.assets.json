@@ -5878,11 +5878,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.API\\Chat.API.csproj",
+      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.API\\Chat.API.csproj",
       "projectName": "Chat.API",
-      "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.API\\Chat.API.csproj",
+      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.API\\Chat.API.csproj",
       "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.API\\obj\\",
+      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -5902,11 +5902,11 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj"
+            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj"
             },
-            "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj"
+            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj"
             }
           }
         }

@@ -4972,11 +4972,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.iOS\\MobileDevApp.iOS.csproj",
+      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.iOS\\MobileDevApp.iOS.csproj",
       "projectName": "MobileDevApp.iOS",
-      "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.iOS\\MobileDevApp.iOS.csproj",
+      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.iOS\\MobileDevApp.iOS.csproj",
       "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.iOS\\obj\\",
+      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.iOS\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -4997,8 +4997,8 @@
       "frameworks": {
         "xamarinios10": {
           "projectReferences": {
-            "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj"
+            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj"
             }
           }
         }

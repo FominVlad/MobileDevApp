@@ -25,6 +25,7 @@
     <None Remove="Resources\scanQR.png" />
     <None Remove="Resources\search.png" />
     <None Remove="Resources\searchQR.png" />
+    <None Remove="Resources\sendLetter.png" />
     <None Remove="Resources\signup.png" />
   </ItemGroup>
 
@@ -43,6 +44,7 @@
     <EmbeddedResource Include="Resources\scanQR.png" />
     <EmbeddedResource Include="Resources\search.png" />
     <EmbeddedResource Include="Resources\searchQR.png" />
+    <EmbeddedResource Include="Resources\sendLetter.png" />
     <EmbeddedResource Include="Resources\signup.png" />
   </ItemGroup>
 

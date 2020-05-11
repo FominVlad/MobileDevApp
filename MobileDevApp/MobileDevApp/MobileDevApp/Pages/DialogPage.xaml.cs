@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +18,9 @@ namespace MobileDevApp
         private ChatShortInfo chatInfo { get; set; }
         private List<MessageShortInfo> oldMessages { get; set; }
         private ChatMessagingClient messagingClient { get; set; }
+
+        public int ScreenHeight { get; private set; }
+        public int ScreenWidth { get; private set; }
 
         public DialogPage(ChatShortInfo chatInfo)
         {
@@ -33,9 +37,25 @@ namespace MobileDevApp
                 AddMessagesToClient(oldMessages);
             }
 
-            //lblPartnerName.Text = chatInfo.PartnerName;
+            
+
+            ScreenHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
+            ScreenWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
+
 
             InitializeComponent();
+
+            if (chatInfo.PartnerImage != null)
+            {
+                Stream stream = new MemoryStream(chatInfo.PartnerImage);
+
+                imgPartnerImage.Source = ImageSource.FromStream(() => { return stream; });
+            }
+
+            lblPartnerName.Text = chatInfo.PartnerName;
+            btnSendMessage.Source = ImageSource.FromResource("MobileDevApp.Resources.sendLetter.png");
+            frameSendMessageIcon.HeightRequest = ScreenHeight / 55;
+            frameSendMessageIcon.WidthRequest = ScreenWidth / 15;
             this.BindingContext = messagingClient;
         }
 
@@ -59,17 +79,19 @@ namespace MobileDevApp
             }
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void ButtonSendMessage_Clicked(object sender, EventArgs e)
         {
             if (messagingClient.IsConnected)
             {
                 messagingClient.Message = new MessageInput()
                 {
-                    Text = textMess.Text,
+                    Text = entryTextMess.Text,
                     ReceiverID = chatInfo.PartnerID
                 };
 
                 messagingClient.SendMessage();
+
+                entryTextMess.Text = "";
             }
         }
     }

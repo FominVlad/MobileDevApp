@@ -4241,11 +4241,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
+      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
       "projectName": "MobileDevApp.Android",
-      "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
+      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\MobileDevApp.Android.csproj",
       "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\obj\\",
+      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.Android\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
@@ -4266,8 +4266,8 @@
       "frameworks": {
         "monoandroid90": {
           "projectReferences": {
-            "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\source\\repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj"
+            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj": {
+              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp\\MobileDevApp.csproj"
             }
           }
         }
