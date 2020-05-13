@@ -57,3 +57,4 @@ C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp\
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp\obj\Debug\netstandard2.0\MobileDevApp.dll
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp\obj\Debug\netstandard2.0\ref\MobileDevApp.dll
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp\obj\Debug\netstandard2.0\MobileDevApp.pdb
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp\obj\Debug\netstandard2.0\Styles\DialogPageStyles.css.g.cs

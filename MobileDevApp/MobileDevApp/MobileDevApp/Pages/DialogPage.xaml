@@ -2,20 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:converters="clr-namespace:MobileDevApp.Helpers"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:converters="clr-namespace:MobileDevApp.Helpers"
              mc:Ignorable="d"
              x:Class="MobileDevApp.DialogPage"
              BackgroundColor="{DynamicResource Key=pageColor}">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
-            <Label x:Name="lblPartnerName" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Image x:Name="imgPartnerImage" HorizontalOptions="Center" VerticalOptions="Center"/>
+        <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="Start">
+            <Frame Padding="0" IsClippedToBounds="True" StyleId="framePartnerIcon" x:Name="framePartnerIcon" HorizontalOptions="End" BackgroundColor="Transparent" HasShadow="False" BorderColor="Transparent">
+                <Image x:Name="imgPartnerImage" VerticalOptions="Start" HorizontalOptions="End" />
+            </Frame>
+            <Label StyleId="lblPartnerName" x:Name="lblPartnerName" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold"/>
         </StackLayout>
     </NavigationPage.TitleView>
 
     <ContentPage.Resources>
-        <StyleSheetExtension Source="..\Styles\MessagesPageStyles.css" />
+        <StyleSheetExtension Source="..\Styles\DialogPageStyles.css" />
         <ResourceDictionary>
             <converters:GetMessagePositionConverter x:Key="GetMessPos" />
         </ResourceDictionary>
@@ -37,7 +40,7 @@
                                             Margin="15,10,15,10" 
                                             HasShadow="False" 
                                            HorizontalOptions="{Binding SenderID, Converter={StaticResource GetMessPos}}">
-                                    <Label HorizontalOptions="Center" BackgroundColor="Transparent" 
+                                    <Label Margin="10,0,10,0" HorizontalOptions="Center" BackgroundColor="Transparent" 
                                                     Text="{Binding Text}" TextColor="{DynamicResource Key=textColor}" />
                                 </Frame>
                             </ViewCell.View>
@@ -46,8 +49,9 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Grid>
-                <Entry x:Name="entryTextMess"  Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="0" Placeholder="Message text..." HorizontalOptions="FillAndExpand" Text="{Binding Text}"/>
-                <Frame x:Name="frameSendMessageIcon" BackgroundColor="{DynamicResource Key=pageColor}" 
+                <Entry x:Name="entryTextMess" StyleId="entryTextMess" Grid.Column="0" Grid.ColumnSpan="8" Grid.Row="0" 
+                       Placeholder="Message text..." HorizontalOptions="FillAndExpand" Text="{Binding Text}"/>
+                <Frame x:Name="frameSendMessageIcon" StyleId="frameSendMessageIcon" BackgroundColor="{DynamicResource Key=pageColor}" 
                        HasShadow="False" BorderColor="Transparent" HorizontalOptions="Center" VerticalOptions="End"
                        Grid.Column="8" Grid.ColumnSpan="2" Grid.Row="0">
                     <Image x:Name="btnSendMessage" IsEnabled="{Binding IsConnected}"  >

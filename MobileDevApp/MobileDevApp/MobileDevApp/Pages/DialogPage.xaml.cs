@@ -37,13 +37,12 @@ namespace MobileDevApp
                 AddMessagesToClient(oldMessages);
             }
 
-            
-
             ScreenHeight = (int)DeviceDisplay.MainDisplayInfo.Height;
             ScreenWidth = (int)DeviceDisplay.MainDisplayInfo.Width;
 
-
             InitializeComponent();
+
+            SetColourScheme();
 
             if (chatInfo.PartnerImage != null)
             {
@@ -54,6 +53,8 @@ namespace MobileDevApp
 
             lblPartnerName.Text = chatInfo.PartnerName;
             btnSendMessage.Source = ImageSource.FromResource("MobileDevApp.Resources.sendLetter.png");
+            framePartnerIcon.HeightRequest = ScreenHeight / 55;
+            framePartnerIcon.WidthRequest = ScreenHeight / 55;
             frameSendMessageIcon.HeightRequest = ScreenHeight / 55;
             frameSendMessageIcon.WidthRequest = ScreenWidth / 15;
             this.BindingContext = messagingClient;
@@ -77,6 +78,12 @@ namespace MobileDevApp
             {
                 messagingClient.Messages.Add(message.ToMessageInfo());
             }
+        }
+
+        private void SetColourScheme()
+        {
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
+            ((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
         }
 
         private void ButtonSendMessage_Clicked(object sender, EventArgs e)
