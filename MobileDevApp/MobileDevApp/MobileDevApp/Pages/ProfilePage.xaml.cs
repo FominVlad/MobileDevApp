@@ -3,14 +3,11 @@ using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using System;
 using System.Linq;
-using MobileDevApp.Models;
 using Plugin.Media;
 using Plugin.Media.Abstractions;
 using MobileDevApp.RemoteProviders.Models;
 using MobileDevApp.Helpers;
 using System.IO;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
 
 namespace MobileDevApp
 {

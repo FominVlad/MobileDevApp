@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
-using System.Text;
 using Xamarin.Forms;
 
 namespace MobileDevApp.Helpers

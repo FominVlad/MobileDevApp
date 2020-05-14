@@ -5,7 +5,6 @@ using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using ZXing.Net.Mobile.Forms;
 
 namespace MobileDevApp
 {

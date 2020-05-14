@@ -10,10 +10,12 @@
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="Start">
-            <Frame Padding="0" IsClippedToBounds="True" StyleId="framePartnerIcon" x:Name="framePartnerIcon" HorizontalOptions="End" BackgroundColor="Transparent" HasShadow="False" BorderColor="Transparent">
+            <Frame Padding="0" IsClippedToBounds="True" StyleId="framePartnerIcon" x:Name="framePartnerIcon" 
+                   HorizontalOptions="End" BackgroundColor="Transparent" HasShadow="False" BorderColor="Transparent">
                 <Image x:Name="imgPartnerImage" VerticalOptions="Start" HorizontalOptions="End" />
             </Frame>
-            <Label StyleId="lblPartnerName" x:Name="lblPartnerName" HorizontalOptions="Start" VerticalOptions="Center" FontAttributes="Bold"/>
+            <Label StyleId="lblPartnerName" x:Name="lblPartnerName" HorizontalOptions="Start" VerticalOptions="Center" 
+                   FontAttributes="Bold"/>
         </StackLayout>
     </NavigationPage.TitleView>
 

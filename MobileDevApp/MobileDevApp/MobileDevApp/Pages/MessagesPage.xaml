@@ -38,14 +38,16 @@
                                         <Label Text="{Binding LastMessage.ReceivedDate}" VerticalOptions="Center"/>
                                         <!--IsVisible="{Binding LastMessage.IsRead, Converter={StaticResource InverseBoolConverter}}"-->
                                         <!--<Image x:Name="imgIsRead"  
-                                               Source="{Binding ., Converter={StaticResource converter}, ConverterParameter='MobileDevApp.Resources.letter.png'}" />-->
+                                               Source="{Binding ., Converter={StaticResource converter}, 
+                                               ConverterParameter='MobileDevApp.Resources.letter.png'}" />-->
                                     </StackLayout>
                                 </ViewCell.View>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Image x:Name="btnAddMessage" StyleId="btnAddMessage" AbsoluteLayout.LayoutFlags="PositionProportional" AbsoluteLayout.LayoutBounds="1,1,75,75" >
+                <Image x:Name="btnAddMessage" StyleId="btnAddMessage" AbsoluteLayout.LayoutFlags="PositionProportional" 
+                       AbsoluteLayout.LayoutBounds="1,1,75,75" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btnAddMessage_Clicked" NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>

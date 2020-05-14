@@ -1,6 +1,4 @@
-﻿using MobileDevApp.Models;
-using System;
-using System.Linq;
+﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
