@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="MobileDevApp.HelpPage"
+             Title="Help"
+             BackgroundColor="{DynamicResource Key=pageColor}">
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="..\Styles\HelpPageStyles.css" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="lblInfo" TextColor="{DynamicResource Key=textColor}" StyleId="lblInfo" VerticalOptions="Start"
+                HorizontalOptions="FillAndExpand" FontSize="Medium" />
+            <Editor x:Name="editorMessageText" StyleId="editorMessageText" TextColor="{DynamicResource Key=textColor}" 
+                    VerticalOptions="Start" HorizontalOptions="FillAndExpand" AutoSize="TextChanges" MaxLength="500" 
+                    Placeholder="Message text..." HeightRequest="150"/>
+            <Button Text="Send" BackgroundColor="{DynamicResource Key=buttonColor}" TextColor="{DynamicResource Key=textColor}" 
+                    x:Name="btnSendMessage" StyleId="btnSendMessage" Clicked="btnSendMessage_Clicked"
+                    HorizontalOptions="Center" VerticalOptions="Start" BorderRadius="15"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

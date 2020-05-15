@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Chat.API</name>
+    </assembly>
+    <members>
+        <member name="T:Chat.API.Controllers.UserController">
+            <summary>
+            Authentication endpoint.
+            </summary>
+        </member>
+        <member name="M:Chat.API.Controllers.UserController.#ctor(Chat.Business.Interfaces.IUserManager)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="userManager">User management injection</param>
+        </member>
+        <member name="M:Chat.API.Controllers.UserController.Info(System.Int32)">
+            <summary>
+            User info.
+            </summary>
+            <param name="userId">User id to find data about the user</param>
+        </member>
+        <member name="M:Chat.API.Controllers.UserController.Info(System.String)">
+            <summary>
+            User info.
+            </summary>
+            <param name="userSearchInfo">User search info to find data</param>
+        </member>
+        <member name="M:Chat.API.Controllers.UserController.Register(Chat.Business.Models.UserRegister)">
+            <summary>
+            Register new user.
+            </summary>
+            <param name="newUser">New user</param>
+        </member>
+        <member name="M:Chat.API.Controllers.UserController.Login(Chat.Business.Models.UserLogin)">
+            <summary>
+            Login user.
+            </summary>
+            <param name="userLoginData">User data to login</param>
+        </member>
+        <member name="M:Chat.API.Controllers.UserController.Edit(Chat.Business.Models.UserEdit)">
+            <summary>
+            Editing user.
+            </summary>
+            <param name="userEditInfo">User data to edit</param>
+        </member>
+    </members>
+</doc>

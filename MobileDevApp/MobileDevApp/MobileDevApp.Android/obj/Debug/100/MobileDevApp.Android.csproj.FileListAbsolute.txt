@@ -1,0 +1,5 @@
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp.Android\obj\Debug\100\MonoAndroid,Version=v10.0.AssemblyAttributes.cs
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp.Android\obj\Debug\100\build.props
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp.Android\obj\Debug\100\adb.props
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp.Android\obj\Debug\100\MobileDevApp.Android.csprojAssemblyReference.cache
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\MobileDevApp\MobileDevApp.Android\obj\Debug\100\_VerifyXamarinAndroidSupportVersions.stamp

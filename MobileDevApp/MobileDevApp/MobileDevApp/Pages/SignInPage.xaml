@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Sign In"
+             x:Class="MobileDevApp.SignInPage"
+             BackgroundColor="{DynamicResource Key=pageColor}">
+
+    <ContentPage.Resources>
+        <StyleSheetExtension Source="..\Styles\SignInPageStyles.css" />
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <Image Grid.Row="0" x:Name="imgAppLogo" StyleId="imgAppLogo" HorizontalOptions="CenterAndExpand" 
+                   VerticalOptions="Start" />
+            <Grid x:Name="grdInternetConn" IsVisible="False">
+                <Label x:Name="lblNoConn" TextColor="{DynamicResource Key=textColor}" StyleId="lblNoConn" 
+                       Grid.Row="1" Text="No internet connection" FontSize="Medium" HorizontalOptions="Center" 
+                       VerticalOptions="End"/>
+                <Image Grid.Row="2" Grid.RowSpan="4" x:Name="imgNoInternetConnection" HorizontalOptions="CenterAndExpand" 
+                       VerticalOptions="Start"/>
+            </Grid>
+            <Grid x:Name="grdContent" IsVisible="False">
+                <AbsoluteLayout VerticalOptions="Center" HorizontalOptions="Center">
+                    <ActivityIndicator x:Name="loaderIndicator" Color="Blue" IsRunning="False" IsVisible="False" 
+                                       IsEnabled="False" BackgroundColor="Transparent"/>
+                </AbsoluteLayout>
+                <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                    <Label x:Name="lblLogin" TextColor="{DynamicResource Key=textColor}" StyleClass="lblInput" Text="Login:"/>
+                    <Entry x:Name="entryLogin" TextColor="{DynamicResource Key=textColor}" StyleClass="lblInput" 
+                           IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                           VerticalOptions="Start" HorizontalOptions="FillAndExpand" ClearButtonVisibility="WhileEditing"
+                           HorizontalTextAlignment="Center" MaxLength="50"/>
+                    <Label x:Name="lblPassword" TextColor="{DynamicResource Key=textColor}" StyleClass="lblInput" 
+                           Text="Password:"/>
+                    <StackLayout Orientation="Horizontal">
+                        <Entry x:Name="entryPassword" TextColor="{DynamicResource Key=textColor}" IsPassword="True" 
+                               StyleClass="lblInput" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                               VerticalOptions="Start" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" 
+                               MaxLength="25"/>
+                        <Frame x:Name="frameShowHidePass" StyleId="frameShowHidePass" BackgroundColor="Transparent" IsVisible="True" 
+                               HasShadow="False" BorderColor="Transparent" HorizontalOptions="Start" VerticalOptions="Start">
+                            <Image x:Name="imgShowHidePass" StyleId="imgProfileIcon" HorizontalOptions="Start" VerticalOptions="Start">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"  NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                        </Frame>
+                    </StackLayout>
+                    <Button Text="Sign in" x:Name="btnSignIn" BackgroundColor="{DynamicResource Key=buttonColor}" 
+                            TextColor="{DynamicResource Key=textColor}" Clicked="btnSignIn_Clicked" VerticalOptions="End" 
+                            HorizontalOptions="CenterAndExpand"/>
+                </StackLayout>
+                <Button x:Name="btnSignUp" FontFamily="Times New Roman" TextColor="{DynamicResource Key=textColor}" 
+                        Text="Sign Up" VerticalOptions="End" HorizontalOptions="End" ContentLayout="Right, 10" 
+                        BackgroundColor="Transparent" Clicked="btnSignUp_Clicked" />
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
