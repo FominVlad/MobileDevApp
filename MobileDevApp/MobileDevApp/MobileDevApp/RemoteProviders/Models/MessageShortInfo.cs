@@ -8,5 +8,16 @@ namespace MobileDevApp.RemoteProviders.Models
         public DateTime ReceivedDate { get; set; }
         public int SenderID { get; set; }
         public bool IsRead { get; set; }
+
+        public MessageInfo ToMessageInfo()
+        {
+            return new MessageInfo
+            {
+                Text = this.Text,
+                ReceivedDate = this.ReceivedDate,
+                SenderID = this.SenderID,
+                IsRead = this.IsRead
+            };
+        }
     }
 }

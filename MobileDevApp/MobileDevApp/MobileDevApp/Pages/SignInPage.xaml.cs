@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using MobileDevApp.Helpers;
-using MobileDevApp.Models;
-using MobileDevApp.RemoteProviders.Implementations;
 using MobileDevApp.RemoteProviders.Models;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
@@ -22,16 +14,12 @@ namespace MobileDevApp
         public SignInPage()
         {
             InitializeComponent();
-            SetColourScheme();
             SetComponentsProp();
 
             CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
-        }
-
-        private void SetColourScheme()
-        {
-            //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
-            //((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
+            imgShowHidePass.Source = ImageSource.FromResource("MobileDevApp.Resources.show.png");
+            frameShowHidePass.HeightRequest = 30;
+            frameShowHidePass.WidthRequest = 30;
         }
 
         private void Current_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
@@ -78,7 +66,8 @@ namespace MobileDevApp
                     if (user != null)
                     {
                         App.Database.AddUserIfNotExist(user);
-                        DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {user.Name} logined successfully!");
+                        DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", 
+                            $"User {user.Name} logined successfully!");
 
                         (Application.Current).MainPage = new NavigationPage(new MainPage());
                     }
@@ -116,6 +105,15 @@ namespace MobileDevApp
         private async void btnSignUp_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SignUpPage());
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            entryPassword.IsPassword = !entryPassword.IsPassword;
+
+            imgShowHidePass.Source = entryPassword.IsPassword == true ?
+                ImageSource.FromResource("MobileDevApp.Resources.show.png") :
+                ImageSource.FromResource("MobileDevApp.Resources.hide.png");
         }
     }
 }

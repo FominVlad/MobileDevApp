@@ -1,9 +1,5 @@
-﻿using MobileDevApp.Helpers;
-using MobileDevApp.Models;
-using System;
-using System.Json;
+﻿using System;
 using System.Linq;
-using Xamarin.Auth;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

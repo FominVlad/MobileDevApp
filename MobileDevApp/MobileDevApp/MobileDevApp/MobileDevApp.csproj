@@ -15,6 +15,8 @@
     <None Remove="Resources\ChatLogo.png" />
     <None Remove="Resources\googleicon.png" />
     <None Remove="Resources\help.png" />
+    <None Remove="Resources\hide.png" />
+    <None Remove="Resources\letter.png" />
     <None Remove="Resources\noInternetConnection.png" />
     <None Remove="Resources\pencil.png" />
     <None Remove="Resources\personChangeIcon.png" />
@@ -24,6 +26,8 @@
     <None Remove="Resources\scanQR.png" />
     <None Remove="Resources\search.png" />
     <None Remove="Resources\searchQR.png" />
+    <None Remove="Resources\sendLetter.png" />
+    <None Remove="Resources\show.png" />
     <None Remove="Resources\signup.png" />
   </ItemGroup>
 
@@ -32,6 +36,8 @@
     <EmbeddedResource Include="Resources\chatLogo.png" />
     <EmbeddedResource Include="Resources\googleicon.png" />
     <EmbeddedResource Include="Resources\help.png" />
+    <EmbeddedResource Include="Resources\hide.png" />
+    <EmbeddedResource Include="Resources\letter.png" />
     <EmbeddedResource Include="Resources\noInternetConnection.png" />
     <EmbeddedResource Include="Resources\pencil.png" />
     <EmbeddedResource Include="Resources\personChangeIcon.png" />
@@ -41,6 +47,8 @@
     <EmbeddedResource Include="Resources\scanQR.png" />
     <EmbeddedResource Include="Resources\search.png" />
     <EmbeddedResource Include="Resources\searchQR.png" />
+    <EmbeddedResource Include="Resources\sendLetter.png" />
+    <EmbeddedResource Include="Resources\show.png" />
     <EmbeddedResource Include="Resources\signup.png" />
   </ItemGroup>
 

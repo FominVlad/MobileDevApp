@@ -2,7 +2,6 @@
 using MobileDevApp.Models;
 using MobileDevApp.RemoteProviders.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 

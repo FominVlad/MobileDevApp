@@ -14,3 +14,4 @@ C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstan
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.AssemblyInfo.cs
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.dll
 C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.pdb
+C:\Users\DELL-\Source\Repos\MobileDevApp\MobileDevApp\Patterns\obj\Debug\netstandard2.0\Patterns.csprojAssemblyReference.cache

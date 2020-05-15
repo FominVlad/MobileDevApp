@@ -1,21 +1,10 @@
 ﻿using MobileDevApp.Helpers;
 using MobileDevApp.Models;
-using MobileDevApp.RemoteProviders.Implementations;
 using MobileDevApp.RemoteProviders.Models;
-using Newtonsoft.Json;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -32,14 +21,7 @@ namespace MobileDevApp
         {
             InitializeComponent();
             CrossConnectivity.Current.ConnectivityChanged += Current_ConnectivityChanged;
-            SetColourScheme();
             SetComponentsProp();
-        }
-
-        private void SetColourScheme()
-        {
-            //((NavigationPage)Application.Current.MainPage).BarBackgroundColor = (Color)Application.Current.Resources["headerColor"];
-            //((NavigationPage)Application.Current.MainPage).BarTextColor = (Color)Application.Current.Resources["textColor"];
         }
 
         private void SetComponentsProp()
@@ -106,7 +88,8 @@ namespace MobileDevApp
                     if (createdUser != null)
                     {
                         App.Database.AddUserIfNotExist(createdUser);
-                        DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", $"User {createdUser.Name} created successfully!");
+                        DependencyService.Get<INotification>().CreateNotification("ZakritiyPredmetChat", 
+                            $"User {createdUser.Name} created successfully!");
                         
                         (Application.Current).MainPage = new NavigationPage(new MainPage());
                     }

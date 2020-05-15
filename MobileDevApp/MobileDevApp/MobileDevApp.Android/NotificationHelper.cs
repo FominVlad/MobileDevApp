@@ -53,7 +53,7 @@ namespace MobileDevApp.Droid
                         .SetVibrate(new long[0])
                         .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate)
                         .SetVisibility((int)NotificationVisibility.Public)
-                        .SetSmallIcon(Resource.Drawable.settings)
+                        .SetSmallIcon(Resource.Drawable.mobileDevAppLogo)
                         .SetContentIntent(pendingIntent);
 
                 NotificationManager notificationManager = mContext.GetSystemService(Context.NotificationService) as NotificationManager;
@@ -64,7 +64,7 @@ namespace MobileDevApp.Droid
 
                     NotificationChannel notificationChannel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, title, importance);
                     notificationChannel.EnableLights(true);
-                    notificationChannel.EnableVibration(true);
+                    notificationChannel.EnableVibration(false);
                     notificationChannel.SetShowBadge(true);
                     notificationChannel.Importance = NotificationImportance.High;
                     notificationChannel.SetVibrationPattern(new long[] { 100, 200, 300, 400, 500, 400, 300, 200, 400 });

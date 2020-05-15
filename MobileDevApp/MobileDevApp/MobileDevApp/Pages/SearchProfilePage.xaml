@@ -15,14 +15,17 @@
     <ContentPage.Content>
         <StackLayout>
             <Grid StyleId="gridSearch" VerticalOptions="Start" ColumnSpacing="10">
-                <Entry x:Name="entrySearchString" StyleId="entrySearchString" TextColor="{DynamicResource Key=textColor}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
-                   VerticalOptions="Start" MaxLength="25" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"/>
-                <Image x:Name="btnSearch" StyleClass="searchImg" VerticalOptions="Start" StyleId="btnSearch" Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="1" >
+                <Entry x:Name="entrySearchString" StyleId="entrySearchString" TextColor="{DynamicResource Key=textColor}" 
+                       IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" 
+                       VerticalOptions="Start" MaxLength="150" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="8"/>
+                <Image x:Name="btnSearch" StyleClass="searchImg" VerticalOptions="Start" StyleId="btnSearch" Grid.Row="0" 
+                       Grid.Column="8" Grid.ColumnSpan="1" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btnSearch_Tapped"  NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>
                 </Image>
-                <Image x:Name="btnScanQr" StyleClass="searchImg" VerticalOptions="Start" StyleId="btnScanQr" Grid.Row="0" Grid.Column="9" Grid.ColumnSpan="1" >
+                <Image x:Name="btnScanQr" StyleClass="searchImg" VerticalOptions="Start" StyleId="btnScanQr" Grid.Row="0" 
+                       Grid.Column="9" Grid.ColumnSpan="1" >
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Tapped="btnScanQr_Tapped"  NumberOfTapsRequired="1" />
                     </Image.GestureRecognizers>

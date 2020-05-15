@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using MobileDevApp.Helpers;
 using MobileDevApp.RemoteProviders.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -134,6 +135,7 @@ namespace MobileDevApp.RemoteProviders.Implementations
         {
             if(message != null)
                 Messages.Add(message);
+                
             if (error != null)
                 Errors.Add(error);
         }

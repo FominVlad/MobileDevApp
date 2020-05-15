@@ -15,15 +15,17 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <Label x:Name="lblTitle" StyleId="lblTitle" TextColor="{DynamicResource Key=textColor}" Text="Application settings" FontSize="Title" 
-                   VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+            <Label x:Name="lblTitle" StyleId="lblTitle" TextColor="{DynamicResource Key=textColor}" 
+                   Text="Application settings" FontSize="Title" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
             <Grid x:Name="gridSettings" StyleId="gridSettings" ColumnSpacing="10" RowSpacing="15">
-                <Label x:Name="lblSetColoutScheme" TextColor="{DynamicResource Key=textColor}" Text="Set colour scheme" Grid.Column="0" FontSize="Subtitle"
-                       Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Start"/>
+                <Label x:Name="lblSetColoutScheme" TextColor="{DynamicResource Key=textColor}" Text="Set colour scheme" 
+                       Grid.Column="0" FontSize="Subtitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="Center" 
+                       VerticalOptions="Start"/>
                 <Switch x:Name="switchColourScheme" VerticalOptions="Start" HorizontalOptions="Center" OnColor="DarkBlue" 
                         Grid.Row="0" Grid.Column="2" />
             </Grid>
-            <Button x:Name="btnSignOut" BackgroundColor="{DynamicResource Key=buttonColor}" Text="Sign out" Clicked="btnSignOut_Clicked"/>
+            <Button x:Name="btnSignOut" HorizontalOptions="Center" BorderRadius="15" 
+                    BackgroundColor="{DynamicResource Key=buttonColor}" Text="Sign out" Clicked="btnSignOut_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
