@@ -6428,25 +6428,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\DELL-\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
+      "projectUniqueName": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
       "projectName": "Chat.Business",
-      "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
-      "packagesPath": "C:\\Users\\DELL-\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.Business\\obj\\",
+      "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.Business\\Chat.Business.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.Business\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\DELL-\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
@@ -6458,11 +6457,11 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj"
+            "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj": {
+              "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Chat.DAL\\Chat.DAL.csproj"
             },
-            "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
-              "projectPath": "C:\\Users\\DELL-\\Source\\Repos\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj"
+            "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj": {
+              "projectPath": "D:\\KPI\\mobile\\MobileDevApp\\MobileDevApp\\Patterns\\Patterns.csproj"
             }
           }
         }

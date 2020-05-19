@@ -38,7 +38,7 @@ namespace Chat.API.Auth
             var authToken = authHeader.First();
 
             var user = _chatUnitOfWork.UsersRepository.FirstOrDefault(
-                new ExpressionSpecification<User>(user => user.Token.Equals(authToken)));
+                new ExpressionSpecification<User>(u => u.Token.Equals(authToken)));
 
             if (user == null)
                 return Task.FromResult(AuthenticateResult.Fail("Invalid token"));
